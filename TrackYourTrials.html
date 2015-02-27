@@ -59,7 +59,7 @@
     </header>
 	
 	<div id="settingUp" ng-hide="setUp.hideSetupForm">
-		<form name="setUpForm" class="teamCard">
+		<form name="setUpForm" class="setUpCard">
 			Tournament Name: <input type="text" id="teamName" placeholder="ex. Party Like a Mock Star 2090" ng-model="setUp.newTourn.tournName"/><br><br>
 			Total Teams: <input type="number" id="totalTeams" placeholder="ex. 20" ng-model="setUp.newTourn.totalTeams"><br><br>
 			<input type="button" value="Submit" id="submit_button" class="button" ng-click="setUp.validate(setUp.newTourn.tournName, setUp.newTourn.totalTeams)">

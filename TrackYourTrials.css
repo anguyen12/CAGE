@@ -11,12 +11,12 @@
 		
 .button {
    border-top: 1px solid #ffffff;
-   background: #fcd874;
-   background: -webkit-gradient(linear, left top, left bottom, from(#ffd036), to(#fcd874));
-   background: -webkit-linear-gradient(top, #ffd036, #fcd874);
-   background: -moz-linear-gradient(top, #ffd036, #fcd874);
-   background: -ms-linear-gradient(top, #ffd036, #fcd874);
-   background: -o-linear-gradient(top, #ffd036, #fcd874);
+   background: #CACAE8;
+   background: -webkit-gradient(linear, left top, left bottom, from(#A4A4AC), to(#CACAE8));
+   background: -webkit-linear-gradient(top, #A4A4AC, #CACAE8);
+   background: -moz-linear-gradient(top, #A4A4AC, #CACAE8);
+   background: -ms-linear-gradient(top, #A4A4AC, #CACAE8);
+   background: -o-linear-gradient(top, #A4A4AC, #CACAE8);
    padding: 5.5px 11px;
    -webkit-border-radius: 9px;
    -moz-border-radius: 9px;
@@ -38,19 +38,32 @@
    }
 .button:active {
    border-top-color: #f5d42e;
-   background: #f5d42e;
+   background: #CACAE8;
    }
 
-.teamCard{
-	background: #f5de75;
-	width: 300px; border: 2px solid;
+.setUpCard{
+	background: #CACAE8;
+	width: 1300px; border: 2px solid;
 	border-width: 6px; border-radius: 30px;
 	box-shadow: 10px 10px 5px #CCCCCC;
 	border-color: #FFFFFF;
 	padding: 12px 12px;
 	margin: 30px 30px;
 	font-family: Helvetica, Arial, Serif;
-	font-size: 9pt;
+	font-size: 15pt;
+	text-align: center;
+}
+
+.teamCard{
+	background: #CACAE8;
+	width: 600px; border: 2px solid;
+	border-width: 6px; border-radius: 30px;
+	box-shadow: 10px 10px 5px #CCCCCC;
+	border-color: #FFFFFF;
+	padding: 12px 12px;
+	margin: 30px 30px;
+	font-family: Helvetica, Arial, Serif;
+	font-size: 12pt;
 }
 
 .errorMessage{
