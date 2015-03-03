@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script>
+        //ThenBy.JS microlibrary is Copyright 2013 Teun Duynstee
+		//
+		//Licensed under the Apache License, Version 2.0 (the "License");
+		//you may not use this file except in compliance with the License.
+		//You may obtain a copy of the License at
+			//http://www.apache.org/licenses/LICENSE-2.0
+			
+        var firstBy=(function(){function e(f){f.thenBy=t;return f}function t(y,x){x=this;return e(function(a,b){return x(a,b)||y(a,b)})}return e})();
+        // data: team information
+		// need to figure out how to instantiate these as real objects
+        var data = [
+            { number: 1022, name: "Macalester A", ballots: 4, cs: 10, pd: 23, impermissibles: [1024, 2000] },
+            { number: 1023, name: "Macalester B", ballots: 3, cs: 11, pd: 20, impermissibles: [1000, 2000] },
+            { number: 1024, name: "Macalester C", ballots: 4, cs: 10, pd: 21, impermissibles: [1022, 2000] },
+			{ number: 1361, name: "Macalester D", ballots: 2, cs: 12, pd: -6, impermissibles: [1000, 2000] },
+			{ number: 1361, name: "U of M A", ballots: 2, cs: 15, pd: -6, impermissibles: [1000, 2000] },
+			{ number: 9999, name: "Bye Team", ballots: 1, cs: 4, pd: 50, impermissibles: [1000, 2000] } 
+        ];
+		//output function prints to html
+        function output() {
+            for (var i = 0; i < data.length; i++) {
+                document.write("<strong>" + data[i].name + "</strong><br/>");
+				document.write("Ballots: " + data[i].ballots + "<br/>");
+				document.write("CS: " + data[i].cs + "<br/>");
+				document.write("PD: " + data[i].pd + "<br/>");
+			}
+            document.write("<br/>");
+        }
+        output(); //print unsorted data
+		
+		//reads for impermissibles
+		function isImpermissible(number, list) {
+			for (var x = 0; x < list.length; x++){
+				if (list[x] == number){
+						return true;
+					}
+				}
+			return false;
+		}
+		
+		function possibleSwaps(badPair, upperPair, lowerPair) {
+			localTeams = [upperPair, badPair, lowerPair];
+			document.write("Testing Imperssible Resolution Here" + "<br/>");
+			document.write(localTeams);
+		}
+			
+		
+        // first by ballots, then by cs, then by pd
+        s = firstBy(function (v1, v2) { return v2.ballots - v1.ballots; })
+                 .thenBy(function (v1, v2) { return v2.cs - v1.cs ; })
+				 .thenBy(function (v1, v2) { return v2.pd - v1.pd ; });
+        data.sort(s);
+		output();
+		
+		//create pairings here
+		var pairs = [];
+		var team;
+		
+		for (var i = 0; i < data.length; i+=2) {
+			pairs.push([data[i], data[i+1]]);
+		}
+		
+		for (var i = 0; i < pairs.length; i++) {
+			teamsinPair = pairs[i];
+            document.write((i+1) + ": " +teamsinPair[0].name + " " + teamsinPair[1].name);	
+			if (isImpermissible(teamsinPair[0].number, teamsinPair[1].impermissibles) || isImpermissible(teamsinPair[1].number, teamsinPair[0].impermissibles)){
+				document.write(" Impermissible!")
+			}
+			document.write(" <br/>");
+		}
+		document.write(" <br/>");
+		
+		for (var i = 0; i < pairs.length; i++) {
+			if ((i-1)>=0){upperPair = pairs[i-1];}  //change so that only proper data is submitted to possibleSwaps
+			else {upperPair = null}
+			if ((i+1)<=pairs.length){lowerPair = pairs[i+1]}
+			else {lowerPair = null}
+			teamsinPair = pairs[i];
+			if (isImpermissible(teamsinPair[0].number, teamsinPair[1].impermissibles) || isImpermissible(teamsinPair[1].number, teamsinPair[0].impermissibles)){
+				possibleSwaps(teamsinPair, upperPair, lowerPair)
+				//move edge checking logic to here
+			}
+		}
+		
+    </script>
+</head>
+<body>
+
+</body>
+</html>
