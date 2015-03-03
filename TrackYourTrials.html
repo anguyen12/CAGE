@@ -69,8 +69,10 @@
 	</div>
 	
 	<div id="allTeams" ng-show="setUp.showAllTeams">
-		<input type="button" ng-click="setUp.testR1()" class="button" value="Submit Round 1" id="startR1_button">
-		<div id="teamChoicesSummary" class="statusMessage" ng-show="setUp.showChoices">Putting teams together...</div>
+		<input type="button" ng-click="setUp.submitTeams(listAllTeams)" class="button" value="Submit Round 1" id="startR1_button">
+			<div id="teamChoicesSummary" class="statusMessage" ng-show="setUp.showChoices">Putting teams together...
+			<p>{{setUp.listAllTeams}}</p>
+			</div>
 		<table cellspacing="0" cellpadding="0" id="teamSetUpTable">
 			<colgroup span="2"></colgroup>
 
@@ -85,15 +87,14 @@
 							<form id="teamCardForm">
 								<div id="teamCard" class="teamCard">
 									<b>Team number</b> {{team.number + 1}}<br>
-									<b>Team name: </b> <input type="text" id="teamName{{team}}" ng-model = "team.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
-									<b>Team ID: </b> <input type="text" id="teamName{{team}}" ng-model = "team.uniqueID" placeholder="ex. 99999"></input><br><br>
+									<b>Team name: </b> <input type="text" id="teamName{{team.number}}" ng-model = "team.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
+									<b>Team ID: </b> <input type="text" id="teamID{{team.number}}" ng-model = "team.uniqueID" placeholder="ex. 99999"></input><br><br>
 								</div>
 							</form>
 					</td>
 				</tr>
 			</tbody>
 	</div>
-	<p>{{setUp.listAllTeams}}</p>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>	

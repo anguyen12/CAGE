@@ -3,17 +3,6 @@
 (function() {
   var app = angular.module('tabRunner', []);
   var firstBuild = { tournName: "" , totalTeams: 0, };
-  var teamObjectOLD = {
-	number: 0, //lets make this the one that is assigned by tabber, and uniqueID as the school's special id
-	name: "",
-	record: 0, //ballots won
-	pointDiff: 0, //points won
-	combinedStr: 0, //combined strength
-	rank: 0,
-	impermissibles: [], //a list of teams (teamObjects) a team cannot face
-	status: "", //plaintiff or defense
-	uniqueID: 0
-	};
 	
 function teamObject(inputnumber) {
 	this.number = inputnumber, //lets make this the one that is assigned by tabber, and uniqueID as the school's special id
@@ -48,6 +37,7 @@ function teamObject(inputnumber) {
 	this.list = [];//1,2,3,4...,n 
 	this.pairings = [];
 	this.showChoices=false;
+	this.pairedTeams = {};
 	
 	this.validate = function(pTourn, pTotal){
 	
@@ -129,8 +119,11 @@ function teamObject(inputnumber) {
 	
 	//is it even possible? :( http://stackoverflow.com/questions/12044277/how-to-validate-inputs-dynamically-created-using-ng-repeat-ng-show-angular
 	//http://stackoverflow.com/questions/12044277/how-to-validate-inputs-dynamically-created-using-ng-repeat-ng-show-angular
-	this.testR1 = function(){
+	
+	this.submitTeams = function(teamList){
+		this.pairedTeams.push(teamList);
 		this.showChoices = true;
+		//this.showAllTeams = false;
 		//$scope.testing = "WHATSUP";
 		
 		//for every value in list 1 through n (where value is 1, 2, 3, 4 ... n, etc)
