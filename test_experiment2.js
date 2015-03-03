@@ -1,17 +1,6 @@
-//before i forget:
-//lets have the code do this...
-//loop through the number list [1, 2, 3 .. n]
-//pair them off [[1,2], [3,4], ... n]
-//write a new function
-//loop through each list in the list
-//create the team object accordingly
-//god gozong
-//no nested views: (wait are views == contrllers?) http://jan.varwig.org/archive/how-to-do-nested-views-in-angularjs-hint-dont http://stackoverflow.com/questions/12574765/better-design-for-passing-data-to-other-ng-views-and-persisting-it-across-contr
-//MIGHT ACTUALLY BE HELPFUL: http://stackoverflow.com/questions/23390752/generate-dynamic-form-input-fields-and-collect-field-data-in-an-array
-
 
 /* OVERVIEW
-There are 2 controllers.
+There is 1 poorly written inefficient controllers.
 
 SetupController
 - validate(name of the tournament, number of teams)
@@ -24,30 +13,11 @@ SetupController
 - testR1()
 - 		Testing.
 
-FormController ---- not complete.
-- validateForms() 
 */
-
-
 
 (function() {
 	var app = angular.module('tabRunner', []);
-	var firstBuild = { tournName: "" , totalTeams: 0, };
-	var teamObjectOLD = {
-		number: 0, //lets make this the one that is assigned by tabber, and uniqueID as the school's special id
-		name: "",
-		record: 0, //ballots won
-		pointDiff: 0, //points won
-		combinedStr: 0, //combined strength
-		rank: 0,
-		impermissibles: [], //a list of teams (teamObjects) a team cannot face
-		status: "", //plaintiff or defense
-		uniqueID: 0
-	};
-	
-	
-	
-
+	var firstSetup = { tournName: "" , totalTeams: 0, };
 	
 	function teamObject(number) {
 		this.number= number, //lets make this the one that is assigned by tabber, and uniqueID as the school's special id
@@ -60,104 +30,79 @@ FormController ---- not complete.
 		this.status= "", //plaintiff or defense
 		this.uniqueID= 0
 	}
-	
-//FormController : to validate the team forms on the second 'screen' -- make sure no fields are empty
-//Roadblock: How do you get information out of dynamically created forms?
-//
-//http://stackoverflow.com/questions/12928752/validation-of-dynamic-created-form-angularjs not super helpful
-//better? http://stackoverflow.com/questions/15843765/angularjs-fields-added-dynamically-are-not-registered-on-formcontroller
-	app.controller('FormController', function($scope){
-		this.isValid = false;
-			
-		this.validateForms = function(){
-			alert("What up");
-				//$scope.testing = "WHATSUP";
-		};
-			
-	});
 
 //SetupController : on the first 'screen' -- figures out what to do and display on the next 'screen' based on form input
 //Poorly written and can be cleaned up.
 	app.controller('SetupController', function($scope){
-		this.newTourn = firstBuild;
+		this.newTourn = firstSetup;
 		this.hideSetupForm = false;
 		this.showAllTeams = false;
 		//this.totalTeams = 0;
-		this.list = [];//1,2,3,4...,n 
-		this.pairings = [];//[1,2][3,4]...
-		this.showChoices=false;
-		this.finalList = [];
-		this.halfwayList = [];
-		this.listAllTeams = [];
+		this.list = [];//ex. 1,2,3,4...,n 
+		this.pairings = [];//ex. [1,2][3,4]...
+		this.showChoices=false; //called 'showChoices' because I wanted to display the teamObjects (for some reason i considered teams as choices..) after the forms have been filled out
+		this.listAllTeams = []; //a list containing all the teams [[TeamObject1, TeamObject2]...etc]
 		
+		//Validate function, returning true if the fields are filled ou
 		this.validate = function(pTourn, pTotal){
 
-			if (isNaN(pTotal)){
+			if (isNaN(pTotal)){//if the total number of teams is not a number (i.e. user inputs 'seven' instead of 7)
 				document.getElementById('errorMessage').innerText = "Please enter a valid number";
-				return false;
+				return false; //returns false, meaning don't show the other div with the team forms yet
 			}
 
-			if ((pTourn == "") || (pTotal == "")){
+			if ((pTourn == "") || (pTotal == "")){ //if the set up fields are empty
 				document.getElementById('errorMessage').innerText = "Please fill out all fields";
-				return false;
+				return false; //returns false, meaning don't show the other div with the team forms yet
 			}
 			
 			else{
-				document.getElementById('errorMessage').innerText = "";
-				//this.totalTeams = pTotal;
-				this.showAllTeams = true;
-				this.hideSetupForm = true;
+				document.getElementById('errorMessage').innerText = ""; //clear the error message div
+				this.showAllTeams = true; //Switches to show the div that will hold all the team forms
+				this.hideSetupForm = true; //hides the set up form
 				//create a list of numbers (of the total teams participating)
-				this.buildList(pTotal);
-				//loop through that
-				this.test(this.list);
-				//this.finalList = this.buildTeams(this.pairings);
-				//this.test(this.list);
+				this.buildList(pTotal); //build the number list [1,2,3... n]
+				this.test(this.list); //pair up the numbers and create team objects for them -- setting 2 different lists. I'm realizing this makes no sense and is doing repetitive work so I'll fix it.
 				return true;
 			}
 		};
 		
+		//buildList is a helper function -- it is never called by the controller on the html side
+		//arguments: number of teams
+		//output: n/a
+		//Populates the list variable to [1,2,3... n]
 		this.buildList = function(number){
-		
 			for (var i = 0 ; i < number; i++) { 
 				this.list.push(i+1);
-				//var newTeam = new teamObject(i+1);
-				//this.listAllTeams.push(newTeam); //We would hope that by the end of this..
-				//listAllTeams looks like this: [{number: 1}, {number: 2}, {number: 3} ... etc] 
-				//a list of incomplete team info that will be retrieved later..
 			}
-		
 		};
 		
-		$scope.formDataTwo = {}; 
-		$scope.formDataTwo.list = this.list;
-		
+		//$scope.formDataTwo = {}; 
+		//$scope.formDataTwo.list = this.list;
 
-		
-		//http://stackoverflow.com/questions/12518259/using-ng-repeat-with-table-rows
-		//http://jsfiddle.net/6aqtj/1/
-		
+		//test is a testing function -- never called by the controller on the html side
+		//arguments: list of numbers, that is [1,2,3... n]
+		//output: n/a
+		//Sets the list of teamObject lists (listAllTeams), and sets the pairings list.
+		//Really inefficient and redundant code. Will fix.
 		this.test = function(listNumbers){
-
-			for (var j=0; j < listNumbers.length; j+=2){
-				if (j+1 >= listNumbers.length){
-					this.pairings.push([]);
-					this.pairings[this.pairings.length-1].push(listNumbers[j]);
+			for (var j=0; j < listNumbers.length; j+=2){ //for every 2 objects in the array starting from 0, 2, 4, etc.
+				if (j+1 >= listNumbers.length){ //if the odd value is the last one in the list (meaning there is no other team to go up against)
+					this.pairings[this.pairings.length-1].push(listNumbers[j]);	//add the odd team to its own list
 					
-					
+					//Concurrently building a list of empty team objects
 					var newTeam = new teamObject(listNumbers[j]);
 					this.listAllTeams.push([]);
 					this.listAllTeams[this.listAllTeams.length-1].push(newTeam);
-					
 				}
 				
-				else{
-					this.pairings.push([]);
-					this.pairings[this.pairings.length-1].push(listNumbers[j]);
-					this.pairings[this.pairings.length-1].push(listNumbers[j+1]);
+				else{ //given the value is even and not the last one in the list
+					this.pairings.push([]); //add a new list to the list
+					this.pairings[this.pairings.length-1].push(listNumbers[j]); //add a new number to the list
+					this.pairings[this.pairings.length-1].push(listNumbers[j+1]); //add a new number to the list
 					
-					
-										var newTeam = new teamObject(listNumbers[j]);
+					//Concurrently building a list of empty team objects
+					var newTeam = new teamObject(listNumbers[j]);
 					var newTeam2 = new teamObject(listNumbers[j+1]);
 					this.listAllTeams.push([]);
 					this.listAllTeams[this.listAllTeams.length-1].push(newTeam);
@@ -165,40 +110,19 @@ FormController ---- not complete.
 				}
 			}
 		}
-		//$scope.chosenPairings = this.pairings;
 		
-		//is it even possible? :( http://stackoverflow.com/questions/12044277/how-to-validate-inputs-dynamically-created-using-ng-repeat-ng-show-angular
-		//http://stackoverflow.com/questions/12044277/how-to-validate-inputs-dynamically-created-using-ng-repeat-ng-show-angular
+		//A test function to see if I can access the values in the dynamically created form. 
 		this.testR1 = function(){
 			this.showChoices = true;
-			//$scope.testing = "WHATSUP";
 			
-			//for every value in list 1 through n (where value is 1, 2, 3, 4 ... n, etc)
-			var something = document.getElementById("team1ID").value;
-			alert("Team Name "+something);
+			var teamName = document.getElementById("teamName1").value;
+			alert("Team 1's Name : "+teamName);
+			
+			var teamID = document.getElementById("teamID1").value;
+			alert("Team 1's ID : "+teamID);
 			
 			var elements = document.getElementById("allTeamForms").elements;
-			
-			for (var i=0; i < elements.length; i++){ //For each form field...
-				if (((elements[i].value == "") || (elements[i].value == null)) || (elements[i].value ==0)) { //If it is empty
-				document.getElementById("errorTeamForms").value = "Please fill out all team fields"; //Replace the error message in the document with this error message
-				//reset the message after every click, run on every post back
-				return false;
-				}
-			}
-			
-			
-		var table = document.getElementById("allTeamForms");
-		for (var i = 0, row; row = table.rows[i]; i++) {
-		   //iterate through rows
-			alert("Team Name "+row);
-		   //rows would be accessed using the "row" variable assigned in the for loop
-		   for (var j = 0, col; col = row.cells[j]; j++) {
-			 //iterate through columns
-			 //columns would be accessed using the "col" variable assigned in the for loop
-		   }  
-		}
-			
+
 		};
 
 	  });
