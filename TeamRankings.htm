@@ -70,7 +70,7 @@
 				<tr ng-repeat="pair in Pairs.pairings">
 					<td ng-repeat="team in pair">
 								<div id="teamCard" class="teamCard">
-									<b>Overall Ranking:</b> To be added <br>
+									<b>Overall Ranking:</b> {{team.rank}} <br>
 									<b>Team Name:</b> {{team.name}} <br>
 									<b>Team Number:</b> {{team.uniqueID}} <br>
 									<b>Team Record:</b> {{team.record}} <br>

@@ -19,12 +19,12 @@
 }
 
   var teams = [
-            { uniqueID: 1022, name: "Macalester A", record: 4, combinedStr: 10, pointDiff: 23, impermissibles: [1024, 2000] },
-            { uniqueID: 1023, name: "Macalester B", record: 3, combinedStr: 11, pointDiff: 20, impermissibles: [1000, 2000] },
-            { uniqueID: 1024, name: "Macalester C", record: 4, combinedStr: 10, pointDiff: 21, impermissibles: [1022, 2000] },
-			{ uniqueID: 1361, name: "Macalester D", record: 2, combinedStr: 12, pointDiff: -6, impermissibles: [1000, 2000] },
-			{ uniqueID: 1361, name: "U of M A", record: 2, combinedStr: 15, pointDiff: -6, impermissibles: [1000, 2000] },
-			{ uniqueID: 9999, name: "Bye Team", record: 1, combinedStr: 4, pointDiff: 50, impermissibles: [1000, 2000] } 
+            { uniqueID: 1022, name: "Macalester A", record: 4, combinedStr: 10, pointDiff: 23, impermissibles: [1024, 2000], rank: 0 },
+            { uniqueID: 1023, name: "Macalester B", record: 3, combinedStr: 11, pointDiff: 20, impermissibles: [1000, 2000], rank: 0 },
+            { uniqueID: 1024, name: "Macalester C", record: 4, combinedStr: 10, pointDiff: 21, impermissibles: [1022, 2000], rank: 0 },
+			{ uniqueID: 1361, name: "Macalester D", record: 2, combinedStr: 12, pointDiff: -6, impermissibles: [1000, 2000], rank: 0 },
+			{ uniqueID: 1361, name: "U of M A", record: 2, combinedStr: 15, pointDiff: -6, impermissibles: [1000, 2000], rank: 0 },
+			{ uniqueID: 9999, name: "Bye Team", record: 1, combinedStr: 4, pointDiff: 50, impermissibles: [1000, 2000], rank: 0 } 
         ];
 		
   var pairs = [];
@@ -46,6 +46,8 @@
 	sortedTeams = teams.sort(s);
 		
 	for (var i = 0; i < sortedTeams.length; i+=2) {
+			sortedTeams[i].rank = i+1;
+			sortedTeams[i+1].rank = i+2;
 			pairs.push([sortedTeams[i], sortedTeams[i+1]]);
 		}
 	
