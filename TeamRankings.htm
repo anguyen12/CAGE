@@ -1,99 +1,87 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-	<link rel="stylesheet" type="text/css" href="resources/bootstrap.min.css">
+<html ng-app="tabRunner">
+  <head>
+    <link rel="stylesheet" type="text/css" href="resources/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="resources/TrackYourTrials.css" /> 
 	<script type="text/javascript" language="javascript" type="application/javascript" src="scripts/angular.min.js"></script>
-    <script type="text/javascript" language="javascript" type="application/javascript" src="scripts/test_experiment2.js"></script>
-	<meta charset="utf-8">
-    <script>
-        //ThenBy.JS microlibrary is Copyright 2013 Teun Duynstee
-		//
-		//Licensed under the Apache License, Version 2.0 (the "License");
-		//you may not use this file except in compliance with the License.
-		//You may obtain a copy of the License at
-			//http://www.apache.org/licenses/LICENSE-2.0
-        var firstBy=(function(){function e(f){f.thenBy=t;return f}function t(y,x){x=this;return e(function(a,b){return x(a,b)||y(a,b)})}return e})();
-        // data: team information
-		// need to figure out how to instantiate these as real objects
-        var data = [
-            { uniqueID: 1022, name: "Macalester A", record: 4, combinedStr: 10, pointDiff: 23, impermissibles: [1024, 2000] },
-            { uniqueID: 1023, name: "Macalester B", record: 3, combinedStr: 11, pointDiff: 20, impermissibles: [1000, 2000] },
-            { uniqueID: 1024, name: "Macalester C", record: 4, combinedStr: 10, pointDiff: 21, impermissibles: [1022, 2000] },
-			{ uniqueID: 1361, name: "Macalester D", record: 2, combinedStr: 12, pointDiff: -6, impermissibles: [1000, 2000] },
-			{ uniqueID: 1361, name: "U of M A", record: 2, combinedStr: 15, pointDiff: -6, impermissibles: [1000, 2000] },
-			{ uniqueID: 9999, name: "Bye Team", record: 1, combinedStr: 4, pointDiff: 50, impermissibles: [1000, 2000] } 
-        ];
-		//output function prints to html
-        function output() {
-            for (var i = 0; i < data.length; i++) {
-                document.write("<strong>" + data[i].name + "</strong><br/>");
-				document.write("Ballots: " + data[i].record + "<br/>");
-				document.write("CS: " + data[i].combinedStr + "<br/>");
-				document.write("PD: " + data[i].pointDiff + "<br/>");
-			}
-            document.write("<br/>");
-        }
-        output(); //print unsorted data
-		
-		//reads for impermissibles
-		function isImpermissible(uniqueID, list) {
-			for (var x = 0; x < list.length; x++){
-				if (list[x] == uniqueID){
-						return true;
-					}
-				}
-			return false;
-		}
-		
-		function possibleSwaps(badPair, upperPair, lowerPair) {
-			localTeams = [upperPair, badPair, lowerPair];
-			document.write("Testing Imperssible Resolution Here" + "<br/>");
-			document.write(localTeams);
-		}
+    <script type="text/javascript" language="javascript" type="application/javascript" src="scripts/pairinglogic.js"></script>
 			
+	<meta charset="utf-8">
+  </head>
+  
+  <body class="list-group" ng-controller="PairController as Pairs">
+  
+  	<nav class="navbar navbar-inverse nav">
+	
+	  <div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
 		
-        // first by record, then by combinedStr, then by pointDiff
-        s = firstBy(function (v1, v2) { return v2.record - v1.record; })
-                 .thenBy(function (v1, v2) { return v2.combinedStr - v1.combinedStr ; })
-				 .thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; });
-        data.sort(s);
-		output();
-		
-		//create pairings here
-		var pairs = [];
-		var team;
-		
-		for (var i = 0; i < data.length; i+=2) {
-			pairs.push([data[i], data[i+1]]);
-		}
-		
-		for (var i = 0; i < pairs.length; i++) {
-			teamsinPair = pairs[i];
-            document.write((i+1) + ": " +teamsinPair[0].name + " " + teamsinPair[1].name);	
-			if (isImpermissible(teamsinPair[0].uniqueID, teamsinPair[1].impermissibles) || isImpermissible(teamsinPair[1].uniqueID, teamsinPair[0].impermissibles)){
-				document.write(" Impermissible!")
-			}
-			document.write(" <br/>");
-		}
-		document.write(" <br/>");
-		
-		for (var i = 0; i < pairs.length; i++) {
-			if ((i-1)>=0){upperPair = pairs[i-1];}  //change so that only proper data is submitted to possibleSwaps
-			else {upperPair = null}
-			if ((i+1)<=pairs.length){lowerPair = pairs[i+1]}
-			else {lowerPair = null}
-			teamsinPair = pairs[i];
-			if (isImpermissible(teamsinPair[0].uniqueID, teamsinPair[1].impermissibles) || isImpermissible(teamsinPair[1].uniqueID, teamsinPair[0].impermissibles)){
-				possibleSwaps(teamsinPair, upperPair, lowerPair)
-				//move edge checking logic to here
-			}
-		}
-		
-    </script>
-</head>
-<body>
+			<!--Buttons with the three lines-->
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  
+		  <a class="navbar-brand " href="FrontPage.html">TrialTracker</a>
+		  
+		</div>
 
-</body>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="TrackYourTrials.html">Track Your Trials<span class="sr-only">(current)</span></a></li>
+				
+			</ul>
+		  <ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About Us <span class="caret"></span></a>
+			  <ul class="dropdown-menu" role="menu">
+				<li><a href="#">Social Media</a></li>
+				<li><a href="#">Our School</a></li>
+				<li><a href="#">Our Life Goals</a></li>
+				<li class="divider"></li>
+				<li><a href="#">Separated link</a></li>
+			  </ul>
+			</li>
+		  </ul>
+		</div><!-- /.navbar-collapse -->
+		
+	  </div><!-- /.container-fluid -->
+	  
+	</nav>
+  
+  	<header class = "page-title">
+      <h1>Mock Trial TabRunner</h1>
+	  <h2>Tournament Test</h2>
+    </header>
+	
+	<div id="allPairs">
+		<table cellspacing="0" cellpadding="0" id="teamSetUpTable">
+			<colgroup span="2"></colgroup>
+			<tbody>
+				<tr class="status">
+					    <th scope="col" title="Plaintiff"><h3>Plaintiff</h3></th>
+						<th scope="col" title="Defense"><h3>Defense</h3></th>
+				</tr>
+				
+				<tr ng-repeat="pair in Pairs.pairings">
+					<td ng-repeat="team in pair">
+								<div id="teamCard" class="teamCard">
+									<b>Overall Ranking:</b> {{team.rank}} <br>
+									<b>Team Name:</b> {{team.name}} <br>
+									<b>Team Number:</b> {{team.uniqueID}} <br>
+									<b>Team Record:</b> {{team.record}} <br>
+									<b>Team CS:</b> {{team.combinedStr}} <br>
+									<b>Team CS:</b> {{team.pointDiff}} <br>
+								</div>
+					</td>
+				</tr>
+			</tbody>
+	</div>
+
+  </body>
+  
 </html>
