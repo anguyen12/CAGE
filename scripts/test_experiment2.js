@@ -116,6 +116,7 @@ function teamObject(inputnumber) {
 				this.listAllTeams.push([newTeam, newTeam2]);
 			}
 		}
+		pairedTeams = this.listAllTeams;
 		return this.listAllTeams;
 	}
 	//$scope.chosenPairings = this.pairings;
@@ -124,10 +125,16 @@ function teamObject(inputnumber) {
 	//http://stackoverflow.com/questions/12044277/how-to-validate-inputs-dynamically-created-using-ng-repeat-ng-show-angular
 	
 	this.addPoints = function(team){
+		if (team.temp1 > 0) {team.record+=1};
+		if (team.temp2 > 0) {team.record+=1};
+		if (team.temp1 == 0) {team.record+=0.5};
+		if (team.temp2 == 0) {team.record+=0.5};
 		team.pointDiff = team.temp1 + team.temp2;
+		team.temp1 = 0;
+		team.temp2 = 0;
 	};
 	
-	this.submitTeams = function(teamList){
+	this.submitTeams = function(){
 		this.showChoices = true;
 		this.showAllTeams = false;
 		//this.showAllTeams = false;
@@ -140,6 +147,10 @@ function teamObject(inputnumber) {
 		//through the teamObject into a bigger list of teamObjects
 		
 	};
+	
+	this.pairTeams = function(listAllTeams){
+		
+	}
 
   });
   
