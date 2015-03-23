@@ -37,7 +37,8 @@ function teamObject(inputnumber) {
 	this.list = [];//1,2,3,4...,n 
 	this.pairings = [];
 	this.showChoices=false;
-	this.pairedTeams = {};
+	this.pairedTeams = [];
+	this.teamList = [];
 	
 	this.validate = function(pTourn, pTotal){
 	
@@ -121,8 +122,8 @@ function teamObject(inputnumber) {
 	//http://stackoverflow.com/questions/12044277/how-to-validate-inputs-dynamically-created-using-ng-repeat-ng-show-angular
 	
 	this.submitTeams = function(teamList){
-		this.pairedTeams.push(teamList);
 		this.showChoices = true;
+		this.showAllTeams = false;
 		//this.showAllTeams = false;
 		//$scope.testing = "WHATSUP";
 		

@@ -54,7 +54,6 @@
 	</nav>
   
   	<header class = "page-title">
-		<h1>GitHub is being a jerk erase this line later</h1>
 	  <h1 ng-show="setUp.showAllTeams">Tournament {{setUp.newTourn.tournName}}</h1>
     </header>
 	
@@ -73,12 +72,34 @@
 		</div>
 	</div>
 	
-	
-	<div id="allTeams" ng-show="setUp.showAllTeams" style="position:absolute; left: 15%;">
-		<input type="button" ng-click="setUp.submitTeams(listAllTeams)" class="button" value="Submit Round 1" id="startR1_button">
+	<div id="allTeams" style="position:absolute; left: 15%;">
 			<div id="teamChoicesSummary" class="statusMessage" ng-show="setUp.showChoices">Putting teams together...
-			<p>{{setUp.listAllTeams}}</p>
-			</div>
+			<table cellspacing="0" cellpadding="0" id="teamRanktable">
+				<colgroup span="2"></colgroup>
+				<tbody>
+					<tr class="status">
+					    <th scope="col" title="Plaintiff"><h3>Plaintiff</h3></th>
+						<th scope="col" title="Defense"><h3>Defense</h3></th>
+					</tr>
+				
+					<tr ng-repeat="pair in setUp.listAllTeams">
+						<td ng-repeat="team in pair">
+								<div id="teamCard" class="teamCard">
+									<b>Overall Ranking:</b> {{team.rank}} <br>
+									<b>Team Name:</b> {{team.name}} <br>
+									<b>Team Number:</b> {{team.uniqueID}} <br>
+									<b>Team Record:</b> {{team.record}} <br>
+									<b>Team CS:</b> {{team.combinedStr}} <br>
+									<b>Team CS:</b> {{team.pointDiff}} <br>
+								</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>	
+		</div>
+	</div>
+	<div id="enterTeams" ng-show="setUp.showAllTeams" style="position:absolute; left: 15%;">
+		<input type="button" ng-click="setUp.submitTeams(setUp.listAllTeams)" class="button" value="Submit Round" id="startR_button">
 		<table cellspacing="0" cellpadding="0" id="teamSetUpTable" style="position:absolute;">
 			<colgroup span="2"></colgroup>
 
@@ -100,6 +121,7 @@
 					</td>
 				</tr>
 			</tbody>
+		</table>	
 	</div>
 	
 	<!-- Latest compiled and minified JavaScript -->
