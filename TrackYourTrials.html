@@ -84,14 +84,18 @@
 				
 					<tr ng-repeat="pair in setUp.listAllTeams">
 						<td ng-repeat="team in pair">
+							<form id="resultsForm">
 								<div id="teamCard" class="teamCard">
 									<b>Overall Ranking:</b> {{team.rank}} <br>
 									<b>Team Name:</b> {{team.name}} <br>
 									<b>Team Number:</b> {{team.uniqueID}} <br>
 									<b>Team Record:</b> {{team.record}} <br>
 									<b>Team CS:</b> {{team.combinedStr}} <br>
-									<b>Team CS:</b> {{team.pointDiff}} <br>
+									<b>Team PD:</b> {{team.pointDiff}} <br>
+									<b>Ballot 1 result: </b> <input type="number" id="ballot1pd" placeholder="-126 to +126"></input>
+									<b>Ballot 2 result: </b> <input type="number" id="ballot2pd" placeholder="-126 to +126"></input>
 								</div>
+							</form>
 						</td>
 					</tr>
 				</tbody>
