@@ -14,7 +14,9 @@ function teamObject(inputnumber) {
 	this.impermissibles= [], //a list of teams (teamObjects) a team cannot face
 	this.status= "", //plaintiff or defense
 	this.uniqueID,
-	this.byeTeam = false
+	this.byeTeam = false,
+	this.temp1 = 0,
+	this.temp2 = 0
 }
 	
 //http://stackoverflow.com/questions/12928752/validation-of-dynamic-created-form-angularjs not super helpful
@@ -120,6 +122,10 @@ function teamObject(inputnumber) {
 	
 	//is it even possible? :( http://stackoverflow.com/questions/12044277/how-to-validate-inputs-dynamically-created-using-ng-repeat-ng-show-angular
 	//http://stackoverflow.com/questions/12044277/how-to-validate-inputs-dynamically-created-using-ng-repeat-ng-show-angular
+	
+	this.addPoints = function(team){
+		team.pointDiff = team.temp1 + team.temp2;
+	};
 	
 	this.submitTeams = function(teamList){
 		this.showChoices = true;

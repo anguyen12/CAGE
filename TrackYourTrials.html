@@ -92,8 +92,9 @@
 									<b>Team Record:</b> {{team.record}} <br>
 									<b>Team CS:</b> {{team.combinedStr}} <br>
 									<b>Team PD:</b> {{team.pointDiff}} <br>
-									<b>Ballot 1 result: </b> <input type="number" id="ballot1pd" placeholder="-126 to +126"></input>
-									<b>Ballot 2 result: </b> <input type="number" id="ballot2pd" placeholder="-126 to +126"></input>
+									<b>Ballot 1 result: </b> <input type="number" ng-model="team.temp1" id="ballot1pd" placeholder="-126 to +126"></input>
+									<b>Ballot 2 result: </b> <input type="number" ng-model="team.temp2" id="ballot2pd" placeholder="-126 to +126"></input>
+									<input type="button" value="Submit" id="submit_button" class="button" ng-click="setUp.addPoints(team)">
 								</div>
 							</form>
 						</td>
