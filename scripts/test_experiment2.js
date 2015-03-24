@@ -17,6 +17,7 @@ function teamObject(inputnumber) {
 	this.byeTeam = false,
 	this.temp1 = 0,
 	this.temp2 = 0
+	this.button = true;
 }
 	
 //http://stackoverflow.com/questions/12928752/validation-of-dynamic-created-form-angularjs not super helpful
@@ -35,6 +36,7 @@ function teamObject(inputnumber) {
     this.newTourn = firstBuild;
 	this.hideSetupForm = false;
 	this.showAllTeams = false;
+	this.showPairings = false;
 	//this.totalTeams = 0;
 	this.list = [];//1,2,3,4...,n 
 	this.pairings = [];
@@ -119,10 +121,6 @@ function teamObject(inputnumber) {
 		pairedTeams = this.listAllTeams;
 		return this.listAllTeams;
 	}
-	//$scope.chosenPairings = this.pairings;
-	
-	//is it even possible? :( http://stackoverflow.com/questions/12044277/how-to-validate-inputs-dynamically-created-using-ng-repeat-ng-show-angular
-	//http://stackoverflow.com/questions/12044277/how-to-validate-inputs-dynamically-created-using-ng-repeat-ng-show-angular
 	
 	this.addPoints = function(team){
 		if (team.temp1 > 0) {team.record+=1};
@@ -132,6 +130,7 @@ function teamObject(inputnumber) {
 		team.pointDiff = team.temp1 + team.temp2;
 		team.temp1 = 0;
 		team.temp2 = 0;
+		team.button = false;
 	};
 	
 	this.submitTeams = function(){
@@ -148,8 +147,40 @@ function teamObject(inputnumber) {
 		
 	};
 	
-	this.pairTeams = function(listAllTeams){
+	this.pairTeams = function(myTeamList){
+		//"unstack" the round one pairings
+		unsortedTeams = []
+		for (var i = 0; i <myTeamList.length;i+=1){
+			tPair = myTeamList[i];
+			for (var x = 0; x<tPair.length; x+=1){
+				unsortedTeams.push(tPair[x]);
+			}
+		}
 		
+		//sort teams by appropriate values
+		firstBy=(function(){function e(f){f.thenBy=t;return f}function t(y,x){x=this;return e(function(a,b){return x(a,b)||y(a,b)})}return e})();
+		//ThenBy.JS microlibrary is Copyright 2013 Teun Duynstee
+		//Licensed under the Apache License, Version 2.0 (the "License");
+		//you may not use this file except in compliance with the License.
+		//You may obtain a copy of the License at
+		//http://www.apache.org/licenses/LICENSE-2.0
+	
+		s = firstBy(function (v1, v2) { return v2.record - v1.record; })
+                 .thenBy(function (v1, v2) { return v2.cs - v1.cs ; })
+				 .thenBy(function (v1, v2) { return v2.pd - v1.pd ; });
+		//setup list of team for output				
+		sortedTeams = unsortedTeams.sort(s);
+		listAllTeams = [];
+		
+		for (var i = 0; i < sortedTeams.length; i+=2) {
+			sortedTeams[i].rank = i+1;
+			sortedTeams[i+1].rank = i+2;
+			listAllTeams.push([sortedTeams[i], sortedTeams[i+1]]);
+		}
+	this.showChoices = false;
+	this.showAllTeams = false;
+	this.showPairings = true;
+	return listAllTeams;
 	}
 
   });
