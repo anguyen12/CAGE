@@ -1,0 +1,92 @@
+<!doctype html>
+<html ng-app="tabtracker">
+   <head>
+      <!-- Include the ui-router script and regular angular js script -->
+      <script type="text/javascript" language="javascript" type="application/javascript" src="scripts/angular.min.js"></script>
+      <script src="js/angular-ui-router.min.js"></script>
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="js/jquery-2.1.3.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>	
+      <!-- Include our controllers -->
+      <script src="js/main-app.js"></script>
+      <script src="js/screen1-controller.js"></script>
+      <!--<script src="js/screen2.js"></script>
+         <script src="js/screen3.js"></script>
+         <script src="js/screen4.js"></script>-->
+      <!-- CSS -->
+      <link rel="stylesheet" type="text/css" href="resources/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="resources/TrackYourTrials.css" />
+   </head>
+   <body>
+      <nav class="navbar navbar-inverse nav">
+         <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+               <!-- Below are html elements that will never change from page to page -->
+               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+               <span class="sr-only">Toggle navigation</span></a>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" rel="home" ui-sref="screen1">TrialTracker TEST TEST TEST</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+               <ul class="nav navbar-nav">
+                  <li><a ui-sref="screen2">Track Your Trials<span class="sr-only">(current)</span></a></li>
+               </ul>
+               <ul class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About Us <span class="caret"></span></a>
+                     <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Social Media</a></li>
+                        <li><a href="http://www.macalester.edu">Our School</a></li>
+                        <li><a href="#">Our Life Goals</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                     </ul>
+                  </li>
+               </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+         </div>
+         <!-- /.container-fluid -->
+      </nav>
+      <!-- Above are html elements that will never change from page to page -->
+      <div ui-view></div>
+      <!-- Below are html elements that will never change from page to page -->
+
+	  
+      <!-- //I was getting a couldnt load error ... using template url in angular js: 
+         //http://stackoverflow.com/questions/16251420/couldnt-load-template-using-templateurl-in-angularjs  -->
+      <script type="text/ng-template" id="temp/screen1.html"><!--aka cara's front page-->
+         <div class="jumbotron">
+         <h1 class = "jumbotron-message">Welcome to TrialTracker</h1>
+         <p class = "jumboMessage">We know. We get it. It's cumbersome to track all of your mock trials information by yourself. There are so many rules that you have to memorize and follow. 
+         There's a chance for human error. There's just got to be a better solution to this. Fear not! For TEAM CAGE has come up with a solution. TrialTracker pairs teams up for you busy busy folks, 
+         adhering to the rules/tabulation manual set by American Mock Trial Association. Let us tabulate for you. All you have to do is click the button below to get started. (Don't use Internet Explorer) </p>
+         <p><a class="btn btn-primary btn-lg" ui-sref="screen2" role="button">Start Tracking Your Trials!</a></p>
+         </div>
+      </script>	
+	  
+	  <script type="text/ng-template" id="temp/screen2.html"><!--aka track your trials.html page-->
+		 	  <div id="settingUp" style="position: absolute; left: 29%;">
+		<form name="setUpForm" class="setUpCard">
+			Tournament Name: <input type="text" id="teamName" placeholder="ex. Party Like a Mock Star 2090" ng-model="setUp.newTourn.tournName"/><br><br>
+			Total Teams: <input type="number" id="totalTeams" placeholder="ex. 20" ng-model="setUp.newTourn.totalTeams"><br><br>
+			<input type="button" value="Submit" id="submit_button" class="button" ng-click="setUp.validate(setUp.newTourn.tournName, setUp.newTourn.totalTeams)">
+			<br>
+			<div id="errorMessage" class="errorMessage"></div>
+		</form>
+	</div>
+      </script>	
+	  
+	  
+	  <script type="text/ng-template" id="temp/screen3.html">
+	  <h1 ng-show="setUp.showAllTeams">Tournament {{firstBuild.tournName}}</h1>
+	</div>
+      </script>	
+
+   </body>
+</html>

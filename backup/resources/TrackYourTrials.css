@@ -1,0 +1,88 @@
+.page-title{
+	font-family: Times;
+	text-align: center;
+	}
+
+.logo{
+	position:absolute;
+    left:0px;
+    bottom:0px
+	}		
+		
+.button {
+   border-top: 1px solid #ffffff;
+   background: #CACAE8;
+   background: -webkit-gradient(linear, left top, left bottom, from(#A4A4AC), to(#CACAE8));
+   background: -webkit-linear-gradient(top, #A4A4AC, #CACAE8);
+   background: -moz-linear-gradient(top, #A4A4AC, #CACAE8);
+   background: -ms-linear-gradient(top, #A4A4AC, #CACAE8);
+   background: -o-linear-gradient(top, #A4A4AC, #CACAE8);
+   padding: 5.5px 11px;
+   -webkit-border-radius: 9px;
+   -moz-border-radius: 9px;
+   border-radius: 9px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: #262626;
+   font-size: 13px;
+   font-family: Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.button:hover {
+   border-top-color: #c9c9c9;
+   background: #c9c9c9;
+   color: #383838;
+   }
+.button:active {
+   border-top-color: #f5d42e;
+   background: #CACAE8;
+   }
+
+.container {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}   
+   
+.setUpCard{
+	background: #CACAE8;
+	width: 500px; border: 2px solid;
+	border-width: 6px; border-radius: 30px;
+	box-shadow: 10px 10px 5px #CCCCCC;
+	border-color: #FFFFFF;
+	padding: 12px 12px;
+	margin: 30px 30px;
+	font-family: Helvetica, Arial, Serif;
+	font-size: 15pt;
+	text-align: center;
+}
+
+.teamCard{
+	background: #CACAE7;
+	width: 350px; border: 2px solid;
+	border-width: 6px; border-radius: 30px;
+	box-shadow: 10px 10px 5px #CCCCCC;
+	border-color: #FFFFFF;
+	padding: 12px 12px;
+	margin: 30px 30px;
+	font-family: Helvetica, Arial, Serif;
+	font-size: 12pt;
+}
+
+.errorMessage{
+	color: red;
+	font-family: Helvetica, Arial, Serif;
+	padding: 15px 0px;
+	font-size: 10pt;
+}
+
+
+.statusMessage{
+	color: black;
+	font-family: Helvetica, Arial, Serif;
+	padding: 15px 10px 10px 10px;
+	font-size: 11pt;
+}

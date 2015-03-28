@@ -1,0 +1,80 @@
+/*GODLY: http://css-tricks.com/examples/ButtonMaker/ */
+body {
+    background-color: #EEEEEE;
+	font-family: Helvetica, Arial, Serif;
+	font-size: 12pt;
+}
+
+.button {
+   border-top: 1px solid #ffffff;
+   background: #fcd874;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ffd036), to(#fcd874));
+   background: -webkit-linear-gradient(top, #ffd036, #fcd874);
+   background: -moz-linear-gradient(top, #ffd036, #fcd874);
+   background: -ms-linear-gradient(top, #ffd036, #fcd874);
+   background: -o-linear-gradient(top, #ffd036, #fcd874);
+   padding: 5.5px 11px;
+   -webkit-border-radius: 9px;
+   -moz-border-radius: 9px;
+   border-radius: 9px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: #262626;
+   font-size: 13px;
+   font-family: Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.button:hover {
+   border-top-color: #c9c9c9;
+   background: #c9c9c9;
+   color: #383838;
+   }
+.button:active {
+   border-top-color: #f5d42e;
+   background: #f5d42e;
+   }
+
+.teamCard{
+	background: #f5de75;
+	width: 300px; border: 2px solid;
+	border-width: 6px; border-radius: 30px;
+	box-shadow: 10px 10px 5px #CCCCCC;
+	border-color: #FFFFFF;
+	padding: 12px 12px;
+	margin: 30px 30px;
+	font-family: Helvetica, Arial, Serif;
+	font-size: 9pt;
+}
+
+.errorMessage{
+	color: red;
+	font-family: Helvetica, Arial, Serif;
+	padding: 15px 0px;
+	font-size: 10pt;
+}
+
+
+.statusMessage{
+	color: black;
+	font-family: Helvetica, Arial, Serif;
+	padding: 15px 10px 10px 10px;
+	font-size: 11pt;
+}
+
+h1{
+	font-family: Aharoni, Arial Black, Arial, Helvetica;
+}
+
+h2{
+	font-family: Arial Black, Arial, Helvetica;
+}
+
+h3{
+	font-family: Arial, Helvetica;
+	font-size: 16pt;
+	background-color: #CCCCCC;
+
+}
