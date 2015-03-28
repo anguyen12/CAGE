@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html ng-app="tabRunner">
+  <head>
+    <link rel="stylesheet" type="text/css" href="resources/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="resources/TrackYourTrials.css" /> 
+	<script type="text/javascript" language="javascript" type="application/javascript" src="scripts/angular.min.js"></script>
+    <script type="text/javascript" language="javascript" type="application/javascript" src="scripts/pairinglogic.js"></script>
+			
+	<meta charset="utf-8">
+  </head>
+  
+  <body class="list-group" ng-controller="PairController as Pairs">
+  
+  	<nav class="navbar navbar-inverse nav">
+	
+	  <div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+		
+			<!--Buttons with the three lines-->
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  
+		  <a class="navbar-brand " href="FrontPage.html">TrialTracker</a>
+		  
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="TrackYourTrials.html">Track Your Trials<span class="sr-only">(current)</span></a></li>
+				
+			</ul>
+		  <ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About Us <span class="caret"></span></a>
+			  <ul class="dropdown-menu" role="menu">
+				<li><a href="#">Social Media</a></li>
+				<li><a href="#">Our School</a></li>
+				<li><a href="#">Our Life Goals</a></li>
+				<li class="divider"></li>
+				<li><a href="#">Separated link</a></li>
+			  </ul>
+			</li>
+		  </ul>
+		</div><!-- /.navbar-collapse -->
+		
+	  </div><!-- /.container-fluid -->
+	  
+	</nav>
+  
+  	<header class = "page-title">
+      <h1>Mock Trial TabRunner</h1>
+	  <h2>Tournament Test</h2>
+    </header>
+	
+	<div id="allPairs">
+		<table cellspacing="0" cellpadding="0" id="teamSetUpTable">
+			<colgroup span="2"></colgroup>
+			<tbody>
+				<tr class="status">
+					    <th scope="col" title="Plaintiff"><h3>Plaintiff</h3></th>
+						<th scope="col" title="Defense"><h3>Defense</h3></th>
+				</tr>
+				
+				<tr ng-repeat="pair in Pairs.pairings">
+					<td ng-repeat="team in pair">
+								<div id="teamCard" class="teamCard">
+									<b>Overall Ranking:</b> {{team.rank}} <br>
+									<b>Team Name:</b> {{team.name}} <br>
+									<b>Team Number:</b> {{team.uniqueID}} <br>
+									<b>Team Record:</b> {{team.record}} <br>
+									<b>Team CS:</b> {{team.combinedStr}} <br>
+									<b>Team CS:</b> {{team.pointDiff}} <br>
+								</div>
+					</td>
+				</tr>
+			</tbody>
+	</div>
+
+  </body>
+  
+</html>
