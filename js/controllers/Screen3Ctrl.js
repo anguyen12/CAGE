@@ -1,5 +1,5 @@
 'use strict';
-//The controller that sets up the tournament
+//The controller that saves team name info
 
 var module = angular.module('tabtracker');
 module.controller('Screen3Ctrl', Screen3Ctrl);
@@ -16,4 +16,5 @@ function Screen3Ctrl($scope, $state){
 	$scope.startR1 = function() {
 		localStorage.setItem('tournamentTeams', JSON.stringify(listAllTeams));
 	}
+	
 }

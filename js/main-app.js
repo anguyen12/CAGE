@@ -35,6 +35,11 @@ angular.module('tabtracker', ['ui.router'])
         controller: 'Screen3Ctrl',
 	});	
 	
+	$stateProvider.state('screen4', {
+        url: 'screen4',
+        templateUrl: 'temp/screen4.html',
+        controller: 'Screen4Ctrl',
+	});	
 	// $stateProvider.state(screen2);
 	// $stateProvider.state(screen3);
 	// $stateProvider.state(screen4);
