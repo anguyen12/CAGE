@@ -11,6 +11,9 @@ function Screen3Ctrl($scope, $state){
 		var thisTournament = JSON.parse(localStorage.getItem('tournament'));
 		this.name = thisTournament.name;
 		this.listAllTeams = JSON.parse(localStorage.getItem('listAllTeams'));
-		
+	}
+	
+	$scope.startR1 = function() {
+		localStorage.setItem('tournamentTeams', JSON.stringify(listAllTeams));
 	}
 }

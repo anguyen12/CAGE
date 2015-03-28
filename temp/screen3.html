@@ -1,6 +1,6 @@
-<h1 align="center"> Tournament {{name}} </h1>	
-	<div id="enterTeams" style="position:absolute; left: 16%;">
-		<input type="button" class="button" ng-click = "configTeams()" value="Configure Tournament" id="startR_button">
+<h1 align="center"> Tournament {{name}} </h1>
+	<div id="enterTeams" ng-init = "configTeams()" style="position:absolute; left: 16%;">
+		<input type="button" class="button" ng-click = "startR1()" value="Start R1" id="startR_button">
 		<table cellspacing="0" cellpadding="0" id="teamSetUpTable" style="position:absolute;">
 			<colgroup span="2"></colgroup>
 			<tbody>
@@ -19,5 +19,6 @@
 					</td>
 				</tr>
 			</tbody>
-		</table>	
+		</table>
 	</div>
+	
