@@ -1,4 +1,4 @@
-<h1 align="center"> Tournament {{name}} </h1>
+<h1 align="center">{{name}} </h1>
 	<div id="teamChoicesSummary" style="position:absolute; left: 16%;" ng-init="showTeams()">
 		<input type="button" class="button" value="Pair Round 2" ng-click="saveRound()" ui-sref="screen5" id="startR_button">
 			<table cellspacing="0" cellpadding="0" id="teamRanktable">
@@ -17,9 +17,11 @@
 									<b>Team Record:</b> {{team.record}} <br>
 									<b>Team CS:</b> {{team.combinedStr}} <br>
 									<b>Team PD:</b> {{team.pointDiff}} <br>
-									<b ng-show = "team.button">Ballot 1 result: <input type="number" ng-model="team.temp1" id="ballot1pd" min="-126" max="126" placeholder="-126 to +126"></input></b>  <br>
-									<b ng-show = "team.button">Ballot 2 result: <input type="number" ng-model="team.temp2" id="ballot2pd" min="-126" max="126" placeholder="-126 to +126"></input></b> <br>
-									<input type="button" ng-show = "team.button" value="Submit" id="submit_button" class="button" ng-click="addPoints(team)">
+									<p ng-show = "team.button">
+									<b>Ballot 1 result: </b> <input type="number" ng-model="team.temp1" id="ballot1pd" min="-126" max="126" placeholder="-126 to +126"></input> <br>
+									<b>Ballot 2 result: </b> <input type="number" ng-model="team.temp2" id="ballot2pd" min="-126" max="126" placeholder="-126 to +126"></input> <br>
+									<input type="button" value="Submit" id="submit_button" class="button" ng-click="addPoints(team)"> 
+									</p>
 								</div>
 							</form>
 						</td>

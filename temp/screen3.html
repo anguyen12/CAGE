@@ -1,4 +1,4 @@
-<h1 align="center"> Tournament {{name}} </h1>
+<h1 align="center">{{name}}</h1>
 	<div id="enterTeams" ng-init = "configTeams()" style="position:absolute; left: 16%;">
 		<input type="button" class="button" ng-click = "startR1()" ui-sref="screen4" value="Start R1" id="startR_button">
 		<table cellspacing="0" cellpadding="0" id="teamSetUpTable" style="position:absolute;">
@@ -12,6 +12,7 @@
 					<td ng-repeat="team in pair">
 							<form id="teamCardForm">
 								<div id="teamCard" class="teamCard">
+									<b>Team {{team.number+1}} </b> <br>
 									<b>Team name: </b> <input type="text" id="teamName{{team.number}}" ng-model = "team.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
 									<b>Team ID: </b> <input type="text" id="teamID{{team.number}}" ng-model = "team.uniqueID" placeholder="ex. 99999"></input><br><br>
 								</div>
