@@ -7,6 +7,7 @@ module.controller('Screen2Ctrl', Screen2Ctrl);
 var tournament = { name: "" , totalTeams: 0 };
 var listAllTeams = [];
 //gozong comment
+//cara test
 function teamObject(inputnumber) {
 	this.number = inputnumber, //lets make this the one that is assigned by tabber, and uniqueID as the school's special id
 	this.name= "",
