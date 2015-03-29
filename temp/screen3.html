@@ -12,8 +12,8 @@
 					<td ng-repeat="team in pair">
 							<form id="teamCardForm">
 								<div id="teamCard" class="teamCard">
-									<b>Team name: </b> <input type="text" id="teamName{{team.number}}" ng-model = "$scope.team.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
-									<b>Team ID: </b> <input type="text" id="teamID{{team.number}}" ng-model = "$scope.team.uniqueID" placeholder="ex. 99999"></input><br><br>
+									<b>Team name: </b> <input type="text" id="teamName{{team.number}}" ng-model = "team.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
+									<b>Team ID: </b> <input type="text" id="teamID{{team.number}}" ng-model = "team.uniqueID" placeholder="ex. 99999"></input><br><br>
 								</div>
 							</form>
 					</td>

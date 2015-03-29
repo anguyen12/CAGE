@@ -18,12 +18,11 @@ function Screen3Ctrl($scope, $state){
 	
 	$scope.startR1 = function($scope) { //clicking the button to start round 1
 		var tournament = JSON.parse(localStorage.getItem('tournament'));//grab the number of totals teams from local storage
-
 		var counter = 0;
 		for (var i=0; i < (parseInt(tournament.totalTeams)/2); i++){
 			var pairing = listAllTeams[i];//grab the pairing
 			var plaintiff = pairing[0];//grab the plaintiff
-			var defendent = pairing[1];//grab the defendent
+			var defendant = pairing[1];//grab the defendant
 			
 			//---Update the properties of the plaintiff and defendant
 			var name_label = "#teamName"+counter; // build the name of the name input box in html
@@ -34,16 +33,14 @@ function Screen3Ctrl($scope, $state){
 			var increment = counter+1; //increment the counter/index of the pairing object, so we can grab the 2nd team of the pairing
 			name_label = "#teamName"+increment;// similar to above--build the name of the name input box
 			id_label = "#teamID"+increment; //build the name of the id input box
-			defendent.name= $(name_label).val(); //update defendent's name and number properties
-			defendent.number = $(id_label).val();
+			defendant.name= $(name_label).val(); //update defendant's name and number properties
+			defendant.number = $(id_label).val();
 			
 			//---Insert into localStorage
 			listAllTeams[i] = "";//clear out the empty placeholder
-			listAllTeams[i] = [plaintiff, defendent]; //replace it with our new plaintiff and defendent pairing filled w/ data
+			listAllTeams[i] = [plaintiff, defendant]; //replace it with our new plaintiff and defendent pairing filled w/ data
 		}
-		
-		localStorage.setItem('tournamentTeams', JSON.stringify(this.listAllTeams)); //store tournament teams into local storage
-		alert("Done configuring");
+		localStorage.setItem('listAllTeams', JSON.stringify(this.listAllTeams)); //store tournament teams into local storage
 	}
 	
 }
