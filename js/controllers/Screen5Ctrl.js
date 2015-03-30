@@ -9,6 +9,7 @@ function Screen5Ctrl($scope, $state){
 	$scope.pairTeams = function() {
 		var thisTournament = JSON.parse(localStorage.getItem('tournament'));
 		this.name = thisTournament.name;
+		this.round = thisTournament.roundNumber;
 		var loadedTeams = JSON.parse(localStorage.getItem('listAllTeams2'));
 		var unsortedTeams = [] //unpair the teams
 		

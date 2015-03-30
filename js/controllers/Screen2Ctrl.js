@@ -4,7 +4,7 @@
 var module = angular.module('tabtracker');
 module.controller('Screen2Ctrl', Screen2Ctrl);
 
-var tournament = { name: "" , totalTeams: 0 };
+var tournament = { name: "" , totalTeams: 0, roundNumber: 1 };
 var listAllTeams = [];
 //gozong comment
 //cara test

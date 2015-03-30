@@ -6,10 +6,10 @@ module.controller('Screen3Ctrl', Screen3Ctrl);
 
 function Screen3Ctrl($scope, $state){
 
-	$scope.configTeams = function() { //on load, build the empty team forms
-		console.log("executed correctly"); 
+	$scope.configTeams = function() { //on load, build the empty team forms 
 		var thisTournament = JSON.parse(localStorage.getItem('tournament')); //grab tournament object
 		this.name = thisTournament.name; //assign {{name}} to the name of the tournament
+		this.round = thisTournament.roundNumber;
 		
 		//this is grabbing the empty placeholder of all team forms
 		//[[**pairing 1**{teamObject},{teamObject}],[**pairing 2**{teamObject1},{teamObject1}], etc...]
