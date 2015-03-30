@@ -54,11 +54,11 @@
 	</nav>
   
   	<header class = "page-title">
-	  <h1 ng-show="setUp.showAllTeams">Tournamenmjhjt {{setUp.newTourn.tournName}}</h1>
+	  <h1 ng-show="setUp.showAllTeams">Tournament {{setUp.newTourn.tournName}}</h1>
     </header>
 	
 	
-	<div id="settingUp" ng-hide="setUp.hideSetupForm" style="position: absolute; left: 29%;">
+	<div id="settingUp" ng-hide="setUp.hideSetupForm">
 		<form name="setUpForm" class="setUpCard">
 			Tournament Name: <input type="text" id="teamName" placeholder="ex. Party Like a Mock Star 2090" ng-model="setUp.newTourn.tournName"/><br><br>
 			Total Teams: <input type="number" id="totalTeams" placeholder="ex. 20" ng-model="setUp.newTourn.totalTeams"><br><br>
@@ -66,27 +66,22 @@
 			<br>
 			<div id="errorMessage" class="errorMessage"></div>
 		</form>
-		
-		<div id="logo" style="position: absolute; left: 47%;">
-			<img src="resources/courthouse_logo.png" alt="TrialTracker" style="width:64px;height:64px">
-		</div>
 	</div>
-	
-	<div id="allTeams" style="position:absolute; left: 20%;">
+		
+	<div id="allTeams">
 			<div id="teamChoicesSummary" class="statusMessage" ng-show="setUp.showChoices">
-			<input type="button" ng-click="setUp.pairTeams(setUp.listAllTeams)" class="button" value="Submit Round" id="startR_button">
-			<table cellspacing="0" cellpadding="0" id="teamRanktable">
+			<table cellspacing="0" cellpadding="0" id="teamRanktable" class="setTeamCard">
 				<colgroup span="2"></colgroup>
 				<tbody>
 					<tr class="status">
-					    <th scope="col" title="Plaintiff"><h3>Plaintiff</h3></th>
-						<th scope="col" title="Defense"><h3>Defense</h3></th>
+					    <th scope="col" title="Plaintiff" style="text-align:center"><h3>Plaintiff</h3></th>
+						<th scope="col" title="Defense" style="text-align:center"><h3>Defense</h3></th>
 					</tr>
 				
 					<tr ng-repeat="pair in setUp.listAllTeams">
 						<td ng-repeat="team in pair">
-							<form id="resultsForm">
-								<div id="teamCard" class="teamCard">
+							<form id="resultsForm" class="teamCard">
+								<div id="teamCard" >
 									<b>Team Name:</b> {{team.name}} <br>
 									<b>Team Number:</b> {{team.uniqueID}} <br>
 									<b>Team Record:</b> {{team.record}} <br>
@@ -101,20 +96,21 @@
 					</tr>
 				</tbody>
 			</table>	
+			<input type="button" ng-click="setUp.pairTeams(setUp.listAllTeams)" class="button" value="Submit Round" id="startR_button">
 		</div>
+		
 		<div id="teamChoicesSummary" class="statusMessage" ng-show="setUp.showPairings">
-			<input type="button" ng-click="submitTeams()" class="button" value="Next Round" id="startR_button">
-			<table cellspacing="0" cellpadding="0" id="teamRanktable">
+			<table cellspacing="0" cellpadding="0" id="teamRanktable" class="setTeamCard">
 				<colgroup span="2"></colgroup>
 				<tbody>
 					<tr class="status">
-					    <th scope="col" title="Plaintiff"><h3>Plaintiff</h3></th>
-						<th scope="col" title="Defense"><h3>Defense</h3></th>
+					    <th scope="col" title="Plaintiff" style="text-align:center"><h3>Plaintiff</h3></th>
+						<th scope="col" title="Defense" style="text-align:center"><h3>Defense</h3></th>
 					</tr>
 					<tr ng-repeat="pair in setUp.listAllTeams">
 						<td ng-repeat="team in pair">
-							<form id="resultsForm">
-								<div id="teamCard" class="teamCard">
+							<form id="resultsForm" class="teamCard">
+								<div id="teamCard" >
 									<b>Team Name:</b> {{team.name}} <br>
 									<b>Team Number:</b> {{team.uniqueID}} <br>
 									<b>Team Record:</b> {{team.record}} <br>
@@ -125,24 +121,24 @@
 						</td>
 					</tr>
 				</tbody>
-			</table>	
+			</table>
+			<input type="button" ng-click="submitTeams()" class="button" value="Next Round" id="startR_button">	
 		</div>
+		
 	</div>
-	<div id="enterTeams" ng-show="setUp.showAllTeams" style="position:absolute; left: 15%;">
-		<input type="button" ng-click="setUp.submitTeams(setUp.listAllTeams)" class="button" value="Submit Round" id="startR_button">
-		<table cellspacing="0" cellpadding="0" id="teamSetUpTable" style="position:absolute;">
-			<colgroup span="2"></colgroup>
 
+	<div id="enterTeams" ng-show="setUp.showAllTeams" >
+		<table cellspacing="0" cellpadding="0" id="teamSetUpTable" class="setTeamCard">
+			<colgroup span="2"></colgroup>
 			<tbody>
-				<tr class="status">
-					    <th scope="col" title="Plaintiff"><h3>Plaintiff</h3></th>
-						<th scope="col" title="Defense"><h3>Defense</h3></th>
+				<tr class="status" class="statusCenter">
+					    <th scope="col" title="Plaintiff" style="text-align:center"><h3>Plaintiff</h3></th>
+						<th scope="col" title="Defense" style="text-align:center"><h3>Defense</h3></th>
 				</tr>
-				
 				<tr ng-repeat="chosenPairings in setUp.listAllTeams">
 					<td ng-repeat="team in chosenPairings">
-							<form id="teamCardForm">
-								<div id="teamCard" class="teamCard">
+							<form id="teamCardForm" class="teamCard">
+								<div id="teamCard">
 									<b>Team name: </b> <input type="text" id="teamName{{team.number}}" ng-model = "team.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
 									<b>Team ID: </b> <input type="text" id="teamID{{team.number}}" ng-model = "team.uniqueID" placeholder="ex. 99999"></input><br><br>
 								</div>
@@ -151,6 +147,7 @@
 				</tr>
 			</tbody>
 		</table>	
+		<input type="button" ng-click="setUp.submitTeams(setUp.listAllTeams)" class="button" value="Submit Round" id="startR_button">
 	</div>
 	
 	<!-- Latest compiled and minified JavaScript -->
