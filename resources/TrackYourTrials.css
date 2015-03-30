@@ -40,6 +40,19 @@
    border-top-color: #f5d42e;
    background: #CACAE8;
    }
+   
+input[type="button"]{
+	display: block;
+	margin: 0 auto; 
+}
+
+form.setUpCard{
+	margin: 0 auto;
+}
+
+table.setTeamCard{
+	margin: 0 auto;
+}
 
 .container {
     display: table-cell;
