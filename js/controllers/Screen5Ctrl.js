@@ -10,7 +10,7 @@ function Screen5Ctrl($scope, $state){
 		var thisTournament = JSON.parse(localStorage.getItem('tournament'));
 		this.name = thisTournament.name;
 		this.round = thisTournament.roundNumber;
-		var loadedTeams = JSON.parse(localStorage.getItem('listAllTeams2'));
+		var loadedTeams = JSON.parse(localStorage.getItem('listAllTeams'));
 		var unsortedTeams = [] //unpair the teams
 		
 		for (var i = 0; i < loadedTeams.length; i+=1){
@@ -38,7 +38,11 @@ function Screen5Ctrl($scope, $state){
 		for (var i = 0; i < sortedTeams.length; i+=2) {
 			sortedTeams[i].rank = i+1;
 			sortedTeams[i+1].rank = i+2;
+			sortedTeams[i].button = true;
+			sortedTeams[i+1].button = true;
 			this.listAllTeams2.push([sortedTeams[i], sortedTeams[i+1]]);
 		}
+		
+		localStorage.setItem('listAllTeams', JSON.stringify(this.listAllTeams2));
 	}
 }
