@@ -1,12 +1,11 @@
 <h1 align="center">{{name}} </h1>
-	<div id="teamChoicesSummary" style="position:absolute; left: 16%;" ng-init="showTeams()">
-		<input type="button" class="button" value="Pair Round 2" ng-click="saveRound()" ui-sref="screen5" id="startR_button">
-			<table cellspacing="0" cellpadding="0" id="teamRanktable">
+	<div id="teamChoicesSummary" ng-init="showTeams()">
+			<table cellspacing="0" cellpadding="0" id="teamRanktable" class="setTeamCard">
 				<colgroup span="2"></colgroup>
 				<tbody>
 					<tr class="status">
-					    <th scope="col" title="Plaintiff"><h3>Plaintiff</h3></th>
-						<th scope="col" title="Defense"><h3>Defense</h3></th>
+					    <th scope="col" title="Plaintiff" style="text-align:center"><h3>Plaintiff</h3></th>
+						<th scope="col" title="Defense" style="text-align:center"><h3>Defense</h3></th>
 					</tr>
 					<tr ng-repeat="pair in this.listAllTeams">
 						<td ng-repeat="team in pair">
@@ -27,6 +26,7 @@
 						</td>
 					</tr>
 				</tbody>
-			</table>	
+			</table>
+			<input type="button" class="button" value="Pair Round 2" ng-click="saveRound()" ui-sref="screen5" id="startR_button">	
 	</div>
 	
