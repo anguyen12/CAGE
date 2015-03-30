@@ -28,8 +28,8 @@ function Screen5Ctrl($scope, $state){
 		//http://www.apache.org/licenses/LICENSE-2.0
 		
 		var s = firstBy(function (v1, v2) { return v2.record - v1.record; })
-                 .thenBy(function (v1, v2) { return v2.cs - v1.cs ; })
-				 .thenBy(function (v1, v2) { return v2.pd - v1.pd ; });
+                 .thenBy(function (v1, v2) { return v2.combinedStr - v1.combinedStr ; })
+				 .thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; });
 		//setup list of team for output				
 		var sortedTeams = unsortedTeams.sort(s);
 		this.listAllTeams2 = [];
