@@ -11,62 +11,65 @@
   
   <body class="list-group" ng-controller="SetupController as setUp">
   
-  	<nav class="navbar navbar-inverse nav">
-	
-	  <div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-		
-			<!--Buttons with the three lines-->
-		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		  </button>
-		  
-		  <a class="navbar-brand " href="FrontPage.html">TrialTracker</a>
-		  
-		</div>
-
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="C:\Users\hp\Desktop\mock_trial_test\TrackYourTrials.html">Track Your Trials<span class="sr-only">(current)</span></a></li>
-				
-			</ul>
-		  <ul class="nav navbar-nav navbar-right">
-			<li class="dropdown">
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About Us <span class="caret"></span></a>
-			  <ul class="dropdown-menu" role="menu">
-				<li><a href="#">Social Media</a></li>
-				<li><a href="#">Our School</a></li>
-				<li><a href="#">Our Life Goals</a></li>
-				<li class="divider"></li>
-				<li><a href="#">Separated link</a></li>
-			  </ul>
-			</li>
-		  </ul>
-		</div><!-- /.navbar-collapse -->
-		
-	  </div><!-- /.container-fluid -->
-	  
-	</nav>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="C:/Users/hp/Desktop/startbootstrap-landing-page-1.0.3/FrontPage2.0.html">TrialTracker</a>
+            </div>
+			
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#about">About</a>
+                    </li>
+					<li>
+                        <a href="#services">Services</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
   
+	<!--Page Content-->
   	<header class = "page-title">
 	  <h1 ng-show="setUp.showAllTeams">Tournament {{setUp.newTourn.tournName}}</h1>
     </header>
 	
+	<div class="container">
+            <div class="row">
+				<hr class="section-heading-spacer">
+				<div class="clearfix"></div>
+            </div>
+    </div>
 	
-	<div id="settingUp" ng-hide="setUp.hideSetupForm">
-		<form name="setUpForm" class="setUpCard">
-			Tournament Name: <input type="text" id="teamName" placeholder="ex. Party Like a Mock Star 2090" ng-model="setUp.newTourn.tournName"/><br><br>
-			Total Teams: <input type="number" id="totalTeams" placeholder="ex. 20" ng-model="setUp.newTourn.totalTeams"><br><br>
-			<input type="button" value="Submit" id="submit_button" class="button" ng-click="setUp.validate(setUp.newTourn.tournName, setUp.newTourn.totalTeams)">
-			<br>
-			<div id="errorMessage" class="errorMessage"></div>
-		</form>
+	<div class="row">
+	<hr class="section-heading-spacer">
+		<div class="clearfix"></div>
+			<div id="settingUp" ng-hide="setUp.hideSetupForm">
+				<form name="setUpForm" class="setUpCard">
+					Tournament Name: <input type="text" id="teamName" placeholder="ex. Party Like a Mock Star 2090" ng-model="setUp.newTourn.tournName"/><br><br>
+					Total Teams: <input type="number" id="totalTeams" placeholder="ex. 20" ng-model="setUp.newTourn.totalTeams"><br><br>
+					<input type="button" value="Submit" id="submit_button" class="button" ng-click="setUp.validate(setUp.newTourn.tournName, setUp.newTourn.totalTeams)">
+				<br>
+				<div id="errorMessage" class="errorMessage"></div>
+				</form>
+			</div>
 	</div>
+
 		
 	<div id="allTeams">
 			<div id="teamChoicesSummary" class="statusMessage" ng-show="setUp.showChoices">
