@@ -14,8 +14,9 @@ function Screen3Ctrl($scope, $state){
 		//this is grabbing the empty placeholder of all team forms
 		//[[**pairing 1**{teamObject},{teamObject}],[**pairing 2**{teamObject1},{teamObject1}], etc...]
 		this.listAllTeams = JSON.parse(localStorage.getItem('listAllTeams'));
+		this.pairings = JSON.parse(localStorage.getItem('pairings'));
 	}
-	
+	// NEEDS EDITED TO UPDATE PAIRINGS OBJECTS
 	$scope.startR1 = function($scope) { //clicking the button to start round 1
 		var tournament = JSON.parse(localStorage.getItem('tournament'));//grab the number of totals teams from local storage
 		var counter = 0;
@@ -41,6 +42,7 @@ function Screen3Ctrl($scope, $state){
 			listAllTeams[i] = [plaintiff, defendant]; //replace it with our new plaintiff and defendent pairing filled w/ data
 		}
 		localStorage.setItem('listAllTeams', JSON.stringify(this.listAllTeams)); //store tournament teams into local storage
+		//NEEDS EDITED UP UPDATE PAIRINGS
 	}
 	
 }

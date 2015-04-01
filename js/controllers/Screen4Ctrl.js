@@ -11,6 +11,7 @@ function Screen4Ctrl($scope, $state){
 		this.name = thisTournament.name;
 		this.round = thisTournament.roundNumber;
 		this.listAllTeams = JSON.parse(localStorage.getItem('listAllTeams'));
+		this.pairings = JSON.parse(localStorage.getItem('pairings'));
 	}
 	
 	$scope.addPoints = function(team){
