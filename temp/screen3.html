@@ -7,24 +7,15 @@
 					    <th scope="col" title="Plaintiff" style="text-align:center"><h3>Plaintiff</h3></th>
 						<th scope="col" title="Defense" style="text-align:center"><h3>Defense</h3></th>
 				</tr>
-				<tr ng-repeat="pairing in this.pairings">
-					<td>
-						<form id="teamCardForm" class="teamCard">
-							<div id="teamCard">
-								<b>Team {{pairing.pTeam.number+1}} </b> <br>
-								<b>Team name: </b> <input type="text" id="teamName{{pairing.pTeam.number}}" ng-model = "pairing.pTeam.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
-								<b>Team ID: </b> <input type="text" id="teamID{{pairing.pTeam.number}}" ng-model = "pairing.pTeam.uniqueID" placeholder="ex. 99999"></input><br><br>
-							</div>
-						</form>
-					</td>
-					<td>
-						<form id="teamCardForm" class="teamCard">
-							<div id="teamCard">
-								<b>Team {{pairing.dTeam.number+1}} </b> <br>
-								<b>Team name: </b> <input type="text" id="teamName{{pairing.dTeam.number}}" ng-model = "pairing.dTeam.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
-								<b>Team ID: </b> <input type="text" id="teamID{{pairing.dTeam.number}}" ng-model = "pairing.dTeam.uniqueID" placeholder="ex. 99999"></input><br><br>
-							</div>
-						</form>
+				<tr ng-repeat="pair in this.listAllTeams">
+					<td ng-repeat="team in pair">
+							<form id="teamCardForm" class="teamCard">
+								<div id="teamCard">
+									<label style="background: #000000; color: #FFFFFF;"><b>Team </label>{{team.number+1}} </b><br>
+									<label style="background: #000000; color: #FFFFFF;"><b>Team name: </b> </label><input type="text" id="teamName{{team.number}}" ng-model = "team.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
+									<b>Team ID: </b> <input type="text" id="teamID{{team.number}}" ng-model = "team.uniqueID" placeholder="ex. 99999"></input><br><br>
+								</div>
+							</form>
 					</td>
 				</tr>
 			</tbody>
