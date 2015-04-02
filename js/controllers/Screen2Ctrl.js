@@ -5,7 +5,7 @@ var module = angular.module('tabtracker');
 module.controller('Screen2Ctrl', Screen2Ctrl);
 
 var tournament = { name: "" , totalTeams: 0, roundNumber: 1 };
-var listAllTeams = [];
+//var listAllTeams = [];
 var pairings = [];
 
 function teamObject(inputnumber) {
@@ -49,7 +49,7 @@ function Screen2Ctrl($scope, $state){
 					byeTeam.name = "Bye Team";
 					byeTeam.uniqueID = 9999;
 					byeTeam.status = "d";
-					listAllTeams.push([newTeam,byeTeam]); //I'm pretty sure this conditional is handling an odd number of teams - EA
+					//listAllTeams.push([newTeam,byeTeam]); //I'm pretty sure this conditional is handling an odd number of teams - EA
 					var thisPair = new pairing(newTeam, byeTeam);
 					pairings.push(thisPair);
 				}	
@@ -58,12 +58,12 @@ function Screen2Ctrl($scope, $state){
 					var newTeam2 = new teamObject(j+1);
 					newTeam.status = "p";
 					newTeam2.status = "d"; 
-					listAllTeams.push([newTeam, newTeam2]);
+					//listAllTeams.push([newTeam, newTeam2]);
 					var thisPair = new pairing(newTeam, newTeam2);
 					pairings.push(thisPair);					
 				}
 			}
-			localStorage.setItem('listAllTeams', JSON.stringify(listAllTeams));
+			//localStorage.setItem('listAllTeams', JSON.stringify(listAllTeams));
 			localStorage.setItem('pairings', JSON.stringify(pairings));
 		}
 }

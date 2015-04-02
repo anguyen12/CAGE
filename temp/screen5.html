@@ -7,15 +7,26 @@
 					    <th scope="col" title="Plaintiff" style="text-align:center"><h3>Plaintiff</h3></th>
 						<th scope="col" title="Defense" style="text-align:center"><h3>Defense</h3></th>
 					</tr>
-					<tr ng-repeat="pair in this.listAllTeams2">
-						<td ng-repeat="team in pair">
-							<form id="resultsForm" class="teamCard">
+					<tr ng-repeat="pair in this.newPairings">
+						<td >
+							<form id="resultsFormP" class="teamCard">
 								<div id="teamCard" >
-									<b>Team Name:</b> {{team.name}} <br>
-									<b>Team Number:</b> {{team.uniqueID}} <br>
-									<b>Team Record:</b> {{team.record}} <br>
-									<b>Team CS:</b> {{team.combinedStr}} <br>
-									<b>Team PD:</b> {{team.pointDiff}} <br>
+									<b>Team Name:</b> {{pair.pTeam.name}} <br>
+									<b>Team Number:</b> {{pair.pTeam.uniqueID}} <br>
+									<b>Team Record:</b> {{pair.pTeam.record}} <br>
+									<b>Team CS:</b> {{pair.pTeam.combinedStr}} <br>
+									<b>Team PD:</b> {{pair.pTeam.pointDiff}} <br>
+								</div>
+							</form>
+						</td>
+						<td >
+							<form id="resultsFormD" class="teamCard">
+								<div id="teamCard" >
+									<b>Team Name:</b> {{pair.dTeam.name}} <br>
+									<b>Team Number:</b> {{pair.dTeam.uniqueID}} <br>
+									<b>Team Record:</b> {{pair.dTeam.record}} <br>
+									<b>Team CS:</b> {{pair.dTeam.combinedStr}} <br>
+									<b>Team PD:</b> {{pair.dTeam.pointDiff}} <br>
 								</div>
 							</form>
 						</td>

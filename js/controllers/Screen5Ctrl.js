@@ -4,20 +4,31 @@
 var module = angular.module('tabtracker');
 module.controller('Screen5Ctrl', Screen5Ctrl);
 
+function pairing(team1, team2) {
+	this.button = true,
+	this.ballot1 = 0;
+	this.ballot2 = 0;
+	this.isImpermissible = false;
+	this.pTeam = team1;
+	this.dTeam = team2;
+}
+
 function Screen5Ctrl($scope, $state){
 	
 	$scope.pairTeams = function() {
 		var thisTournament = JSON.parse(localStorage.getItem('tournament'));
 		this.name = thisTournament.name;
 		this.round = thisTournament.roundNumber;
-		var loadedTeams = JSON.parse(localStorage.getItem('listAllTeams'));
+		//var loadedTeams = JSON.parse(localStorage.getItem('listAllTeams'));
+		var pairings = JSON.parse(localStorage.getItem('pairings'));
 		var unsortedTeams = [] //unpair the teams
 		
-		for (var i = 0; i < loadedTeams.length; i+=1){
-			var tPair = loadedTeams[i];
-			for (var x = 0; x<tPair.length; x+=1){
-				unsortedTeams.push(tPair[x]);
-			}
+		for (var i = 0; i < pairings.length; i+=1){
+			var thisPair = pairings[i];
+			var team1 = thisPair.pTeam;
+			var team2 = thisPair.dTeam;
+			unsortedTeams.push(team1);
+			unsortedTeams.push(team2);
 		}
 		
 		//sort teams by appropriate values
@@ -33,16 +44,17 @@ function Screen5Ctrl($scope, $state){
 				 .thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; });
 		//setup list of team for output				
 		var sortedTeams = unsortedTeams.sort(s);
-		this.listAllTeams2 = [];
+		this.newPairings = [];
 		
 		for (var i = 0; i < sortedTeams.length; i+=2) {
 			sortedTeams[i].rank = i+1;
 			sortedTeams[i+1].rank = i+2;
 			sortedTeams[i].button = true;
 			sortedTeams[i+1].button = true;
-			this.listAllTeams2.push([sortedTeams[i], sortedTeams[i+1]]);
+			var pair =  new pairing(sortedTeams[i],sortedTeams[i+1]);
+			this.newPairings.push(pair);
 		}
 		
-		localStorage.setItem('listAllTeams', JSON.stringify(this.listAllTeams2));
+		localStorage.setItem('pairings', JSON.stringify(this.newPairings));
 	}
 }

@@ -10,7 +10,7 @@ function Screen4Ctrl($scope, $state){
 		var thisTournament = JSON.parse(localStorage.getItem('tournament'));
 		this.name = thisTournament.name;
 		this.round = thisTournament.roundNumber;
-		this.listAllTeams = JSON.parse(localStorage.getItem('listAllTeams'));
+		//this.listAllTeams = JSON.parse(localStorage.getItem('listAllTeams'));
 		this.pairings = JSON.parse(localStorage.getItem('pairings'));
 	}
 	
@@ -26,7 +26,8 @@ function Screen4Ctrl($scope, $state){
 	};
 	
 	$scope.saveRound = function() {
-		localStorage.setItem('listAllTeams', JSON.stringify(this.listAllTeams));
+		//localStorage.setItem('listAllTeams', JSON.stringify(this.listAllTeams));
+		localStorage.setItem('pairings', JSON.stringify(this.pairings));
 		var thisTournament = JSON.parse(localStorage.getItem('tournament'));
 		thisTournament.roundNumber = thisTournament.roundNumber + 1;
 		localStorage.setItem('tournament', JSON.stringify(thisTournament));

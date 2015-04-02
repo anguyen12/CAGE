@@ -13,7 +13,7 @@ function Screen3Ctrl($scope, $state){
 		
 		//this is grabbing the empty placeholder of all team forms
 		//[[**pairing 1**{teamObject},{teamObject}],[**pairing 2**{teamObject1},{teamObject1}], etc...]
-		this.listAllTeams = JSON.parse(localStorage.getItem('listAllTeams'));
+		//this.listAllTeams = JSON.parse(localStorage.getItem('listAllTeams'));
 		this.pairings = JSON.parse(localStorage.getItem('pairings'));
 	}
 	// NEEDS EDITED TO UPDATE PAIRINGS OBJECTS
@@ -21,9 +21,10 @@ function Screen3Ctrl($scope, $state){
 		var tournament = JSON.parse(localStorage.getItem('tournament'));//grab the number of totals teams from local storage
 		var counter = 0;
 		for (var i=0; i < (parseInt(tournament.totalTeams)/2); i++){
-			var pairing = listAllTeams[i];//grab the pairing
-			var plaintiff = pairing[0];//grab the plaintiff
-			var defendant = pairing[1];//grab the defendant
+						
+			var pairing = pairings[i];//grab the pairing
+			var plaintiff = pairing.pTeam;//grab the plaintiff
+			var defendant = pairing.dTeam;//grab the defendant
 			
 			//---Update the properties of the plaintiff and defendant
 			var name_label = "#teamName"+counter; // build the name of the name input box in html
@@ -37,11 +38,14 @@ function Screen3Ctrl($scope, $state){
 			defendant.name= $(name_label).val(); //update defendant's name and number properties
 			defendant.number = $(id_label).val();
 			
-			//---Insert into localStorage
-			listAllTeams[i] = "";//clear out the empty placeholder
-			listAllTeams[i] = [plaintiff, defendant]; //replace it with our new plaintiff and defendent pairing filled w/ data
+			//---Insert into 
+			pairing.pTeam = plaintiff;
+			pairing.dTeam = defendant;
+			//listAllTeams[i] = "";//clear out the empty placeholder
+			//listAllTeams[i] = [plaintiff, defendant]; //replace it with our new plaintiff and defendent pairing filled w/ data
 		}
-		localStorage.setItem('listAllTeams', JSON.stringify(this.listAllTeams)); //store tournament teams into local storage
+		//localStorage.setItem('listAllTeams', JSON.stringify(this.listAllTeams)); //store tournament teams into local storage
+		localStorage.setItem('pairings', JSON.stringify(this.pairings)); //store tournament teams into local storage
 		//NEEDS EDITED UP UPDATE PAIRINGS
 	}
 	
