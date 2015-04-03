@@ -103,6 +103,7 @@ h6 {
 }
 
 .section-heading-spacer {
+display: block;
     float: left;
     width: 200px;
 }
