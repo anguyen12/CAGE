@@ -5,9 +5,6 @@ var module = angular.module('tabtracker');
 module.controller('Screen5Ctrl', Screen5Ctrl);
 
 function pairing(team1, team2) {
-	this.button = true,
-	this.ballot1 = 0;
-	this.ballot2 = 0;
 	this.isImpermissible = false;
 	this.pTeam = team1;
 	this.dTeam = team2;
@@ -16,11 +13,11 @@ function pairing(team1, team2) {
 function Screen5Ctrl($scope, $state){
 	
 	$scope.pairTeams = function() {
-		var thisTournament = JSON.parse(localStorage.getItem('tournament'));
-		this.name = thisTournament.name;
-		this.round = thisTournament.roundNumber;
+		//var thisTournament = JSON.parse(localStorage.getItem('tournament'));
+		this.name = tournament.name;
+		this.round = tournament.roundNumber;
 		//var loadedTeams = JSON.parse(localStorage.getItem('listAllTeams'));
-		var pairings = JSON.parse(localStorage.getItem('pairings'));
+		//var pairings = JSON.parse(localStorage.getItem('pairings'));
 		var unsortedTeams = [] //unpair the teams
 		
 		for (var i = 0; i < pairings.length; i+=1){
@@ -54,7 +51,7 @@ function Screen5Ctrl($scope, $state){
 			var pair =  new pairing(sortedTeams[i],sortedTeams[i+1]);
 			this.newPairings.push(pair);
 		}
-		
-		localStorage.setItem('pairings', JSON.stringify(this.newPairings));
+		pairings = newPairings;
+		//localStorage.setItem('pairings', JSON.stringify(this.newPairings));
 	}
 }

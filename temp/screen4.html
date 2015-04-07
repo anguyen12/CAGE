@@ -13,13 +13,13 @@
 								<div id="teamCard" >
 									<b>Team Name:</b> {{pair.pTeam.name}} <br>
 									<b>Team Number:</b> {{pair.pTeam.uniqueID}} <br>
-									<b>Team Record:</b> {{pair.pTeam.record}} <br>
+									<b>Team Record:</b> {{pair.pTeam.record + pair.pTeam.tempRecord}} <br>
 									<b>Team CS:</b> {{pair.pTeam.combinedStr}} <br>
-									<b>Team PD:</b> {{pair.pTeam.pointDiff}} <br>
-									<p ng-show = "pair.pTeam.button">
+									<b>Team PD:</b> {{pair.pTeam.pointDiff + pair.pTeam.temp1 + pair.pTeam.temp2}} <br>
 									<b>Ballot 1 result: </b> <input type="number" ng-model="pair.pTeam.temp1" id="ballot1pd" min="-126" max="126" placeholder="-126 to +126"></input> <br>
 									<b>Ballot 2 result: </b> <input type="number" ng-model="pair.pTeam.temp2" id="ballot2pd" min="-126" max="126" placeholder="-126 to +126"></input> <br>
-									<input type="button" value="Submit" id="submit_button" class="button" ng-click="addPoints(pair.pTeam)"> 
+									<p ng-show = "pair.pTeam.button">
+									<input type="button" value="Submit" id="submit_button" class="button" ng-click="addPoints(pair.pTeam, pair.dTeam.record)"> 
 									</p>
 								</div>
 							</form>
@@ -29,13 +29,13 @@
 								<div id="teamCard" >
 									<b>Team Name:</b> {{pair.dTeam.name}} <br>
 									<b>Team Number:</b> {{pair.dTeam.uniqueID}} <br>
-									<b>Team Record:</b> {{pair.dTeam.record}} <br>
+									<b>Team Record:</b> {{pair.dTeam.record + pair.dTeam.tempRecord}} <br>
 									<b>Team CS:</b> {{pair.dTeam.combinedStr}} <br>
-									<b>Team PD:</b> {{pair.dTeam.pointDiff}} <br>
-									<p ng-show = "pair.dTeam.button">
+									<b>Team PD:</b> {{pair.dTeam.pointDiff + pair.dTeam.temp1 + pair.dTeam.temp2}} <br>
 									<b>Ballot 1 result: </b> <input type="number" ng-model="pair.dTeam.temp1" id="ballot1pd" min="-126" max="126" placeholder="-126 to +126"></input> <br>
 									<b>Ballot 2 result: </b> <input type="number" ng-model="pair.dTeam.temp2" id="ballot2pd" min="-126" max="126" placeholder="-126 to +126"></input> <br>
-									<input type="button" value="Submit" id="submit_button" class="button" ng-click="addPoints(pair.dTeam)"> 
+									<p ng-show = "pair.dTeam.button">
+									<input type="button" value="Submit" id="submit_button" class="button" ng-click="addPoints(pair.dTeam, pair.pTeam.record)"> 
 									</p>
 								</div>
 							</form>

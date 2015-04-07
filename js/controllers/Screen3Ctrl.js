@@ -7,18 +7,18 @@ module.controller('Screen3Ctrl', Screen3Ctrl);
 function Screen3Ctrl($scope, $state){
 
 	$scope.configTeams = function() { //on load, build the empty team forms 
-		var thisTournament = JSON.parse(localStorage.getItem('tournament')); //grab tournament object
-		this.name = thisTournament.name; //assign {{name}} to the name of the tournament
-		this.round = thisTournament.roundNumber;
-		
+		//var thisTournament = JSON.parse(localStorage.getItem('tournament')); //grab tournament object
+		this.name = tournament.name; //assign {{name}} to the name of the tournament
+		this.round = tournament.roundNumber;
+		this.pairings = pairings;
 		//this is grabbing the empty placeholder of all team forms
 		//[[**pairing 1**{teamObject},{teamObject}],[**pairing 2**{teamObject1},{teamObject1}], etc...]
 		//this.listAllTeams = JSON.parse(localStorage.getItem('listAllTeams'));
-		this.pairings = JSON.parse(localStorage.getItem('pairings'));
+		//this.pairings = JSON.parse(localStorage.getItem('pairings'));
 	}
 	// NEEDS EDITED TO UPDATE PAIRINGS OBJECTS
 	$scope.startR1 = function($scope) { //clicking the button to start round 1
-		var tournament = JSON.parse(localStorage.getItem('tournament'));//grab the number of totals teams from local storage
+		//var tournament = JSON.parse(localStorage.getItem('tournament'));//grab the number of totals teams from local storage
 		var counter = 0;
 		for (var i=0; i < (parseInt(tournament.totalTeams)/2); i++){
 						
