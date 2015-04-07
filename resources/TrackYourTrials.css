@@ -183,12 +183,12 @@ p.copyright {
 
 .button {
    border-top: 1px solid #ffffff;
-   background: #CACAE8;
-   background: -webkit-gradient(linear, left top, left bottom, from(#A4A4AC), to(#CACAE8));
-   background: -webkit-linear-gradient(top, #A4A4AC, #CACAE8);
-   background: -moz-linear-gradient(top, #A4A4AC, #CACAE8);
-   background: -ms-linear-gradient(top, #A4A4AC, #CACAE8);
-   background: -o-linear-gradient(top, #A4A4AC, #CACAE8);
+   background: #E4E4F4;
+   background: -webkit-gradient(linear, left top, left bottom, from(#CDCDDC), to(#E4E4F4));
+   background: -webkit-linear-gradient(top, #CDCDDC, #E4E4F4);
+   background: -moz-linear-gradient(top, #CDCDDC, #E4E4F4);
+   background: -ms-linear-gradient(top, #CDCDDC, #E4E4F4);
+   background: -o-linear-gradient(top, #CDCDDC, #E4E4F4);
    padding: 5.5px 11px;
    -webkit-border-radius: 9px;
    -moz-border-radius: 9px;
@@ -210,7 +210,7 @@ p.copyright {
    }
 .button:active {
    border-top-color: #f5d42e;
-   background: #CACAE8;
+   background: #E4E4F4;
    }
    
 input[type="button"]{
