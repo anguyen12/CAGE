@@ -40,7 +40,7 @@ function Screen4Ctrl($scope, $state){
 			this.pairings[i].dTeam.record = pairings[i].dTeam.tempRecord + pairings[i].dTeam.record;
 			this.pairings[i].dTeam.combinedStr = pairings[i].dTeam.combinedStr + pairings[i].dTeam.tempCS;
 			this.pairings[i].dTeam.pointDiff = pairings[i].dTeam.temp1 + pairings[i].dTeam.temp2 + pairings[i].dTeam.pointDiff;
-			console.log("logged date for pairing", i);
+			
 		}
 		//localStorage.setItem('listAllTeams', JSON.stringify(this.listAllTeams));
 		//localStorage.setItem('pairings', JSON.stringify(this.pairings));
