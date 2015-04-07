@@ -103,7 +103,6 @@ h6 {
 }
 
 .section-heading-spacer {
-display: block;
     float: left;
     width: 200px;
 }
@@ -228,7 +227,7 @@ table.setTeamCard{
 }
      
 .setUpCard{
-	background: #b6b6b6;
+	background: #F4F4F4;
 	width: 500px; border: 2px solid;
 	border-width: 6px; border-radius: 30px;
 	border-color: #FFFFFF;
@@ -240,7 +239,7 @@ table.setTeamCard{
 }
 
 .teamCard{
-	background: #b6b6b6;
+	background: #F4F4F4;
 	width: 350px; border: 2px solid;
 	border-width: 6px; border-radius: 30px;
 	border-color: #FFFFFF;
