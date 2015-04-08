@@ -1,7 +1,7 @@
 window.tournament = { name: "" , totalTeams: 0, roundNumber: 1 };
 window.pairings = [];
 
-function teamObject(inputnumber) {
+function TeamObject(inputnumber) {
 	this.number = inputnumber, //lets make this the one that is assigned by tabber, and uniqueID as the school's special id
 	this.name= "",
 	this.record= 0, //ballots won
@@ -19,7 +19,7 @@ function teamObject(inputnumber) {
 	this.button = true;
 }
 
-function pairing(team1, team2) {
+function Pairing(team1, team2) {
 	this.isImpermissible = false;
 	this.pTeam = team1;
 	this.dTeam = team2;
