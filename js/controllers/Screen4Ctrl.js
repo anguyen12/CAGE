@@ -16,21 +16,10 @@ function Screen4Ctrl($scope, $state){
 	}
 	
 	$scope.addPoints = function(team, opponentRecord){
-		if (team.temp2 > 0) {
-			team.tempRecord+=1;
-		};
-		if (team.temp1 > 0) {
-			team.tempRecord+=1;
-		};
-		if (team.temp1 == 0) {
-			team.tempRecord+=0.5
-		};
-		if (team.temp2 == 0) {
-			team.tempRecord+=0.5
-		};
-		team.tempCS = team.combinedStr + opponentRecord;
 		team.button = false;
 	};
+	
+	$scope.values = [0, 0.5, 1, 1.5, 2];
 	
 	$scope.saveRound = function() {
 		for (var i = 0; i < this.pairings.length; i++) {

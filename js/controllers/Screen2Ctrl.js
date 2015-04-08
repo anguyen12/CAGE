@@ -17,24 +17,24 @@ function Screen2Ctrl($scope, $state){
 			
 			for (var j=0; j < tournament.totalTeams; j+=2) {
 				if (j+1 >= tournament.totalTeams){
-					var newTeam = new teamObject(j);
+					var newTeam = new TeamObject(j);
 					newTeam.status = "p";
-					var byeTeam = new teamObject(j+1); //create a bye team when there is odd number of teams - EA
+					var byeTeam = new TeamObject(j+1); //create a bye team when there is odd number of teams - EA
 					byeTeam.byeTeam = true;
 					byeTeam.name = "Bye Team";
 					byeTeam.uniqueID = 9999;
 					byeTeam.status = "d";
 					//listAllTeams.push([newTeam,byeTeam]); //I'm pretty sure this conditional is handling an odd number of teams - EA
-					var thisPair = new pairing(newTeam, byeTeam);
+					var thisPair = new Pairing(newTeam, byeTeam);
 					pairings.push(thisPair);
 				}	
 				else {			
-					var newTeam = new teamObject(j);
-					var newTeam2 = new teamObject(j+1);
+					var newTeam = new TeamObject(j);
+					var newTeam2 = new TeamObject(j+1);
 					newTeam.status = "p";
 					newTeam2.status = "d"; 
 					//listAllTeams.push([newTeam, newTeam2]);
-					var thisPair = new pairing(newTeam, newTeam2);
+					var thisPair = new Pairing(newTeam, newTeam2);
 					pairings.push(thisPair);					
 				}
 			}

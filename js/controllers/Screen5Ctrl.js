@@ -48,7 +48,7 @@ function Screen5Ctrl($scope, $state){
 			sortedTeams[i+1].rank = i+2;
 			sortedTeams[i].button = true;
 			sortedTeams[i+1].button = true;
-			var pair =  new pairing(sortedTeams[i],sortedTeams[i+1]);
+			var pair =  new Pairing(sortedTeams[i],sortedTeams[i+1]);
 			this.newPairings.push(pair);
 		}
 		pairings = newPairings;
