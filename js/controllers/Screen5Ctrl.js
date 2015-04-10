@@ -4,12 +4,6 @@
 var module = angular.module('tabtracker');
 module.controller('Screen5Ctrl', Screen5Ctrl);
 
-function pairing(team1, team2) {
-	this.isImpermissible = false;
-	this.pTeam = team1;
-	this.dTeam = team2;
-}
-
 function Screen5Ctrl($scope, $state){
 	
 	$scope.pairTeams = function() {
@@ -48,10 +42,13 @@ function Screen5Ctrl($scope, $state){
 			sortedTeams[i+1].rank = i+2;
 			sortedTeams[i].button = true;
 			sortedTeams[i+1].button = true;
+			sortedTeams[i].tempRecord = true;
+			sortedTeams[i+1].tempRecord = true;
 			var pair =  new Pairing(sortedTeams[i],sortedTeams[i+1]);
 			this.newPairings.push(pair);
 		}
-		pairings = newPairings;
-		//localStorage.setItem('pairings', JSON.stringify(this.newPairings));
+		pairings = this.newPairings;
+		localStorage.setItem('pairings', JSON.stringify(pairings));
+		localStorage.setItem('tournament', JSON.stringify(tournament));
 	}
 }

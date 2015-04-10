@@ -22,6 +22,7 @@ function Screen4Ctrl($scope, $state){
 	$scope.values = [0, 0.5, 1, 1.5, 2];
 	
 	$scope.saveRound = function() {
+		tournament.roundNumber += 1;
 		for (var i = 0; i < this.pairings.length; i++) {
 			this.pairings[i].pTeam.record = pairings[i].pTeam.tempRecord + pairings[i].pTeam.record;
 			this.pairings[i].pTeam.combinedStr = pairings[i].pTeam.combinedStr + pairings[i].pTeam.tempCS;

@@ -32,7 +32,7 @@ function Screen3Ctrl($scope, $state){
 			plaintiff.name = $(name_label).val(); //update plaintiff to have value user feeds into input box
 			plaintiff.number = $(id_label).val(); //update plaintiff to have value user feeds into input box
 			
-			var increment = counter+1; //increment the counter/index of the pairing object, so we can grab the 2nd team of the pairing
+			counter = counter+1; //increment the counter/index of the pairing object, so we can grab the 2nd team of the pairing
 			name_label = "#teamName"+increment;// similar to above--build the name of the name input box
 			id_label = "#teamID"+increment; //build the name of the id input box
 			defendant.name= $(name_label).val(); //update defendant's name and number properties
@@ -45,7 +45,7 @@ function Screen3Ctrl($scope, $state){
 			//listAllTeams[i] = [plaintiff, defendant]; //replace it with our new plaintiff and defendent pairing filled w/ data
 		}
 		//localStorage.setItem('listAllTeams', JSON.stringify(this.listAllTeams)); //store tournament teams into local storage
-		localStorage.setItem('pairings', JSON.stringify(this.pairings)); //store tournament teams into local storage
+		//localStorage.setItem('pairings', JSON.stringify(this.pairings)); //store tournament teams into local storage
 		//NEEDS EDITED UP UPDATE PAIRINGS
 	}
 	
