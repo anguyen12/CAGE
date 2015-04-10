@@ -11,8 +11,8 @@
 					<td >
 						<form id="teamCardFormP" class="teamCard">
 							<div id="teamCard">
-								<label style="background: #000000; color: #FFFFFF;"><b>Team </label>{{pair.pTeam.number+1}} </b><br>
-								<label style="background: #000000; color: #FFFFFF;"><b>Team name: </b> </label><input type="text" id="teamName{{pair.pTeam.number}}" ng-model = "pair.pTeam.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
+								<b>Team </label>{{pair.pTeam.number+1}} </b><br>
+								<b>Team name: </b> </label><input type="text" id="teamName{{pair.pTeam.number}}" ng-model = "pair.pTeam.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
 								<b>Team ID: </b> <input type="text" id="teamID{{pair.pTeam.number}}" ng-model = "pair.pTeam.uniqueID" placeholder="ex. 99999"></input><br><br>
 							</div>
 						</form>
@@ -20,8 +20,8 @@
 					<td >
 						<form id="teamCardFormD" class="teamCard">
 							<div id="teamCard">
-								<label style="background: #000000; color: #FFFFFF;"><b>Team </label>{{pair.dTeam.number+1}} </b><br>
-								<label style="background: #000000; color: #FFFFFF;"><b>Team name: </b> </label><input type="text" id="teamName{{pair.dTeam.number}}" ng-model = "pair.dTeam.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
+								<b>Team </label>{{pair.dTeam.number+1}} </b><br>
+								<b>Team name: </b> </label><input type="text" id="teamName{{pair.dTeam.number}}" ng-model = "pair.dTeam.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
 								<b>Team ID: </b> <input type="text" id="teamID{{pair.dTeam.number}}" ng-model = "pair.dTeam.uniqueID" placeholder="ex. 99999"></input><br><br>
 							</div>
 						</form>
@@ -32,3 +32,4 @@
 		<input type="button" class="button" ng-click = "startR1()" ui-sref="screen4" value="Start Round 1" id="startR_button">
 	</div>
 	
+	<!--<label style="background: #000000; color: #FFFFFF;">-->
