@@ -32,15 +32,16 @@ function Screen3Ctrl($scope, $state){
 			plaintiff.name = $(name_label).val(); //update plaintiff to have value user feeds into input box
 			plaintiff.number = $(id_label).val(); //update plaintiff to have value user feeds into input box
 			
-			counter = counter+1; //increment the counter/index of the pairing object, so we can grab the 2nd team of the pairing
-			name_label = "#teamName"+increment;// similar to above--build the name of the name input box
-			id_label = "#teamID"+increment; //build the name of the id input box
+			counter +=1; //increment the counter/index of the pairing object, so we can grab the 2nd team of the pairing
+			name_label = "#teamName"+counter;// similar to above--build the name of the name input box
+			id_label = "#teamID"+counter; //build the name of the id input box
 			defendant.name= $(name_label).val(); //update defendant's name and number properties
 			defendant.number = $(id_label).val();
 			
 			//---Insert into 
 			pairing.pTeam = plaintiff;
 			pairing.dTeam = defendant;
+			counter +=1
 			//listAllTeams[i] = "";//clear out the empty placeholder
 			//listAllTeams[i] = [plaintiff, defendant]; //replace it with our new plaintiff and defendent pairing filled w/ data
 		}

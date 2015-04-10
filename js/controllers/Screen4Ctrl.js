@@ -15,8 +15,13 @@ function Screen4Ctrl($scope, $state){
 		//this.pairings = JSON.parse(localStorage.getItem('pairings'));
 	}
 	
-	$scope.addPoints = function(team, opponentRecord){
-		team.button = false;
+	$scope.addPoints = function(team){
+		if (team.button == false){
+			team.button = true;
+		} 
+		if (team.button == true){
+			team.button = false;
+		}
 	};
 	
 	$scope.values = [0, 0.5, 1, 1.5, 2];
