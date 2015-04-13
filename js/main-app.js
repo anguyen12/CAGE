@@ -19,32 +19,38 @@ angular.module('tabtracker', ['ui.router'])
 	$stateProvider.state(main);
 	$stateProvider.state('screen1', {
         url: 'screen1',
-        templateUrl: '/temp/screen1.html',
+        templateUrl: '/templates/screen1.html',
         controller: 'NavigationCtrl',
 	});
 	
 	$stateProvider.state('screen2', {
         url: 'screen2',
-        templateUrl: '/temp/screen2.html',
+        templateUrl: '/templates/screen2.html',
         controller: 'Screen2Ctrl',
 	});
 	
 	$stateProvider.state('screen3', {
         url: 'screen3',
-        templateUrl: 'temp/screen3.html',
+        templateUrl: 'templates/screen3.html',
         controller: 'Screen3Ctrl',
 	});	
 	
 	$stateProvider.state('screen4', {
         url: 'screen4',
-        templateUrl: 'temp/screen4.html',
+        templateUrl: 'templates/screen4.html',
         controller: 'Screen4Ctrl',
 	});	
 	
 	$stateProvider.state('screen5', {
         url: 'screen5',
-        templateUrl: 'temp/screen5.html',
+        templateUrl: 'templates/screen5.html',
         controller: 'Screen5Ctrl',
+	});	
+	
+	$stateProvider.state('screen6', {
+        url: 'screen6',
+        templateUrl: 'templates/screen6.html',
+        controller: 'Screen6Ctrl',
 	});	
 	// $stateProvider.state(screen2);
 	// $stateProvider.state(screen3);
