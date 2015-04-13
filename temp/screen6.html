@@ -1,16 +1,17 @@
 <h1 align="center">Final Results</h1>
-<input type="button" 
-<tr ng-repeat="pair in this.pairings">
+<div ng-init="getWinners()">
+<tr ng-repeat="team in this.winners">
 		<td>
 			<form id="resultsFormP" class="teamCard">
 				<div id="teamCard" >
-					<b>Team Name:</b> {{pair.pTeam.name}} <br>
-					<b>Team Number:</b> {{pair.pTeam.uniqueID}} <br>
-					<b>Team Record:</b> {{pair.pTeam.record}} <br>
-					<b>Team CS:</b> {{pair.pTeam.combinedStr}} <br>
-					<b>Team PD:</b> {{pair.pTeam.pointDiff}} <br>
+					<b>Team Name:</b> {{team.name}} <br>
+					<b>Team Number:</b> {{team.uniqueID}} <br>
+					<b>Team Record:</b> {{team.record}} <br>
+					<b>Team CS:</b> {{team.combinedStr}} <br>
+					<b>Team PD:</b> {{team.pointDiff}} <br>
 				</div>
 			</form>
 		</td>
 	<td>
 </tr>
+</div>
