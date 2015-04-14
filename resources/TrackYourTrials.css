@@ -169,7 +169,7 @@ table.setTeamCard{
 
 .mainView{
 	min-height: 72%;
-	margin: 30px 0px; 
+	/*margin: 30px 0px;*/ 
 }
 
 .setUpCard{
