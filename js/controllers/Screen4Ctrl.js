@@ -29,11 +29,22 @@ function Screen4Ctrl($scope, $state){
 		tournament.roundNumber += 1;
 		for (var i = 0; i < this.pairings.length; i++) {
 			this.pairings[i].pTeam.record = pairings[i].pTeam.tempRecord + pairings[i].pTeam.record;
-			this.pairings[i].pTeam.combinedStr = pairings[i].pTeam.combinedStr + pairings[i].pTeam.tempCS;
 			this.pairings[i].pTeam.pointDiff = pairings[i].pTeam.temp1 + pairings[i].pTeam.temp2 + pairings[i].pTeam.pointDiff;
+			
 			this.pairings[i].dTeam.record = pairings[i].dTeam.tempRecord + pairings[i].dTeam.record;
-			this.pairings[i].dTeam.combinedStr = pairings[i].dTeam.combinedStr + pairings[i].dTeam.tempCS;
 			this.pairings[i].dTeam.pointDiff = pairings[i].dTeam.temp1 + pairings[i].dTeam.temp2 + pairings[i].dTeam.pointDiff;
+
+			this.pairings[i].pTeam.impermissibles.push(pairings[i].dTeam.uniqueID);
+			this.pairings[i].dTeam.impermissibles.push(pairings[i].pTeam.uniqueID);
+
+			this.list = pairings[i].pTeam.impermissibles;
+			this.ID = pairings[i].dTeam.uniqueID;
+			for (var x = 0; x < this.list.length; x++){
+				if (this.list[x] == this.ID){
+					pairings[i].isImpermissible = true;
+				}
+				console.log("Checked", this.ID, "against", this.list[x]);
+			}
 		}
 		//localStorage.setItem('listAllTeams', JSON.stringify(this.listAllTeams));
 		//localStorage.setItem('pairings', JSON.stringify(this.pairings));

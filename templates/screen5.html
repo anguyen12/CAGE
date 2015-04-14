@@ -8,6 +8,7 @@
 						<th scope="col" title="Defense" style="text-align:center"><h3>Defense</h3></th>
 					</tr>
 					<tr ng-repeat="pair in this.newPairings">
+						<p ng-show = "pair.isImpermissible"> Impermissible! </p>
 						<td >
 							<form id="resultsFormP" class="teamCard">
 								<div id="teamCard" >
