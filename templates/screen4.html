@@ -47,6 +47,7 @@
 					</tr>
 				</tbody>
 			</table>
-		<input type="button" class="button" value="Pair Round {{round + 1}}" ng-click="saveRound()" ui-sref="screen5" id="startR_button">	
+		<input type="button" ng-show = "round != 4" class="button" value="Pair Round {{round + 1}}" ng-click="saveRound()" ui-sref="screen5" id="startR_button">
+		<input type="button" ng-show = "round == 4" class="button" value="Show results" ng-click="saveRound()" ui-sref="screen6" id="startFinalButton"">
 	</div>
 	
