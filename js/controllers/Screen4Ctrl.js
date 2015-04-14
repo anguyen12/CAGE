@@ -16,12 +16,11 @@ function Screen4Ctrl($scope, $state){
 	}
 	
 	$scope.addPoints = function(team){
-		if (team.button == false){
-			team.button = true;
-		} 
-		if (team.button == true){
-			team.button = false;
-		}
+		team.button = false;
+	};
+	
+	$scope.editPoints = function(team){
+		team.button = true;
 	};
 	
 	$scope.values = [0, 0.5, 1, 1.5, 2];
