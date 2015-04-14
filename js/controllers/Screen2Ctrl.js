@@ -22,7 +22,7 @@ function Screen2Ctrl($scope, $state){
 					var byeTeam = new TeamObject(j+1); //create a bye team when there is odd number of teams - EA
 					byeTeam.byeTeam = true;
 					byeTeam.name = "Bye Team";
-					byeTeam.uniqueID = 9999;
+					byeTeam.uniqueID = "9999";
 					byeTeam.status = "d";
 					//listAllTeams.push([newTeam,byeTeam]); //I'm pretty sure this conditional is handling an odd number of teams - EA
 					var thisPair = new Pairing(newTeam, byeTeam);
