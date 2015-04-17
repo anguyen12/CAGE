@@ -210,6 +210,6 @@ table.setTeamCard{
 	font-size: 11pt;
 }
 
-input.ng-invalid{
+input.ng-invalid.ng-dirty{
 	border: 1px solid red;
 }

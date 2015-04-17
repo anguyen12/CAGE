@@ -7,8 +7,8 @@
 		
 	<div id="settingUp">
 		<form name="setUpForm" class="setUpCard">
-			Tournament Name: <input type="text" id="tourName" placeholder="ex. Party Like a Mock Star 2090" /><br><br>
-			Total Teams: <input type="number" id="totalTeams" placeholder="ex. 20" ><br><br>
+			Tournament Name: <input type="text" id="tourName" placeholder="ex. Party Like a Mock Star 2090" required><br><br>
+			Total Teams: <input type="number" id="totalTeams" placeholder="ex. 20" required><br><br>
 			<input type="button" value="Submit" id="submit_button" class="button" ui-sref="screen3" ng-click="initTour()">
 			<button ng-disabled="setUpForm.$invalid">Test</button>
 			<br>
