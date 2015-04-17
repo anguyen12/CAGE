@@ -209,3 +209,7 @@ table.setTeamCard{
 	padding: 15px 10px 10px 10px;
 	font-size: 11pt;
 }
+
+input.ng-invalid{
+	border: 1px solid red;
+}
