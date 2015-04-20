@@ -9,6 +9,10 @@ module.controller('Screen2Ctrl', Screen2Ctrl);
 //var pairings = [];
 
 function Screen2Ctrl($scope, $state){
+
+		$scope.blah = function(){
+			alert("What the fuck");
+		}
 		
 		$scope.initTour = function(){
 			tournament.name = $('#tourName').val();
