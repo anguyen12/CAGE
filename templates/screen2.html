@@ -8,9 +8,9 @@
 	<!--	
 	<div id="settingUp">
 		<form name="setUpForm" class="setUpCard">
-			Tournament Name: <input type="text" id="tourName" placeholder="ex. Party Like a Mock Star 2090" required><br><br>
-			Total Teams: <input type="number" id="totalTeams" placeholder="ex. 20" required><br><br>
-			<input type="button" value="Submit" id="submit_button" class="button" ui-sref="screen3" ng-disabled="setUpForm.$invalid" ng-click="initTour()">
+			Tournament Name: <input type="text" id="tourName" placeholder="ex. Party Like a Mock Star 2090" ng-model="text" required><br><br>
+			Total Teams: <input type="number" id="totalTeams" placeholder="ex. 20" ng-model="number" required><br><br>
+			<button ng-disabled="setUpForm.$invalid" name="name" ng-click="initTour()" ui-sref="screen3" class="button" id="submit_button">Submit</button>
 			<br>
 			<div id="errorMessage" class="errorMessage"></div>
 		</form>
