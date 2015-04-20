@@ -180,8 +180,7 @@ table.setTeamCard{
 	padding: 12px 12px;
 	margin: 30px 30px;
 	font-size: 15pt;
-	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-	text-align: center; 
+	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif; 
 }
 
 .teamCard{
