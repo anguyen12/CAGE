@@ -13,12 +13,11 @@ window.s = firstBy(function (v1, v2) { return v2.record - v1.record; })
 
 
 function TeamObject(inputnumber) {
-	this.number = inputnumber, //lets make this the one that is assigned by tabber, and uniqueID as the school's special id
 	this.name= "",
 	this.record= 0, //ballots won
 	this.pointDiff= 0, //points won
 	this.combinedStr= 0, //combined strength
-	this.rank= 0,
+	this.rank= inputnumber, //lets make this the one that is assigned by tabber, and uniqueID as the school's special id
 	this.impermissibles= [], //a list of teams (teamObjects) a team cannot face
 	this.status= "", //plaintiff or defense
 	this.uniqueID,
@@ -27,7 +26,8 @@ function TeamObject(inputnumber) {
 	this.temp2 = 0,
 	this.tempRecord = 0,
 	this.tempCS = 0,
-	this.button = true;
+	this.button = true,
+	this.opponents = [];
 }
 
 function Pairing(team1, team2) {
