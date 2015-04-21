@@ -55,10 +55,7 @@ function Screen5Ctrl($scope, $state){
 			for (var x = 0; x < this.list.length; x++){
 				if (this.list[x] == this.ID){
 					this.newPairings[i].isImpermissible = true;
-					console.log("Impermissible!");
-					console.log(this.newPairings[i].isImpermissible);
 				}
-				console.log("Checked", this.ID, "against", this.list[x]);
 			}
 		}
 		
