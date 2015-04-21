@@ -19,17 +19,17 @@
 						</form>
 						-->
 						<form id="teamCardFormP" class="teamCard form-horizontal">
-							<div id="teamCard" class="form-group">
+							<div class="form-group">
 								<label for="TeamNumber" class="col-sm-2 control-label"> Team {{pair.pTeam.number+1}} </label> 
 							</div>
-							<div id="teamCard" class="form-group" align="center">
+							<div id="teamCard" class="form-group">
 								<label for="TeamName" class="col-sm-4 control-label"> Team Name: </label>
 								<div class="col-sm-4">
 									<input type="text" id="teamName{{pair.pTeam.number}}" ng-model = "pair.pTeam.name" placeholder="ex. Macalester Mock Trial Team" class="form-control"></input>
 								</div>
 							</div>
-							<div id="teamCard" class="form-group">
-								<label for="TeamID" class="col-sm-4 control-label"> Team ID: </label><br>
+							<div  class="form-group">
+								<label for="TeamID" class="col-sm-4 control-label"> Team ID: </label>
 								<div class="col-sm-4">
 									<input type="text" id="teamID{{pair.pTeam.number}}" ng-model = "pair.pTeam.uniqueID" placeholder="ex. 99999" class="form-control"></input>
 								</div>
@@ -37,11 +37,30 @@
 						</form>
 					</td>
 					<td >
+					<!--
 						<form id="teamCardFormD" class="teamCard">
 							<div id="teamCard">
 								<label><b>Team </label>{{pair.dTeam.number+1}} </b><br>
 								<label><b>Team name: </b> </label><input type="text" id="teamName{{pair.dTeam.number}}" ng-model = "pair.dTeam.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
 								<label><b>Team ID: </b> </label><input type="text" id="teamID{{pair.dTeam.number}}" ng-model = "pair.dTeam.uniqueID" placeholder="ex. 99999"></input><br><br>
+							</div>
+						</form>
+					-->
+						<form id="teamCardFormD" class="teamCard form-horizontal">
+							<div class="form-group">
+								<label for="TeamNumber" class="col-sm-2 control-label"> Team {{pair.dTeam.number+1}} </label> 
+							</div>
+							<div id="teamCard" class="form-group">
+								<label for="TeamName" class="col-sm-4 control-label"> Team Name: </label>
+								<div class="col-sm-4">
+									<input type="text" id="teamName{{pair.pTeam.number}}" ng-model = "pair.dTeam.name" placeholder="ex. Macalester Mock Trial Team" class="form-control"></input>
+								</div>
+							</div>
+							<div  class="form-group">
+								<label for="TeamID" class="col-sm-4 control-label"> Team ID: </label>
+								<div class="col-sm-4">
+									<input type="text" id="teamID{{pair.pTeam.number}}" ng-model = "pair.dTeam.uniqueID" placeholder="ex. 99999" class="form-control"></input>
+								</div>
 							</div>
 						</form>
 					</td>
