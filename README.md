@@ -1,6 +1,12 @@
-<h1>TabTracker</h1>
+<h1>Trial Tracker: Overview of the File Structure</h1>
 
-Testing README.
+<b>js/controllers</b> - has all of our screen controllers.
 
-<h1>Overview of the Code</h1>
+<b>templates</b> - has all our html screen fragments.
+
+<b>resources</b> - css, img, fonts.
+
+<b>main root</b> - index page.
+
+
 
