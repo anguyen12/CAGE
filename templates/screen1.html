@@ -1,4 +1,5 @@
 	<!--Modified landing page template: http://startbootstrap.com/template-overviews/landing-page/-->
+	<!--Google Developer Guide for reCAPTCHA: https://developers.google.com/recaptcha/docs/display/-->
 	
 	<!-- Header -->
     <div class="intro-header intro-message" background="resources/img/intro-bg.jpg">
@@ -11,6 +12,23 @@
 			</li>
 		</ul>
     </div>
+	
+	<html>
+		<head>
+			<title>reCAPTCHA demo: Simple page</title>
+			<script src ="https://www.google.com/recaptcha/api.js" async defer> </script>
+		</head>
+		<body>
+			<form action="?" method="POST">
+				<div class="g-recaptcha" data-sitekey="6LdWqQUTAAAAADadBAX8wvoqZ0W2iq5lGAhIJFsm"></div>
+				<br/>
+				<input type="submit" value="Submit">
+			</form>
+		</body>
+	</html>
+	
+	
+	
     <!-- /.intro-header -->
 
     <div class="content-section-a">
