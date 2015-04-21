@@ -191,14 +191,30 @@ table.setTeamCard{
 }
 
 .teamCard{
-	background: #F4F4F4;
+	background: #FFFFFF;
 	width: 350px; border: 2px solid;
-	border-width: 6px; border-radius: 30px;
+	border-width: 6px; 
 	border-color: #FFFFFF;
 	padding: 12px 12px;
 	margin: 30px 30px;
 	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-size: 12pt;
+	
+}
+
+.teamCard input, textarea {
+	width:150px;
+	background: #FFFFFF;
+	border-color: #000000;
+	border-width: 1px;
+	width: 50%;
+}
+
+.teamCard label {
+	background: #000000;
+	color: #FFFFFF;
+	padding: 3px 3px 3px 3px;
+	width: 100px;
 }
 
 .errorMessage{
@@ -217,5 +233,5 @@ table.setTeamCard{
 }
 
 input.ng-dirty.ng-invalid{
-	border: 1px solid red;
+	background: #FFFF99;
 }

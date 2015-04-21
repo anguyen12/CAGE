@@ -10,10 +10,6 @@ module.controller('Screen2Ctrl', Screen2Ctrl);
 
 function Screen2Ctrl($scope, $state){
 
-		$scope.blah = function(){
-			alert("What the fuck");
-		}
-		
 		$scope.initTour = function(){
 			tournament.name = $('#tourName').val();
 			tournament.totalTeams = $('#totalTeams').val();
