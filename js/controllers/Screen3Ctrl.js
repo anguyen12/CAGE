@@ -6,6 +6,12 @@ module.controller('Screen3Ctrl', Screen3Ctrl);
 
 function Screen3Ctrl($scope, $state){
 
+
+		$scope.blah = function(){
+			alert("Test");
+		}
+		
+
 	$scope.configTeams = function() { //on load, build the empty team forms 
 		//var thisTournament = JSON.parse(localStorage.getItem('tournament')); //grab tournament object
 		this.name = tournament.name; //assign {{name}} to the name of the tournament
