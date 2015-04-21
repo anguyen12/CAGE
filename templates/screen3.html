@@ -13,15 +13,15 @@
 						<td>
 							<div class="teamCard">
 								<label><b>Team </label>{{pair.pTeam.rank+1}} </b><br>
-								<label><b>Team name: </b> </label><input type="text" ng-model = "pair.pTeam.name" placeholder="ex. Macalester Mock Trial Team" required></input><br>
-								<label><b>Team ID: </b> </label><input type="text" ng-model = "pair.pTeam.uniqueID" placeholder="ex. 99999" required></input><br><br>
+								<label><b>Team name: </b> </label><input type="text" id="teamName{{pair.pTeam.rank}}" ng-model = "pair.pTeam.name" placeholder="ex. Macalester Mock Trial Team" required></input><br>
+								<label><b>Team ID: </b> </label><input type="text" id="teamID{{pair.pTeam.rank}}" ng-model = "pair.pTeam.uniqueID" placeholder="ex. 99999" required></input><br><br>
 							</div>
 						</td>
 						<td >
 							<div class="teamCard">
 								<label><b>Team </label>{{pair.dTeam.rank+1}} </b><br>
-								<label><b>Team name: </b> </label><input type="text" ng-model = "pair.dTeam.name" placeholder="ex. Macalester Mock Trial Team" required></input><br>
-								<label><b>Team ID: </b> </label><input type="text" ng-model = "pair.dTeam.uniqueID" placeholder="ex. 99999" required></input><br><br>
+								<label><b>Team name: </b> </label><input type="text" id="teamName{{pair.dTeam.rank}}" ng-model = "pair.dTeam.name" placeholder="ex. Macalester Mock Trial Team" required></input><br>
+								<label><b>Team ID: </b> </label><input type="text" id="teamID{{pair.dTeam.rank}}" ng-model = "pair.dTeam.uniqueID" placeholder="ex. 99999" required></input><br><br>
 							</div>
 						</td>
 					</tr>
