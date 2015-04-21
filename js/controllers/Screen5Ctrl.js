@@ -42,11 +42,26 @@ function Screen5Ctrl($scope, $state){
 			sortedTeams[i+1].rank = i+2;
 			sortedTeams[i].button = true;
 			sortedTeams[i+1].button = true;
-			sortedTeams[i].tempRecord = true;
-			sortedTeams[i+1].tempRecord = true;
+			sortedTeams[i].tempRecord = 0;
+			sortedTeams[i+1].tempRecord = 0;
 			var pair =  new Pairing(sortedTeams[i],sortedTeams[i+1]);
 			this.newPairings.push(pair);
 		}
+		
+		for (i = 0; i < this.newPairings.length; i++){
+			this.list = this.newPairings[i].pTeam.impermissibles;
+			this.ID = this.newPairings[i].dTeam.uniqueID;
+			
+			for (var x = 0; x < this.list.length; x++){
+				if (this.list[x] == this.ID){
+					this.newPairings[i].isImpermissible = true;
+					console.log("Impermissible!");
+					console.log(this.newPairings[i].isImpermissible);
+				}
+				console.log("Checked", this.ID, "against", this.list[x]);
+			}
+		}
+		
 		pairings = this.newPairings;
 		localStorage.setItem('pairings', JSON.stringify(pairings));
 		localStorage.setItem('tournament', JSON.stringify(tournament));

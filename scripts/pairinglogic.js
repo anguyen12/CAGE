@@ -18,6 +18,12 @@
 	this.enterResults = false
 }
 
+function Pairing(team1, team2) {
+	this.isImpermissible = false;
+	this.pTeam = team1;
+	this.dTeam = team2;
+}
+
   var teams = [
             { uniqueID: 1022, name: "Macalester A", record: 4, combinedStr: 10, pointDiff: 23, impermissibles: [1024, 2000], rank: 0 },
             { uniqueID: 1023, name: "Macalester B", record: 3, combinedStr: 11, pointDiff: 20, impermissibles: [1000, 2000], rank: 0 },
@@ -40,8 +46,8 @@
 	//http://www.apache.org/licenses/LICENSE-2.0
 	
 	s = firstBy(function (v1, v2) { return v2.record - v1.record; })
-                    .thenBy(function (v1, v2) { return v2.cs - v1.cs ; })
-				    .thenBy(function (v1, v2) { return v2.pd - v1.pd ; });
+                    .thenBy(function (v1, v2) { return v2.combinedStr - v1.combinedStr ; })
+				    .thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; });
 	//setup list of team for output				
 	sortedTeams = teams.sort(s);
 		

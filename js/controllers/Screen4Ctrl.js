@@ -36,15 +36,6 @@ function Screen4Ctrl($scope, $state){
 
 			this.pairings[i].pTeam.impermissibles.push(pairings[i].dTeam.uniqueID);
 			this.pairings[i].dTeam.impermissibles.push(pairings[i].pTeam.uniqueID);
-
-			this.list = pairings[i].pTeam.impermissibles;
-			this.ID = pairings[i].dTeam.uniqueID;
-			for (var x = 0; x < this.list.length; x++){
-				if (this.list[x] == this.ID){
-					pairings[i].isImpermissible = true;
-				}
-				console.log("Checked", this.ID, "against", this.list[x]);
-			}
 		}
 		//localStorage.setItem('listAllTeams', JSON.stringify(this.listAllTeams));
 		//localStorage.setItem('pairings', JSON.stringify(this.pairings));
