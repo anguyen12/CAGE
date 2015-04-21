@@ -12,14 +12,14 @@
 					<tr ng-repeat="pair in pairings"> <!--Don't have ID attributes in repeat-->
 						<td>
 							<div class="teamCard">
-								<label><b>Team </label>{{pair.pTeam.number+1}} </b><br>
+								<label><b>Team </label>{{pair.pTeam.rank+1}} </b><br>
 								<label><b>Team name: </b> </label><input type="text" ng-model = "pair.pTeam.name" placeholder="ex. Macalester Mock Trial Team" required></input><br>
 								<label><b>Team ID: </b> </label><input type="text" ng-model = "pair.pTeam.uniqueID" placeholder="ex. 99999" required></input><br><br>
 							</div>
 						</td>
 						<td >
 							<div class="teamCard">
-								<label><b>Team </label>{{pair.dTeam.number+1}} </b><br>
+								<label><b>Team </label>{{pair.dTeam.rank+1}} </b><br>
 								<label><b>Team name: </b> </label><input type="text" ng-model = "pair.dTeam.name" placeholder="ex. Macalester Mock Trial Team" required></input><br>
 								<label><b>Team ID: </b> </label><input type="text" ng-model = "pair.dTeam.uniqueID" placeholder="ex. 99999" required></input><br><br>
 							</div>
