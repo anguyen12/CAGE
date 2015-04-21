@@ -1,4 +1,4 @@
-	<h1 align="center">{{name}} - Enter Team Information for Round {{round}} Pairings</h1>
+	<h1 align="center">{{name}} <br> Enter Team Information for Round {{round}} Pairings</h1>
 	<div id="enterTeams" ng-init = "configTeams()" >
 		<table cellspacing="0" cellpadding="0" id="teamSetUpTable" class="setTeamCard">
 			<colgroup span="2"></colgroup>
@@ -8,12 +8,31 @@
 						<th scope="col" title="Defense" style="text-align:center"><h3>Defense</h3></th>
 				</tr>
 				<tr ng-repeat="pair in pairings">
-					<td>
-						<form id="teamCardFormP" class="teamCard">
+					<td class="form-group">
+						<!--
+						<form id="teamCardFormP" class="teamCard form-horizontal">
 							<div id="teamCard">
 								<label><b>Team </label>{{pair.pTeam.number+1}} </b><br>
 								<label><b>Team name: </b> </label><input type="text" id="teamName{{pair.pTeam.number}}" ng-model = "pair.pTeam.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
 								<label><b>Team ID: </b> </label><input type="text" id="teamID{{pair.pTeam.number}}" ng-model = "pair.pTeam.uniqueID" placeholder="ex. 99999"></input><br><br>
+							</div>
+						</form>
+						-->
+						<form id="teamCardFormP" class="teamCard form-horizontal">
+							<div id="teamCard" class="form-group">
+								<label for="TeamNumber" class="col-sm-2 control-label"> Team {{pair.pTeam.number+1}} </label> 
+							</div>
+							<div id="teamCard" class="form-group" align="center">
+								<label for="TeamName" class="col-sm-4 control-label"> Team Name: </label>
+								<div class="col-sm-4">
+									<input type="text" id="teamName{{pair.pTeam.number}}" ng-model = "pair.pTeam.name" placeholder="ex. Macalester Mock Trial Team" class="form-control"></input>
+								</div>
+							</div>
+							<div id="teamCard" class="form-group">
+								<label for="TeamID" class="col-sm-4 control-label"> Team ID: </label><br>
+								<div class="col-sm-4">
+									<input type="text" id="teamID{{pair.pTeam.number}}" ng-model = "pair.pTeam.uniqueID" placeholder="ex. 99999" class="form-control"></input>
+								</div>
 							</div>
 						</form>
 					</td>
@@ -34,4 +53,5 @@
 		<br></br>
 	</div>
 	
+
 	
