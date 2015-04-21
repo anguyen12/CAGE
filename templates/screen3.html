@@ -1,4 +1,4 @@
-	<h1 align="center">{{name}} - Round {{round}} Pairings</h1>
+	<h1 align="center">{{name}} <br> Enter Team Information for Round {{round}} Pairings</h1>
 	<div id="enterTeams" ng-init = "configTeams()" >
 		<table cellspacing="0" cellpadding="0" id="teamSetUpTable" class="setTeamCard">
 			<colgroup span="2"></colgroup>
@@ -8,21 +8,40 @@
 						<th scope="col" title="Defense" style="text-align:center"><h3>Defense</h3></th>
 				</tr>
 				<tr ng-repeat="pair in pairings">
-					<td >
-						<form id="teamCardFormP" class="teamCard">
+					<td class="form-group">
+						<!--
+						<form id="teamCardFormP" class="teamCard form-horizontal">
 							<div id="teamCard">
-								<b>Team </label>{{pair.pTeam.number+1}} </b><br>
-								<b>Team name: </b> </label><input type="text" id="teamName{{pair.pTeam.number}}" ng-model = "pair.pTeam.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
-								<b>Team ID: </b> <input type="text" id="teamID{{pair.pTeam.number}}" ng-model = "pair.pTeam.uniqueID" placeholder="ex. 99999"></input><br><br>
+								<label><b>Team </label>{{pair.pTeam.number+1}} </b><br>
+								<label><b>Team name: </b> </label><input type="text" id="teamName{{pair.pTeam.number}}" ng-model = "pair.pTeam.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
+								<label><b>Team ID: </b> </label><input type="text" id="teamID{{pair.pTeam.number}}" ng-model = "pair.pTeam.uniqueID" placeholder="ex. 99999"></input><br><br>
+							</div>
+						</form>
+						-->
+						<form id="teamCardFormP" class="teamCard form-horizontal">
+							<div id="teamCard" class="form-group">
+								<label for="TeamNumber" class="col-sm-2 control-label"> Team {{pair.pTeam.number+1}} </label> 
+							</div>
+							<div id="teamCard" class="form-group" align="center">
+								<label for="TeamName" class="col-sm-4 control-label"> Team Name: </label>
+								<div class="col-sm-4">
+									<input type="text" id="teamName{{pair.pTeam.number}}" ng-model = "pair.pTeam.name" placeholder="ex. Macalester Mock Trial Team" class="form-control"></input>
+								</div>
+							</div>
+							<div id="teamCard" class="form-group">
+								<label for="TeamID" class="col-sm-4 control-label"> Team ID: </label><br>
+								<div class="col-sm-4">
+									<input type="text" id="teamID{{pair.pTeam.number}}" ng-model = "pair.pTeam.uniqueID" placeholder="ex. 99999" class="form-control"></input>
+								</div>
 							</div>
 						</form>
 					</td>
 					<td >
 						<form id="teamCardFormD" class="teamCard">
 							<div id="teamCard">
-								<b>Team </label>{{pair.dTeam.number+1}} </b><br>
-								<b>Team name: </b> </label><input type="text" id="teamName{{pair.dTeam.number}}" ng-model = "pair.dTeam.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
-								<b>Team ID: </b> <input type="text" id="teamID{{pair.dTeam.number}}" ng-model = "pair.dTeam.uniqueID" placeholder="ex. 99999"></input><br><br>
+								<label><b>Team </label>{{pair.dTeam.number+1}} </b><br>
+								<label><b>Team name: </b> </label><input type="text" id="teamName{{pair.dTeam.number}}" ng-model = "pair.dTeam.name" placeholder="ex. Macalester Mock Trial Team"></input><br>
+								<label><b>Team ID: </b> </label><input type="text" id="teamID{{pair.dTeam.number}}" ng-model = "pair.dTeam.uniqueID" placeholder="ex. 99999"></input><br><br>
 							</div>
 						</form>
 					</td>
@@ -30,7 +49,9 @@
 			</tbody>
 		</table>
 		<input type="button" class="button" ng-click = "startR1()" ui-sref="screen4" value="Start Round 1" id="startR_button">
+		<button class="button" ng-disabled="teamCardFormD.$invalid || teamCardFormP.$invalid" ng-click = "startR1()" ui-sref="screen4">Start Round 1</button>
 		<br></br>
 	</div>
 	
-	<!--<label style="background: #000000; color: #FFFFFF;">-->
+
+	

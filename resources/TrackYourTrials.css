@@ -11,7 +11,9 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6, 
+label, 
+button {
     font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
@@ -139,10 +141,11 @@ p.copyright {
    box-shadow: rgba(0,0,0,1) 0 1px 0;
    text-shadow: rgba(0,0,0,.4) 0 1px 0;
    color: #262626;
-   font-size: 13px;
-   font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
    text-decoration: none;
    vertical-align: middle;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
    }
 .button:hover {
    border-top-color: #c9c9c9;
@@ -152,6 +155,12 @@ p.copyright {
 .button:active {
    border-top-color: #f5d42e;
    background: #E4E4F4;
+   }
+.button:disabled {
+   border-top-color: #EEEEEE;
+   background: #EEEEEE;
+   color: #DDDDDD;
+   box-shadow: none;   
    }
    
 input[type="button"]{
@@ -174,14 +183,12 @@ table.setTeamCard{
 
 .setUpCard{
 	background: #F4F4F4;
-	width: 500px; border: 2px solid;
+	width: 475px; border: 2px solid;
 	border-width: 6px; border-radius: 30px;
 	border-color: #FFFFFF;
 	padding: 12px 12px;
-	margin: 30px 30px;
 	font-size: 15pt;
-	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-	text-align: center; 
+
 }
 
 .teamCard{
@@ -191,9 +198,24 @@ table.setTeamCard{
 	border-color: #FFFFFF;
 	padding: 12px 12px;
 	margin: 30px 30px;
-	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-size: 12pt;
+	
 }
+
+/*.teamCard input, textarea {
+	width:150px;
+	background: #FFFFFF;
+	border-color: #000000;
+	border-width: 1px;
+	width: 50%;
+}
+
+.teamCard label {
+	background: #000000;
+	color: #FFFFFF;
+	padding: 3px 3px 3px 3px;
+	width: 100px;
+} */
 
 .errorMessage{
 	color: red;
@@ -211,5 +233,5 @@ table.setTeamCard{
 }
 
 input.ng-dirty.ng-invalid{
-	border: 1px solid red;
+	background: #FFFF99;
 }
