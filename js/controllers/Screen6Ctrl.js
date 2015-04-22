@@ -13,6 +13,7 @@ function Screen6Ctrl($scope, $state){
 		//var loadedTeams = JSON.parse(localStorage.getItem('listAllTeams'));
 		//var pairings = JSON.parse(localStorage.getItem('pairings'));
 		
+		this.finalTeams = [];
 		var unsortedTeams = []; //unpair the teams
 		
 		for (var i = 0; i < pairings.length; i+=1){

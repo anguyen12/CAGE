@@ -40,7 +40,6 @@ function Screen5Ctrl($scope, $state){
 			var sortedTeams = unsortedTeams.sort(s); //sort teams by appropriate values
 			
 			for (var i = 0; i < sortedTeams.length; i+=2) { //pair teams
-				console.log("round is NOT side constrained")
 				sortedTeams[i].rank = i+1;
 				sortedTeams[i+1].rank = i+2;
 				sortedTeams[i].button = true;
@@ -54,10 +53,10 @@ function Screen5Ctrl($scope, $state){
 			}
 			
 			checkImpermissibles(this.newPairings); //check for impermissibles
+		
 		}		
 		
 		if (tournament.roundNumber == 4 || tournament.roundNumber == 2){ //round is side constrained
-			console.log("round is side constrained")
 			var sortedDTeams = unsortedNeedD.sort(s); //sort each stack of teams
 			var sortedPTeams = unsortedNeedP.sort(s);
 			
@@ -75,6 +74,13 @@ function Screen5Ctrl($scope, $state){
 			}
 			
 			checkImpermissibles(this.newPairings); //check for impermissibles
+			
+			for (var x = 0; x < this.newPairings.length; x+=1){
+				console.log(this.newPairings[x], x, this.newPairings, swapList);
+				if (this.newPairings[x].isImpermissible){
+					resolveImpermissiblesSC(this.newPairings[x], x, this.newPairings, swapList);
+				}
+			}
 		}
 		
 		pairings = this.newPairings;

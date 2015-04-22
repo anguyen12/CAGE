@@ -1,6 +1,6 @@
 <h1 align="center">{{name}} - Round {{round}} Pairings</h1>
-	<div id="teamChoicesSummary" ng-init="pairTeams()">
-			<table cellspacing="0" cellpadding="0" id="teamRanktable" class="setTeamCard">
+	<div ng-init="pairTeams()">
+			<table cellspacing="0" cellpadding="0" class="setTeamCard">
 				<colgroup span="2"></colgroup>
 				<tbody>
 					<tr class="status">
@@ -9,7 +9,7 @@
 					</tr>
 					<tr ng-repeat="pair in this.newPairings">
 						<td >
-							<form id="resultsFormP" class="teamCard">
+							<form class="teamCard">
 								<div id="teamCard" >
 									<b>Team Name:</b> {{pair.pTeam.name}} <br>
 									<b>Team Number:</b> {{pair.pTeam.uniqueID}} <br>
@@ -20,7 +20,7 @@
 							</form>
 						</td>
 						<td >
-							<form id="resultsFormD" class="teamCard">
+							<form class="teamCard">
 								<div id="teamCard" >
 									<b>Team Name:</b> {{pair.dTeam.name}} <br>
 									<b>Team Number:</b> {{pair.dTeam.uniqueID}} <br>

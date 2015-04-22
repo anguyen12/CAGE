@@ -42,6 +42,25 @@ window.checkImpermissibles = function(pairedTeams){
 				}
 			}
 		}
+}
+
+window.resolveImpermissiblesSC = function(impMatch, location, pairs, swapped){
+	p = impMatch.pTeam;
+	d = impMatch.dTeam;
+	pSwaps = [];
+	dSwaps = [];
+	if (location > 0){
+		pSwaps.push(pairs[location-1].pTeam)
+		dSwaps.push(pairs[location-1].dTeam)
+	}
+	pSwaps.push(p);
+	dSwaps.push(d);
+	if (location < (pairs.length-1)){
+		pSwaps.push(pairs[location+1].pTeam)
+		dSwaps.push(pairs[location+1].dTeam)
+	}
+	console.log(pSwaps);
+	console.log(dSwaps);
 }	
 
 function TeamObject(inputnumber) {
