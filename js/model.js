@@ -18,7 +18,6 @@ window.updateCS = function(team, allTeams){
 		for (var i =0; i < opponents.length; i++){
 			var opponent = opponents[i];
 			var oppID = opponent[2];
-			console.log(oppID);
 			var oppRecord = -1;
 			var counter = 0
 			while (oppRecord == -1){
