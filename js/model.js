@@ -30,8 +30,20 @@ window.updateCS = function(team, allTeams){
 			}
 			team.combinedStr+=oppRecord;
 		}
-	}
+}
+
+window.checkImpermissibles = function(pairedTeams){
+		for (i = 0; i < pairedTeams.length; i++){
+			var list = pairedTeams[i].pTeam.impermissibles;
+			var ID = pairedTeams[i].dTeam.uniqueID;
 			
+			for (var x = 0; x < list.length; x++){
+				if (list[x] == ID){
+					pairedTeams[i].isImpermissible = true;
+				}
+			}
+		}
+}	
 
 function TeamObject(inputnumber) {
 	this.name= "",
