@@ -31,8 +31,12 @@
 							</form>
 						</td>
 						<td > 
-							<b ng-show = "!pair.isImpermissible">Not Impermissible</b>
-							<b ng-show = "pair.isImpermissible">Impermissible</b>
+							<b ng-show = "!pair.isImpermissible">Permissible</b>
+							<p ng-show = "pair.isImpermissible">
+							<b>Impermissible</b><br>
+							<b>Proposed Swap: {{pair.inTeam.uniqueID}} and {{pair.outTeam.uniqueID}}</b><br>
+							<input type="button" value="Swap" id="submit_button" class="button" ng-click="swapTeams(pair, this.newPairings)">
+							</p>
 						</td>
 					</tr>
 				</tbody>
