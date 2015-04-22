@@ -52,6 +52,8 @@ function Screen5Ctrl($scope, $state){
 				var pair =  new Pairing(sortedTeams[i],sortedTeams[i+1]);
 				this.newPairings.push(pair);
 			}
+			
+			checkImpermissibles(this.newPairings); //check for impermissibles
 		}		
 		
 		if (tournament.roundNumber == 4 || tournament.roundNumber == 2){ //round is side constrained
@@ -71,17 +73,8 @@ function Screen5Ctrl($scope, $state){
 				var pair =  new Pairing(sortedPTeams[i],sortedDTeams[i]);
 				this.newPairings.push(pair);
 			}
-		}
-		
-		for (i = 0; i < this.newPairings.length; i++){
-			this.list = this.newPairings[i].pTeam.impermissibles;
-			this.ID = this.newPairings[i].dTeam.uniqueID;
 			
-			for (var x = 0; x < this.list.length; x++){
-				if (this.list[x] == this.ID){
-					this.newPairings[i].isImpermissible = true;
-				}
-			}
+			checkImpermissibles(this.newPairings); //check for impermissibles
 		}
 		
 		pairings = this.newPairings;
