@@ -11,6 +11,27 @@ window.s = firstBy(function (v1, v2) { return v2.record - v1.record; })
 			.thenBy(function (v1, v2) { return v2.combinedStr - v1.combinedStr ; })
 			.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; });			
 
+window.updateCS = function(team, allTeams){	
+		team.combinedStr = 0;
+		
+		var opponents = team.opponents;
+		for (var i =0; i < opponents.length; i++){
+			var opponent = opponents[i];
+			var oppID = opponent[2];
+			console.log(oppID);
+			var oppRecord = -1;
+			var counter = 0
+			while (oppRecord == -1){
+				checkTeam = allTeams[counter];
+				if (checkTeam.uniqueID == oppID){
+					oppRecord = checkTeam.record;
+				}
+				counter+=1;
+			}
+			team.combinedStr+=oppRecord;
+		}
+	}
+			
 
 function TeamObject(inputnumber) {
 	this.name= "",

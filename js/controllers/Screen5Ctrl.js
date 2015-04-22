@@ -34,6 +34,7 @@ function Screen5Ctrl($scope, $state){
 		
 		// sort and re-pair the teams
 		this.newPairings = [];
+		var swapList = [];
 		
 		if (tournament.roundNumber == 3){ //round not side constrained
 			var sortedTeams = unsortedTeams.sort(s); //sort teams by appropriate values
@@ -46,6 +47,8 @@ function Screen5Ctrl($scope, $state){
 				sortedTeams[i+1].button = true;
 				sortedTeams[i].tempRecord = 0;
 				sortedTeams[i+1].tempRecord = 0;
+				updateCS(sortedTeams[i], sortedTeams);
+				updateCS(sortedTeams[i+1], sortedTeams);
 				var pair =  new Pairing(sortedTeams[i],sortedTeams[i+1]);
 				this.newPairings.push(pair);
 			}
@@ -57,12 +60,14 @@ function Screen5Ctrl($scope, $state){
 			var sortedPTeams = unsortedNeedP.sort(s);
 			
 			for (var i = 0; i < sortedPTeams.length; i+=1) { //pair teams from P and D stack
-				sortedPTeams[i].rank = i+1;
-				sortedDTeams[i].rank = i+2;
+				sortedPTeams[i].rank = i;
+				sortedDTeams[i].rank = i;
 				sortedPTeams[i].button = true;
 				sortedDTeams[i].button = true;
 				sortedPTeams[i].tempRecord = 0;
 				sortedDTeams[i].tempRecord = 0;
+				updateCS(sortedDTeams[i], sortedDTeams.concat(sortedPTeams));
+				updateCS(sortedPTeams[i], sortedDTeams.concat(sortedPTeams));
 				var pair =  new Pairing(sortedPTeams[i],sortedDTeams[i]);
 				this.newPairings.push(pair);
 			}
