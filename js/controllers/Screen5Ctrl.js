@@ -65,8 +65,8 @@ function Screen5Ctrl($scope, $state){
 			var sortedTeams = unsortedTeams.sort(s); //sort teams by appropriate values
 			
 			for (var i = 0; i < sortedTeams.length; i+=2) { //pair teams
-				sortedTeams[i].rank = i+1;
-				sortedTeams[i+1].rank = i+2;
+				sortedTeams[i].rank = i;
+				sortedTeams[i+1].rank = i+1;
 				sortedTeams[i].button = true;
 				sortedTeams[i+1].button = true;
 				sortedTeams[i].tempRecord = 0;
