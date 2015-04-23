@@ -9,7 +9,11 @@ window.pairings = [];
 window.firstBy=(function(){function e(f){f.thenBy=t;return f}function t(y,x){x=this;return e(function(a,b){return x(a,b)||y(a,b)})}return e})();
 window.s = firstBy(function (v1, v2) { return v2.record - v1.record; })
 			.thenBy(function (v1, v2) { return v2.combinedStr - v1.combinedStr ; })
-			.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; });			
+			.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; });	
+			
+window.s1 = firstBy(function (v1, v2) { return v2.record - v1.record; })
+			.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; })
+			.thenBy(function (v1, v2) { return v2.uniqueID - v1.uniqueID ; });;			
 
 window.updateCS = function(team, allTeams){	
 		team.combinedStr = 0;
