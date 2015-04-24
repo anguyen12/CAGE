@@ -8,9 +8,13 @@ function Screen2Ctrl($scope, $state){
 
 		$scope.initTour = function(){
 			//clear out old data
-			tournament.name = "";
-			tournament.totalTeams = 0;
-			pairings = [];
+			if (tournament.totalTeams > 0){
+				tournament.name = "";
+				tournament.totalTeams = 0;
+				tournament.rnd1Flip = "";
+				tournmanet.rnd3Flip = "";
+				pairings = [];
+			}
 			
 			tournament.name = $('#tourName').val();
 			tournament.totalTeams = $('#totalTeams').val();

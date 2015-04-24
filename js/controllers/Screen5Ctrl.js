@@ -18,9 +18,7 @@ function Screen5Ctrl($scope, $state){
 			thesePairings[swapDestination].pTeam = aPairing.inTeam;
 			aPairing.pTeam = aPairing.outTeam;
 
-		}
-		
-		if (swapSide == "d"){
+		} else {
 			thesePairings[swapDestination].dTeam = aPairing.inTeam;
 			aPairing.dTeam = aPairing.outTeam;
 		}
@@ -30,17 +28,22 @@ function Screen5Ctrl($scope, $state){
 		this.newPairings = pairings;
 	}
 	
+	$scope.coinflip = ["Heads", "Tails"];
+	
 	$scope.pairTeams = function() {
 		//var thisTournament = JSON.parse(localStorage.getItem('tournament'));
 		this.name = tournament.name;
 		this.round = tournament.roundNumber;
 		var swapList = [];
+		this.flip3 = "Heads";
 		//var loadedTeams = JSON.parse(localStorage.getItem('listAllTeams'));
 		//var pairings = JSON.parse(localStorage.getItem('pairings'));
 		
 		var unsortedTeams = []; //unpair the teams
 		var unsortedNeedP = [];
 		var unsortedNeedD = [];
+		var leftCol = ""
+		var rightCol = ""
 		
 		for (var i = 0; i < pairings.length; i+=1){
 			var thisPair = pairings[i];
@@ -50,7 +53,7 @@ function Screen5Ctrl($scope, $state){
 			if (tournament.roundNumber == 3){
 				unsortedTeams.push(team1);
 				unsortedTeams.push(team2);
-				}
+			}
 			if (tournament.roundNumber == 4 || tournament.roundNumber == 2){
 				unsortedNeedD.push(team1);
 				unsortedNeedP.push(team2);
@@ -70,12 +73,17 @@ function Screen5Ctrl($scope, $state){
 				sortedTeams[i].button = true;
 				sortedTeams[i+1].button = true;
 				sortedTeams[i].tempRecord = 0;
-				sortedTeams[i].status = "p"; //this will need to include the coin toss later on
-				sortedTeams[i+1].status = "d";
+				sortedTeams[i].status = 'p'; //this will need to include the coin toss later on
+				sortedTeams[i+1].status = 'd';
 				sortedTeams[i+1].tempRecord = 0;
 				updateCS(sortedTeams[i], sortedTeams);
 				updateCS(sortedTeams[i+1], sortedTeams);
-				var pair =  new Pairing(sortedTeams[i],sortedTeams[i+1]);
+				if (leftCol == "p"){
+					var pair =  new Pairing(sortedTeams[i],sortedTeams[i+1]);
+				} else {
+					var pair =  new Pairing(sortedTeams[i+i],sortedTeams[i]);
+				}
+				
 				this.newPairings.push(pair);
 			}
 			

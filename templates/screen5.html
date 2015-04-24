@@ -1,9 +1,12 @@
 <h1 align="center">{{name}} - Round {{round}} Pairings</h1>
+<p align="center" ng-show = "round == 3">Coin Flip Results: 
+	<select ng-model = "flip3" ng-options="side for side in coinflip" ></select>
+</p>
 	<div ng-init="pairTeams()">
 			<table cellspacing="0" cellpadding="0" class="setTeamCard">
 				<colgroup span="2"></colgroup>
 				<tbody>
-					<tr class="status">
+					<tr class="status" >
 					    <th scope="col" title="Plaintiff" style="text-align:center"><h3>Plaintiff</h3></th>
 						<th scope="col" title="Defense" style="text-align:center"><h3>Defense</h3></th>
 					</tr>
