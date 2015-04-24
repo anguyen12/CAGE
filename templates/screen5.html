@@ -38,13 +38,13 @@
 							<p ng-show = "pair.isImpermissible">
 							<b>Impermissible</b><br>
 							<b>Proposed Swap: {{pair.inTeam.uniqueID}} and {{pair.outTeam.uniqueID}}</b><br>
-							<input type="button" value="Swap" id="submit_button" class="button" ng-click="swapTeams(pair, this.newPairings)">
+							<input type="button" value="Swap" id="submit_button" class="btn btn-default" ng-click="swapTeams(pair, this.newPairings)">
 							</p>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-		<input type="button" class="button" value="Enter Round {{round}} Results" ui-sref="screen4" id="startR_button">	
+		<input type="button" class="btn btn-default" value="Enter Round {{round}} Results" ui-sref="screen4" id="startR_button">	
 		<br></br>
 	</div>
 	
