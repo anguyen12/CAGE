@@ -84,8 +84,8 @@ function Screen5Ctrl($scope, $state){
 		}		
 		
 		if (tournament.roundNumber == 4 || tournament.roundNumber == 2){ //round is side constrained
-			var sortedDTeams = unsortedNeedD.sort(s); //sort each stack of teams
-			var sortedPTeams = unsortedNeedP.sort(s);
+			var sortedDTeams = unsortedNeedD.sort(s1); //sort each stack of teams
+			var sortedPTeams = unsortedNeedP.sort(s1);
 			
 			for (var i = 0; i < sortedPTeams.length; i+=1) { //pair teams from P and D stack
 				sortedPTeams[i].rank = i;
