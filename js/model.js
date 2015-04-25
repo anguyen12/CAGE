@@ -1,4 +1,4 @@
-window.tournament = { name: "" , totalTeams: 0, roundNumber: 1, rnd1Flip: "", rnd3Flip: "" };
+window.tournament = { name: "" , totalTeams: 0, roundNumber: 1, rnd1Flip: ""};
 window.pairings = [];
 
 //ThenBy.JS microlibrary is Copyright 2013 Teun Duynstee

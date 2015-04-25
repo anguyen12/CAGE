@@ -1,6 +1,7 @@
 <h1 align="center">{{name}} - Round {{round}} Pairings</h1>
-<p align="center" ng-show = "round == 3">Coin Flip Results: 
-	<select ng-model = "flip3" ng-options="side for side in coinflip" ></select>
+<p>Swap list: {{swapList}}</p>
+<p align="center" ng-show = "round == 3">Coin Flip: Tab Director must flip the team sides if tails.
+	<input type="button" class="btn btn-default" value="Flip Team Sides" ng-click ="FlipSides()">
 </p>
 	<div ng-init="pairTeams()">
 			<table cellspacing="0" cellpadding="0" class="setTeamCard">

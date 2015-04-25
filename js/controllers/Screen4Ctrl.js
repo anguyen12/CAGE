@@ -26,7 +26,6 @@ function Screen4Ctrl($scope, $state){
 	$scope.coinflip = ["Heads", "Tails"];
 	
 	$scope.saveRound = function() {
-		tournament.roundNumber += 1;
 		if (tournament.roundNumber == 1){tournament.rnd1Flip = this.flip1;}
 		if (tournament.roundNumber == 3){tournament.rnd3Flip = this.flip3;} //change to side swapping logic??
 		for (var i = 0; i < this.pairings.length; i++) {
@@ -42,6 +41,7 @@ function Screen4Ctrl($scope, $state){
 			this.pairings[i].pTeam.opponents.push([pairings[i].dTeam.temp1, pairings[i].dTeam.temp2, pairings[i].dTeam.uniqueID]);
 			this.pairings[i].dTeam.opponents.push([pairings[i].pTeam.temp1, pairings[i].pTeam.temp2, pairings[i].pTeam.uniqueID]);
 		}
+		tournament.roundNumber += 1;
 	}
 	
 }

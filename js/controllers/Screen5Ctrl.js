@@ -4,9 +4,9 @@
 var module = angular.module('tabtracker');
 module.controller('Screen5Ctrl', Screen5Ctrl);
 
-var swapList = [];
-
 function Screen5Ctrl($scope, $state){
+	
+	$scope.swapList = [];
 	
 	$scope.swapTeams = function(aPairing, thesePairings) {
 		console.log(aPairing.outTeam, aPairing.inTeam);
@@ -25,7 +25,19 @@ function Screen5Ctrl($scope, $state){
 		aPairing.isImpermissible = false;
 		thesePairings[swapDestination].isImpermissible = false;
 		checkImpermissiblesSC(pairings, swapList); //check for impermissibles
+		swapList.push([aPairing.outTeam.uniqueID, aPairing.inTeam.uniqueID])
 		this.newPairings = pairings;
+	}
+	
+	$scope.FlipSides = function(){
+		for (var i = 0; i < pairings.length; i+=1){
+			var wasP = pairings[i].pTeam;
+			var wasD = pairings[i].dTeam;
+			pairings[i].pTeam = wasD;
+			pairings[i].dTeam = wasP;
+			pairings[i].pTeam.status = "p";
+			pairings[i].dTeam.status = "d";
+		}
 	}
 	
 	$scope.coinflip = ["Heads", "Tails"];
@@ -35,28 +47,28 @@ function Screen5Ctrl($scope, $state){
 		this.name = tournament.name;
 		this.round = tournament.roundNumber;
 		var swapList = [];
-		this.flip3 = "Heads";
 		//var loadedTeams = JSON.parse(localStorage.getItem('listAllTeams'));
 		//var pairings = JSON.parse(localStorage.getItem('pairings'));
 		
 		var unsortedTeams = []; //unpair the teams
-		var unsortedNeedP = [];
-		var unsortedNeedD = [];
-		var leftCol = ""
-		var rightCol = ""
+		var leftColumn = []; 
+		var rightColumn = [];
+		
+		var leftColSide = "";
+		var rightColSide = "";
 		
 		for (var i = 0; i < pairings.length; i+=1){
 			var thisPair = pairings[i];
-			var team1 = thisPair.pTeam;
-			var team2 = thisPair.dTeam;
+			var wasPTeam = thisPair.pTeam;
+			var wasDTeam = thisPair.dTeam;
 			
 			if (tournament.roundNumber == 3){
-				unsortedTeams.push(team1);
-				unsortedTeams.push(team2);
+				unsortedTeams.push(wasPTeam);
+				unsortedTeams.push(wasDTeam);
 			}
 			if (tournament.roundNumber == 4 || tournament.roundNumber == 2){
-				unsortedNeedD.push(team1);
-				unsortedNeedP.push(team2);
+				rightColumn.push(wasPTeam);
+				leftColumn.push(wasDTeam);
 			}
 		}
 		
@@ -73,17 +85,12 @@ function Screen5Ctrl($scope, $state){
 				sortedTeams[i].button = true;
 				sortedTeams[i+1].button = true;
 				sortedTeams[i].tempRecord = 0;
-				sortedTeams[i].status = 'p'; //this will need to include the coin toss later on
-				sortedTeams[i+1].status = 'd';
 				sortedTeams[i+1].tempRecord = 0;
+				sortedTeams[i].status = "p";
+				sortedTeams[i+1].status = "d";
 				updateCS(sortedTeams[i], sortedTeams);
 				updateCS(sortedTeams[i+1], sortedTeams);
-				if (leftCol == "p"){
-					var pair =  new Pairing(sortedTeams[i],sortedTeams[i+1]);
-				} else {
-					var pair =  new Pairing(sortedTeams[i+i],sortedTeams[i]);
-				}
-				
+				var pair =  new Pairing(sortedTeams[i],sortedTeams[i+1]);
 				this.newPairings.push(pair);
 			}
 			
@@ -92,8 +99,8 @@ function Screen5Ctrl($scope, $state){
 		}		
 		
 		if (tournament.roundNumber == 4 || tournament.roundNumber == 2){ //round is side constrained
-			var sortedDTeams = unsortedNeedD.sort(s1); //sort each stack of teams
-			var sortedPTeams = unsortedNeedP.sort(s1);
+			var sortedDTeams = rightColumn.sort(s1); //sort each stack of teams
+			var sortedPTeams = leftColumn.sort(s1);
 			
 			for (var i = 0; i < sortedPTeams.length; i+=1) { //pair teams from P and D stack
 				sortedPTeams[i].rank = i;
