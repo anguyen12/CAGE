@@ -3,6 +3,7 @@
 	<select ng-model = "flip1" ng-options="side for side in coinflip" ></select>
 </p>
 	<div id="teamChoicesSummary" ng-init="showTeams()">
+		<form name="teamCards">	
 			<table cellspacing="0" cellpadding="0" id="teamRanktable" class="setTeamCard">
 				<colgroup span="2"></colgroup>
 				<tbody>
@@ -12,45 +13,47 @@
 					</tr>
 					<tr ng-repeat="pair in this.pairings">
 						<td>
-							<form id="resultsFormp" class="teamCard">
-								<div id="teamCard" >
+							<!--<form id="resultsFormp" class="teamCard">-->
+								<div id="teamCardFormP"  class="teamCard form-horizontal">
 									<b>Team Name:</b> {{pair.pTeam.name}} <br>
 									<b>Team Number:</b> {{pair.pTeam.uniqueID}} <br>
 									<b>Team Record:</b> {{pair.pTeam.record + pair.pTeam.tempRecord}} <br>
 									<b>Team CS:</b> {{pair.pTeam.combinedStr}} <br>
 									<b>Team PD:</b> {{pair.pTeam.pointDiff + pair.pTeam.temp1 + pair.pTeam.temp2}} <br>
 									<p ng-show = "pair.pTeam.button">
-									<b>Ballots Won:</b> <select ng-model = "pair.pTeam.tempRecord" ng-options="value for value in values" ></select> <br>
-									<b>Ballot 1 result: </b> <input type="number" ng-model="pair.pTeam.temp1" id="ballot1pd" min="-126" max="126" placeholder="-126 to +126"></input> <br>
-									<b>Ballot 2 result: </b> <input type="number" ng-model="pair.pTeam.temp2" id="ballot2pd" min="-126" max="126" placeholder="-126 to +126"></input> <br>
-									</p>
-									<input type="button" ng-show = "pair.pTeam.button" value="Submit" id="submit_button" class="btn btn-default" ng-click="addPoints(pair.pTeam)">
-									<input type="button" ng-show = "!pair.pTeam.button" value="Edit" id="submit_button" class="btn btn-default" ng-click="editPoints(pair.pTeam)">
+									<b>Ballots Won:</b> <select ng-model = "pair.pTeam.tempRecord" ng-options="value for value in values" required></select> <br>
+									<b>Ballot 1 result: </b> <input type="number" ng-model="pair.pTeam.temp1" id="ballot1pd" min="-126" max="126" placeholder="-126 to +126" required></input> <br>
+									<b>Ballot 2 result: </b> <input type="number" ng-model="pair.pTeam.temp2" id="ballot2pd" min="-126" max="126" placeholder="-126 to +126" required></input> <br>
+									</p>	
+									<input type="button" ng-show = "pair.pTeam.button" value="Submit" id="submit_button" class="button" ng-click="addPoints(pair.pTeam)" ng-disabled="teamCards.$invalid">
+									<input type="button" ng-show = "!pair.pTeam.button" value="Edit" id="submit_button" class="button" ng-click="editPoints(pair.pTeam)">
 								</div>
-							</form>
+							<!--</form>-->
 						</td>
 						<td>
-							<form id="resultsFormd" class="teamCard">
-								<div id="teamCard" >
+							<!--<form id="resultsFormd" class="teamCard">-->
+								<div id="teamCardFormD" class="teamCard form-horizontal">
 									<b>Team Name:</b> {{pair.dTeam.name}} <br>
 									<b>Team Number:</b> {{pair.dTeam.uniqueID}} <br>
 									<b>Team Record:</b> {{pair.dTeam.record + pair.dTeam.tempRecord}} <br>
 									<b>Team CS:</b> {{pair.dTeam.combinedStr}} <br>
 									<b>Team PD:</b> {{pair.dTeam.pointDiff + pair.dTeam.temp1 + pair.dTeam.temp2}} <br>
 									<p ng-show = "pair.dTeam.button">
-									<b>Ballots Won:</b> <select ng-model = "pair.dTeam.tempRecord" ng-options="value for value in values" ></select> <br>
-									<b>Ballot 1 result: </b> <input type="number" ng-model="pair.dTeam.temp1" id="ballot1pd" min="-126" max="126" placeholder="-126 to +126"></input> <br>
-									<b>Ballot 2 result: </b> <input type="number" ng-model="pair.dTeam.temp2" id="ballot2pd" min="-126" max="126" placeholder="-126 to +126"></input> <br>
+									<b>Ballots Won:</b> <select ng-model = "pair.dTeam.tempRecord" ng-options="value for value in values" required></select> <br>
+									<b>Ballot 1 result: </b> <input type="number" ng-model="pair.dTeam.temp1" id="ballot1pd" min="-126" max="126" placeholder="-126 to +126" required></input> <br>
+									<b>Ballot 2 result: </b> <input type="number" ng-model="pair.dTeam.temp2" id="ballot2pd" min="-126" max="126" placeholder="-126 to +126" required></input> <br>
 									</p>
-									<input type="button" ng-show = "pair.dTeam.button" value="Submit" id="submit_button" class="btn btn-default" ng-click="addPoints(pair.dTeam)"> 
-									<input type="button" ng-show = "!pair.dTeam.button" value="Edit" id="submit_button" class="btn btn-default" ng-click="editPoints(pair.dTeam)">
+									<input type="button" ng-show = "pair.dTeam.button" value="Submit" id="submit_button" class="button" ng-click="addPoints(pair.dTeam)" ng-disabled="teamCards.$invalid"> 
+									<input type="button" ng-show = "!pair.dTeam.button" value="Edit" id="submit_button" class="button" ng-click="editPoints(pair.dTeam)">
 								</div>
-							</form>
+							<!--</form>-->
 						</td>
 					</tr>
 				</tbody>
 			</table>
-		<input type="button" ng-show = "round != 4" class="btn btn-default" value="Pair Round {{round + 1}}" ng-click="saveRound()" ui-sref="screen5" id="startR_button">
-		<input type="button" ng-show = "round == 4" class="btn btn-default" value="Show results" ng-click="saveRound()" ui-sref="screen6" id="startFinalButton"">
+		<!--if the round is not round 4 yet..-->
+		<input type="button" ng-show = "round != 4" class="btn btn-default" value="Pair Round {{round + 1}}" ng-click="saveRound()" ui-sref="screen5" ng-disabled="teamCards.$invalid" id="startR_button">
+		<!--if its round 4--->
+		<input type="button" ng-show = "round == 4" class="btn btn-default" value="Show results" ng-click="saveRound()" ui-sref="screen6" ng-disabled="teamCards.$invalid" id="startFinalButton">
+		</form>
 	</div>
-	
