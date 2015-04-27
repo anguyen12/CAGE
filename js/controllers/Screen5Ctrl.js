@@ -12,7 +12,6 @@ function Screen5Ctrl($scope, $state){
 		console.log(aPairing.outTeam, aPairing.inTeam);
 		var swapSide = aPairing.outTeam.status;
 		var swapDestination = aPairing.outTeam.rank;
-		console.log(swapSide);
 		
 		if (swapSide == "p"){
 			thesePairings[swapDestination].pTeam = aPairing.inTeam;
