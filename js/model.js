@@ -71,6 +71,7 @@ window.proposeSwapNSC = function(impMatch, location, pairs, swapped){
 	}
 
 	swOptions.sort(s);
+	console.log(swOptions);
 	pairs[location].inTeam = swOptions[0].inTeam;
 	pairs[location].outTeam = swOptions[0].outTeam;
 }	

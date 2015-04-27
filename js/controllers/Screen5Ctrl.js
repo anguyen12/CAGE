@@ -12,7 +12,8 @@ function Screen5Ctrl($scope, $state){
 		var swapDestination = aPairing.outTeam.rank;
 		
 		if (tournament.roundNumber == 3){swapDestination=Math.floor(swapDestination/2)};
-		
+		console.log(swapDestination);
+		console.log(swapSide);
 		if (swapSide == "p"){
 			thesePairings[swapDestination].pTeam = aPairing.inTeam;
 			aPairing.pTeam = aPairing.outTeam;
@@ -68,7 +69,7 @@ function Screen5Ctrl($scope, $state){
 		var leftColumn = []; 
 		var rightColumn = [];
 		
-		var leftColSide = "";
+		var leftColSide = ""; //garbage
 		var rightColSide = "";
 		
 		for (var i = 0; i < pairings.length; i+=1){
