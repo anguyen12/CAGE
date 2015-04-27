@@ -122,6 +122,7 @@ window.proposeSwapSC = function(impMatch, location, pairs, swapped){
 	pairs[location].outTeam = swOptions[0].outTeam;
 }	
 
+
 function TeamObject(inputnumber) {
 	this.name= "",
 	this.record= 0, //ballots won
@@ -132,10 +133,10 @@ function TeamObject(inputnumber) {
 	this.status= "", //plaintiff or defense
 	this.uniqueID,
 	this.byeTeam = false,
-	this.temp1 = 0,
-	this.temp2 = 0,
-	this.tempRecord = 0,
-	this.tempCS = 0,
+	this.temp1, //GL - Originally = 0. Uninstantiated for field validation.
+	this.temp2, //GL - Originally = 0. Uninstantiated for field validation.
+	this.tempRecord, //GL - Originally = 0. Uninstantiated for field validation.
+	this.tempCS = 0; 
 	this.button = true,
 	this.opponents = [];
 }
