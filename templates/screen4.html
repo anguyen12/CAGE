@@ -25,8 +25,8 @@
 									<b>Ballot 1 result: </b> <input type="number" ng-model="pair.pTeam.temp1" id="ballot1pd" min="-126" max="126" placeholder="-126 to +126" required></input> <br>
 									<b>Ballot 2 result: </b> <input type="number" ng-model="pair.pTeam.temp2" id="ballot2pd" min="-126" max="126" placeholder="-126 to +126" required></input> <br>
 									</p>	
-									<input type="button" ng-show = "pair.pTeam.button" value="Submit" id="submit_button" class="button" ng-click="addPoints(pair.pTeam)" ng-disabled="teamCards.$invalid">
-									<input type="button" ng-show = "!pair.pTeam.button" value="Edit" id="submit_button" class="button" ng-click="editPoints(pair.pTeam)">
+									<input type="button" ng-show = "pair.pTeam.button" value="Submit" id="submit_button" class="btn btn-default" ng-click="addPoints(pair.pTeam)" ng-disabled="teamCards.$invalid">
+									<input type="button" ng-show = "!pair.pTeam.button" value="Edit" id="submit_button" class="btn btn-default" ng-click="editPoints(pair.pTeam)">
 								</div>
 							<!--</form>-->
 						</td>
@@ -43,8 +43,8 @@
 									<b>Ballot 1 result: </b> <input type="number" ng-model="pair.dTeam.temp1" id="ballot1pd" min="-126" max="126" placeholder="-126 to +126" required></input> <br>
 									<b>Ballot 2 result: </b> <input type="number" ng-model="pair.dTeam.temp2" id="ballot2pd" min="-126" max="126" placeholder="-126 to +126" required></input> <br>
 									</p>
-									<input type="button" ng-show = "pair.dTeam.button" value="Submit" id="submit_button" class="button" ng-click="addPoints(pair.dTeam)" ng-disabled="teamCards.$invalid"> 
-									<input type="button" ng-show = "!pair.dTeam.button" value="Edit" id="submit_button" class="button" ng-click="editPoints(pair.dTeam)">
+									<input type="button" ng-show = "pair.dTeam.button" value="Submit" id="submit_button" class="btn btn-default" ng-click="addPoints(pair.dTeam)" ng-disabled="teamCards.$invalid"> 
+									<input type="button" ng-show = "!pair.dTeam.button" value="Edit" id="submit_button" class="btn btn-default" ng-click="editPoints(pair.dTeam)">
 								</div>
 							<!--</form>-->
 						</td>
