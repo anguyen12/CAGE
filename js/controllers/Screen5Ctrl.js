@@ -20,10 +20,12 @@ function Screen5Ctrl($scope, $state){
 		}
 		aPairing.isImpermissible = false;
 		thesePairings[swapDestination].isImpermissible = false;
-		tournament.swapList.push([aPairing.outTeam.uniqueID, aPairing.inTeam.uniqueID])
-		checkImpermissiblesSC(pairings, tournament.swapList); //check for impermissibles
+		swapList.push([aPairing.outTeam.uniqueID, aPairing.inTeam.uniqueID])
+		checkImpermissiblesSC(pairings, swapList); //check for impermissibles
 		this.newPairings = pairings;
 	}
+	
+	$scope.swapList = swapList;
 	
 	$scope.FlipSides = function(){
 		for (var i = 0; i < pairings.length; i+=1){
@@ -39,7 +41,7 @@ function Screen5Ctrl($scope, $state){
 	$scope.coinflip = ["Heads", "Tails"];
 	
 	$scope.saveSwaps = function(){
-		tournament.swapList = [];
+		swapList = [];
 		localStorage.setItem('pairings', JSON.stringify(pairings));
 		localStorage.setItem('tournament', JSON.stringify(tournament));
 		pairings = this.newPairings;
@@ -49,7 +51,6 @@ function Screen5Ctrl($scope, $state){
 		//var thisTournament = JSON.parse(localStorage.getItem('tournament'));
 		this.name = tournament.name;
 		this.round = tournament.roundNumber;
-		var swapList = [];
 		//var loadedTeams = JSON.parse(localStorage.getItem('listAllTeams'));
 		//var pairings = JSON.parse(localStorage.getItem('pairings'));
 		
