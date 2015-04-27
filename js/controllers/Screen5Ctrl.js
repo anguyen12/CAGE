@@ -20,8 +20,8 @@ function Screen5Ctrl($scope, $state){
 		}
 		aPairing.isImpermissible = false;
 		thesePairings[swapDestination].isImpermissible = false;
-		checkImpermissiblesSC(pairings, swapList); //check for impermissibles
 		tournament.swapList.push([aPairing.outTeam.uniqueID, aPairing.inTeam.uniqueID])
+		checkImpermissiblesSC(pairings, tournament.swapList); //check for impermissibles
 		this.newPairings = pairings;
 	}
 	
