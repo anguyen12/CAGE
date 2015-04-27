@@ -1,4 +1,4 @@
-window.tournament = { name: "" , totalTeams: 0, roundNumber: 1, rnd1Flip: ""};
+window.tournament = { name: "" , totalTeams: 0, roundNumber: 1, rnd1Flip: "", swapList = []};
 window.pairings = [];
 
 //ThenBy.JS microlibrary is Copyright 2013 Teun Duynstee

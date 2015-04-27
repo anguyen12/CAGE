@@ -6,10 +6,7 @@ module.controller('Screen5Ctrl', Screen5Ctrl);
 
 function Screen5Ctrl($scope, $state){
 	
-	$scope.swapList = [];
-	
 	$scope.swapTeams = function(aPairing, thesePairings) {
-		console.log(aPairing.outTeam, aPairing.inTeam);
 		var swapSide = aPairing.outTeam.status;
 		var swapDestination = aPairing.outTeam.rank;
 		
@@ -24,7 +21,7 @@ function Screen5Ctrl($scope, $state){
 		aPairing.isImpermissible = false;
 		thesePairings[swapDestination].isImpermissible = false;
 		checkImpermissiblesSC(pairings, swapList); //check for impermissibles
-		swapList.push([aPairing.outTeam.uniqueID, aPairing.inTeam.uniqueID])
+		tournament.swapList.push([aPairing.outTeam.uniqueID, aPairing.inTeam.uniqueID])
 		this.newPairings = pairings;
 	}
 	
@@ -40,6 +37,13 @@ function Screen5Ctrl($scope, $state){
 	}
 	
 	$scope.coinflip = ["Heads", "Tails"];
+	
+	$scope.saveSwaps = function(){
+		tournament.swapList = [];
+		localStorage.setItem('pairings', JSON.stringify(pairings));
+		localStorage.setItem('tournament', JSON.stringify(tournament));
+		pairings = this.newPairings;
+	}
 	
 	$scope.pairTeams = function() {
 		//var thisTournament = JSON.parse(localStorage.getItem('tournament'));
@@ -117,9 +121,5 @@ function Screen5Ctrl($scope, $state){
 			}
 			checkImpermissiblesSC(this.newPairings, swapList); //check for impermissibles
 		}
-		
-		pairings = this.newPairings;
-		localStorage.setItem('pairings', JSON.stringify(pairings));
-		localStorage.setItem('tournament', JSON.stringify(tournament));
 	}
 }
