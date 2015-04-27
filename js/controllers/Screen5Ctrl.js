@@ -6,9 +6,12 @@ module.controller('Screen5Ctrl', Screen5Ctrl);
 
 function Screen5Ctrl($scope, $state){
 	
+		
 	$scope.swapTeams = function(aPairing, thesePairings) {
 		var swapSide = aPairing.outTeam.status;
 		var swapDestination = aPairing.outTeam.rank;
+		
+		if (tournament.roundNumber == 3){swapDestination=Math.floor(swapDestination/2)};
 		
 		if (swapSide == "p"){
 			thesePairings[swapDestination].pTeam = aPairing.inTeam;
@@ -21,7 +24,9 @@ function Screen5Ctrl($scope, $state){
 		aPairing.isImpermissible = false;
 		thesePairings[swapDestination].isImpermissible = false;
 		swapList.push([aPairing.outTeam.uniqueID, aPairing.inTeam.uniqueID])
-		checkImpermissiblesSC(pairings, swapList); //check for impermissibles
+		if (tournament.roundNumber == 3){
+			checkImpermissiblesNSC(pairings, swapList);
+			} else {checkImpermissiblesSC(pairings, swapList);}
 		this.newPairings = pairings;
 	}
 	
@@ -36,6 +41,11 @@ function Screen5Ctrl($scope, $state){
 			pairings[i].pTeam.status = "p";
 			pairings[i].dTeam.status = "d";
 		}
+		console.log("flipped");
+		if (tournament.roundNumber == 3){
+			checkImpermissiblesNSC(pairings, swapList);
+			} else {checkImpermissiblesSC(pairings, swapList);}
+		this.newPairings = pairings;
 	}
 	
 	$scope.coinflip = ["Heads", "Tails"];

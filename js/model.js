@@ -47,9 +47,35 @@ window.checkImpermissiblesNSC = function(pairedTeams){
 				}
 			}
 		}
+		
+		for (var x = 0; x < pairedTeams.length; x+=1){
+		//console.log(pairedTeams[x], x, pairedTeams, swapList);
+		if (pairedTeams[x].isImpermissible){
+			proposeSwapNSC(pairedTeams[x], x, pairedTeams, swapList);
+		}
+	}
 }
 
-window.checkImpermissiblesSC = function(pairedTeams, swapList){
+window.proposeSwapNSC = function(impMatch, location, pairs, swapped){
+	p = impMatch.pTeam;
+	d = impMatch.dTeam;
+	swOptions = [];
+	
+	if (location > 0){
+		swap = new ProposedSwap(p, pairs[location-1].dTeam);
+		swOptions.push(swap);
+	}
+	if (location < (pairs.length-1)){
+		swap2 = new ProposedSwap(d, pairs[location+1].pTeam);
+		swOptions.push(swap2);
+	}
+
+	swOptions.sort(s);
+	pairs[location].inTeam = swOptions[0].inTeam;
+	pairs[location].outTeam = swOptions[0].outTeam;
+}	
+
+window.checkImpermissiblesSC = function(pairedTeams, swapped){
 	for (i = 0; i < pairedTeams.length; i++){
 		var list = pairedTeams[i].pTeam.impermissibles;
 		var ID = pairedTeams[i].dTeam.uniqueID;
@@ -64,7 +90,7 @@ window.checkImpermissiblesSC = function(pairedTeams, swapList){
 	for (var x = 0; x < pairedTeams.length; x+=1){
 		//console.log(pairedTeams[x], x, pairedTeams, swapList);
 		if (pairedTeams[x].isImpermissible){
-			proposeSwapSC(pairedTeams[x], x, pairedTeams, swapList);
+			proposeSwapSC(pairedTeams[x], x, pairedTeams, swapped);
 		}
 	}
 }
