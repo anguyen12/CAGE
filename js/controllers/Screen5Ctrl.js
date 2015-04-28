@@ -65,9 +65,8 @@ function Screen5Ctrl($scope, $state){
 			pairings[i].dTeam = wasP;
 			pairings[i].pTeam.status = "p";
 			pairings[i].dTeam.status = "d";
-			pairings[i].pTeam.rank = wasD.rank;
-			pairings[i].dTeam.rank = wasP.rank;
 		}
+		updateRanks();
 		console.log("flipped");
 		checkImpermissibles(pairings, swapList);
 		this.newPairings = pairings;
@@ -115,10 +114,11 @@ function Screen5Ctrl($scope, $state){
 		
 		// sort and re-pair the teams
 		this.newPairings = [];
-		
+		var sortingAlgorithm = pickSortAlg(tournament.roundNumber); //picks the appropriate sorting algorithm, which varies by round
 		
 		if (!tournament.isSideConstrained){ //round not side constrained
-			var sortedTeams = unsortedTeams.sort(s); //sort teams by appropriate values
+			
+			var sortedTeams = unsortedTeams.sort(sortingAlgorithm); //sort teams by appropriate values
 			
 			for (var i = 0; i < sortedTeams.length; i+=2) { //pair teams
 				sortedTeams[i].rank = i;
@@ -137,8 +137,8 @@ function Screen5Ctrl($scope, $state){
 		}		
 		
 		if (tournament.isSideConstrained){ //round is side constrained
-			var sortedDTeams = rightColumn.sort(s1); //sort each stack of teams
-			var sortedPTeams = leftColumn.sort(s1);
+			var sortedDTeams = rightColumn.sort(sortingAlgorithm); //sort each stack of teams
+			var sortedPTeams = leftColumn.sort(sortingAlgorithm);
 			
 			for (var i = 0; i < sortedPTeams.length; i+=1) { //pair teams from P and D stack
 				sortedPTeams[i].rank = i;

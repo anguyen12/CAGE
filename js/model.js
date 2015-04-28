@@ -11,10 +11,6 @@ window.firstBy=(function(){function e(f){f.thenBy=t;return f}function t(y,x){x=t
 window.s = firstBy(function (v1, v2) { return v2.record - v1.record; })
 			.thenBy(function (v1, v2) { return v2.combinedStr - v1.combinedStr ; })
 			.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; });
-			
-window.s1 = firstBy(function (v1, v2) { return v2.record - v1.record; })
-			.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; })
-			.thenBy(function (v1, v2) { return v2.uniqueID - v1.uniqueID ; });
 
 window.leastDiff = firstBy(function (v1, v2) { return v1.recordDiff - v2.recordDiff; })
 			.thenBy(function (v1, v2) { return v1.PDdiff - v2.PDdiff ; })
@@ -54,6 +50,37 @@ window.updateRanks = function(){
 		}
 	}
 	
+}
+
+window.pickSortAlg = function(round){
+	var result;
+	
+	if(round == 1){
+		if (tournament.rnd1Flip == "Heads"){
+			result = firstBy(function (v1, v2) { return v2.record - v1.record; })
+				.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; })
+				.thenBy(function (v1, v2) { return v2.uniqueID - v1.uniqueID ; });
+		}
+		if (tournament.rnd1Flip == "Tails"){
+			result = firstBy(function (v1, v2) { return v2.record - v1.record; })
+				.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; })
+				.thenBy(function (v1, v2) { return v1.uniqueID - v2.uniqueID ; });
+		}
+	} else {
+		if (tournament.rnd1Flip == "Heads"){
+			result = firstBy(function (v1, v2) { return v2.record - v1.record; })
+				.thenBy(function (v1, v2) { return v2.combinedStr - v1.combinedStr ; })
+				.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; })
+				.thenBy(function (v1, v2) { return v2.uniqueID - v1.uniqueID ; });
+		}
+		if (tournament.rnd1Flip == "Tails"){
+			result = firstBy(function (v1, v2) { return v2.record - v1.record; })
+				.thenBy(function (v1, v2) { return v2.combinedStr - v1.combinedStr ; })
+				.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; })
+				.thenBy(function (v1, v2) { return v1.uniqueID - v2.uniqueID ; });
+		}
+	}
+	return result;
 }
 
 window.checkImpermissibles = function(pairedTeams, swapList){

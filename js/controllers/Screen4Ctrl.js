@@ -13,14 +13,6 @@ function Screen4Ctrl($scope, $state){
 		this.pairings = window.pairings;
 	}
 	
-	// $scope.addPoints = function(team){
-		// team.button = false;
-	// };
-	
-	// $scope.editPoints = function(team){
-		// team.button = true;
-	// };
-	
 	$scope.values = [0, 0.5, 1, 1.5, 2];
 	
 	$scope.coinflip = ["Heads", "Tails"];
