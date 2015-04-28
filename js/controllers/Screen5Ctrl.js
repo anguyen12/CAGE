@@ -132,9 +132,6 @@ function Screen5Ctrl($scope, $state){
 				var pair =  new Pairing(sortedTeams[i],sortedTeams[i+1]);
 				this.newPairings.push(pair);
 			}
-			
-			checkImpermissibles(this.newPairings); //check for impermissibles
-		
 		}		
 		
 		if (tournament.isSideConstrained){ //round is side constrained
@@ -153,7 +150,8 @@ function Screen5Ctrl($scope, $state){
 				var pair =  new Pairing(sortedPTeams[i],sortedDTeams[i]);
 				this.newPairings.push(pair);
 			}
-			checkImpermissibles(this.newPairings, swapList); //check for impermissibles
 		}
+		pairings = this.newPairings;
+		checkImpermissibles(this.newPairings, swapList); //check for impermissibles
 	}
 }
