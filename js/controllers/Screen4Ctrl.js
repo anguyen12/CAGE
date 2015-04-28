@@ -27,7 +27,6 @@ function Screen4Ctrl($scope, $state){
 	
 	$scope.saveRound = function() {
 		if (tournament.roundNumber == 1){tournament.rnd1Flip = this.flip1;}
-		if (tournament.roundNumber == 3){tournament.rnd3Flip = this.flip3;} //change to side swapping logic??
 		for (var i = 0; i < this.pairings.length; i++) {
 			this.pairings[i].pTeam.record = pairings[i].pTeam.tempRecord + pairings[i].pTeam.record;
 			this.pairings[i].pTeam.pointDiff = pairings[i].pTeam.temp1 + pairings[i].pTeam.temp2 + pairings[i].pTeam.pointDiff;

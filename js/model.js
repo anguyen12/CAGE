@@ -1,4 +1,4 @@
-window.tournament = { name: "", totalTeams: 0, roundNumber: 1, rnd1Flip: ""};
+window.tournament = { name: "", totalTeams: 0, roundNumber: 1, rnd1Flip: "", isSideConstrained: true};
 window.pairings = [];
 window.swapList = [];
 
@@ -37,6 +37,7 @@ window.updateCS = function(team, allTeams){
 }
 
 window.checkImpermissiblesNSC = function(pairedTeams){
+		console.log("checking NSC imper");
 		for (i = 0; i < pairedTeams.length; i++){
 			var list = pairedTeams[i].pTeam.impermissibles;
 			var ID = pairedTeams[i].dTeam.uniqueID;
@@ -50,7 +51,7 @@ window.checkImpermissiblesNSC = function(pairedTeams){
 		
 		for (var x = 0; x < pairedTeams.length; x+=1){
 		//console.log(pairedTeams[x], x, pairedTeams, swapList);
-		if (pairedTeams[x].isImpermissible){
+		if (pairedTeams[x].isImpermissible){ //need to merge the logic here
 			proposeSwapNSC(pairedTeams[x], x, pairedTeams, swapList);
 		}
 	}
@@ -77,6 +78,7 @@ window.proposeSwapNSC = function(impMatch, location, pairs, swapped){
 }	
 
 window.checkImpermissiblesSC = function(pairedTeams, swapped){
+	console.log("checking SC imper");
 	for (i = 0; i < pairedTeams.length; i++){
 		var list = pairedTeams[i].pTeam.impermissibles;
 		var ID = pairedTeams[i].dTeam.uniqueID;
