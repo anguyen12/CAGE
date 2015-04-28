@@ -47,9 +47,7 @@ function Screen5Ctrl($scope, $state){
 		aPairing.isImpermissible = false;
 		thesePairings[swapDestination].isImpermissible = false;
 		swapList.push([aPairing.outTeam.uniqueID, aPairing.inTeam.uniqueID])
-		if (tournament.roundNumber == 3){
-			checkImpermissiblesNSC(pairings, swapList);
-			} else {checkImpermissiblesSC(pairings, swapList);}
+		checkImpermissibles(pairings, swapList);
 		this.newPairings = pairings;
 	}
 	
@@ -65,9 +63,7 @@ function Screen5Ctrl($scope, $state){
 			pairings[i].dTeam.status = "d";
 		}
 		console.log("flipped");
-		if (!tournament.isSideConstrained){
-			checkImpermissiblesNSC(pairings, swapList);
-			} else {checkImpermissiblesSC(pairings, swapList);}
+		checkImpermissibles(pairings, swapList);
 		this.newPairings = pairings;
 	}
 	
@@ -121,8 +117,6 @@ function Screen5Ctrl($scope, $state){
 			for (var i = 0; i < sortedTeams.length; i+=2) { //pair teams
 				sortedTeams[i].rank = i;
 				sortedTeams[i+1].rank = i+1;
-				sortedTeams[i].button = true;
-				sortedTeams[i+1].button = true;
 				sortedTeams[i].tempRecord = 0;
 				sortedTeams[i+1].tempRecord = 0;
 				sortedTeams[i].status = "p";
@@ -135,7 +129,7 @@ function Screen5Ctrl($scope, $state){
 				this.newPairings.push(pair);
 			}
 			
-			checkImpermissiblesNSC(this.newPairings); //check for impermissibles
+			checkImpermissibles(this.newPairings); //check for impermissibles
 		
 		}		
 		
@@ -146,8 +140,6 @@ function Screen5Ctrl($scope, $state){
 			for (var i = 0; i < sortedPTeams.length; i+=1) { //pair teams from P and D stack
 				sortedPTeams[i].rank = i;
 				sortedDTeams[i].rank = i;
-				sortedPTeams[i].button = true;
-				sortedDTeams[i].button = true;
 				sortedPTeams[i].tempRecord = 0;
 				sortedDTeams[i].tempRecord = 0;
 				sortedPTeams[i].status = "p";
@@ -157,7 +149,7 @@ function Screen5Ctrl($scope, $state){
 				var pair =  new Pairing(sortedPTeams[i],sortedDTeams[i]);
 				this.newPairings.push(pair);
 			}
-			checkImpermissiblesSC(this.newPairings, swapList); //check for impermissibles
+			checkImpermissibles(this.newPairings, swapList); //check for impermissibles
 		}
 	}
 }

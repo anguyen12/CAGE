@@ -36,8 +36,7 @@ window.updateCS = function(team, allTeams){
 		}
 }
 
-window.checkImpermissiblesNSC = function(pairedTeams){
-		console.log("checking NSC imper");
+window.checkImpermissibles = function(pairedTeams, swapList){
 		for (i = 0; i < pairedTeams.length; i++){
 			var list = pairedTeams[i].pTeam.impermissibles;
 			var ID = pairedTeams[i].dTeam.uniqueID;
@@ -50,10 +49,17 @@ window.checkImpermissiblesNSC = function(pairedTeams){
 		}
 		
 		for (var x = 0; x < pairedTeams.length; x+=1){
-		//console.log(pairedTeams[x], x, pairedTeams, swapList);
-		if (pairedTeams[x].isImpermissible){ //need to merge the logic here
-			proposeSwapNSC(pairedTeams[x], x, pairedTeams, swapList);
-		}
+			//console.log(pairedTeams[x], x, pairedTeams, swapList);
+			if (pairedTeams[x].isImpermissible){ //need to merge the logic here
+				if (!tournament.isSideConstrained){
+					console.log("checking NSC imper");
+					proposeSwapNSC(pairedTeams[x], x, pairedTeams, swapList);
+					} //NSC swaps
+				if (tournament.isSideConstrained){
+					console.log("checking SC imper");
+					proposeSwapSC(pairedTeams[x], x, pairedTeams, swapList);
+					} //SC swaps
+			}
 	}
 }
 
@@ -64,11 +70,19 @@ window.proposeSwapNSC = function(impMatch, location, pairs, swapped){
 	
 	if (location > 0){
 		swap = new ProposedSwap(p, pairs[location-1].dTeam);
-		swOptions.push(swap);
+		var teamIDs = [swap.outTeam.uniqueID, swap.inTeam.uniqueID];
+		if (!_.contains(swapped, teamIDs)){
+			console.log("legal swap proposed")
+			swOptions.push(swap);
+		}
 	}
 	if (location < (pairs.length-1)){
 		swap2 = new ProposedSwap(d, pairs[location+1].pTeam);
-		swOptions.push(swap2);
+		var teamIDs = [swap2.outTeam.uniqueID, swap2.inTeam.uniqueID];
+		if (!_.contains(swapped, teamIDs)){
+			console.log("legal swap proposed")
+			swOptions.push(swap2);
+		}
 	}
 
 	swOptions.sort(s);
@@ -76,27 +90,6 @@ window.proposeSwapNSC = function(impMatch, location, pairs, swapped){
 	pairs[location].inTeam = swOptions[0].inTeam;
 	pairs[location].outTeam = swOptions[0].outTeam;
 }	
-
-window.checkImpermissiblesSC = function(pairedTeams, swapped){
-	console.log("checking SC imper");
-	for (i = 0; i < pairedTeams.length; i++){
-		var list = pairedTeams[i].pTeam.impermissibles;
-		var ID = pairedTeams[i].dTeam.uniqueID;
-		
-		for (var x = 0; x < list.length; x++){
-			if (list[x] == ID){
-				pairedTeams[i].isImpermissible = true;
-			}
-		}
-	}
-		
-	for (var x = 0; x < pairedTeams.length; x+=1){
-		//console.log(pairedTeams[x], x, pairedTeams, swapList);
-		if (pairedTeams[x].isImpermissible){
-			proposeSwapSC(pairedTeams[x], x, pairedTeams, swapped);
-		}
-	}
-}
 
 window.proposeSwapSC = function(impMatch, location, pairs, swapped){
 	p = impMatch.pTeam;
@@ -140,7 +133,6 @@ function TeamObject(inputnumber) {
 	this.temp2, //GL - Originally = 0. Uninstantiated for field validation.
 	this.tempRecord, //GL - Originally = 0. Uninstantiated for field validation.
 	this.tempCS = 0; 
-	this.button = true,
 	this.opponents = [];
 }
 
