@@ -13,7 +13,8 @@ angular.module('tabtracker', ['ui.router'])
  	var main = {
 		name: 'main',
 		url: '/#',
-		templateUrl: ''
+		templateUrl: '',
+		controller: 'AutoPopCtrl',
 	};
 	
 	$stateProvider.state(main);
