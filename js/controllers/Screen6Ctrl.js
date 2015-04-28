@@ -26,10 +26,10 @@ function Screen6Ctrl($scope, $state){
 		
 		var sortedTeams = unsortedTeams.sort(s); //sort teams by appropriate values
 			
-		for (var i = 0; i < sortedTeams.length; i+=2) { //pair teams
+		for (var i = 0; i < sortedTeams.length; i+=2) {
 			sortedTeams[i].rank = i+1;
 			sortedTeams[i+1].rank = i+2;
-			updateCS(sortedTeams[i], sortedTeams);
+			updateCS(sortedTeams[i], sortedTeams); // will cause bugs, needs to be done before sorting
 			updateCS(sortedTeams[i+1], sortedTeams);
 		}
 		

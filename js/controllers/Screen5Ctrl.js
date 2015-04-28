@@ -53,11 +53,13 @@ function Screen5Ctrl($scope, $state){
 	
 	$scope.swapList = swapList;
 	
-	$scope.FlipSides = function(){
+	$scope.flipSides = function(){
 		for (var i = 0; i < pairings.length; i+=1){
 			var wasP = pairings[i].pTeam;
 			var wasD = pairings[i].dTeam;
+			console.log("switched sides:", pairings[i].pTeam, " plaintiff is now: ", wasD);
 			pairings[i].pTeam = wasD;
+			console.log("switched sides: ", pairings[i].dTeam, " defense is now: ", wasP);
 			pairings[i].dTeam = wasP;
 			pairings[i].pTeam.status = "p";
 			pairings[i].dTeam.status = "d";
@@ -123,9 +125,9 @@ function Screen5Ctrl($scope, $state){
 				sortedTeams[i+1].tempRecord = 0;
 				sortedTeams[i].status = "p";
 				sortedTeams[i+1].status = "d";
-				console.log(sortedTeams[i], sortedTeams);
-				updateCS(sortedTeams[i], sortedTeams);
-				console.log(sortedTeams[i+1], sortedTeams);
+				//console.log(sortedTeams[i], sortedTeams);
+				updateCS(sortedTeams[i], sortedTeams); // needs to be moved someplace more appropriate
+				//console.log(sortedTeams[i+1], sortedTeams);
 				updateCS(sortedTeams[i+1], sortedTeams);
 				var pair =  new Pairing(sortedTeams[i],sortedTeams[i+1]);
 				this.newPairings.push(pair);
