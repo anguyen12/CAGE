@@ -123,52 +123,13 @@ p.copyright {
 	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
 	text-align: center;
 	}
-
-.button {
-   border-top: 1px solid #ffffff;
-   background: #E4E4F4;
-   background: -webkit-gradient(linear, left top, left bottom, from(#CDCDDC), to(#E4E4F4));
-   background: -webkit-linear-gradient(top, #CDCDDC, #E4E4F4);
-   background: -moz-linear-gradient(top, #CDCDDC, #E4E4F4);
-   background: -ms-linear-gradient(top, #CDCDDC, #E4E4F4);
-   background: -o-linear-gradient(top, #CDCDDC, #E4E4F4);
-   padding: 5.5px 11px;
-   -webkit-border-radius: 9px;
-   -moz-border-radius: 9px;
-   border-radius: 9px;
-   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   box-shadow: rgba(0,0,0,1) 0 1px 0;
-   text-shadow: rgba(0,0,0,.4) 0 1px 0;
-   color: #262626;
-   text-decoration: none;
-   vertical-align: middle;
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 2px;
-   }
-.button:hover {
-   border-top-color: #c9c9c9;
-   background: #c9c9c9;
-   color: #383838;
-   }
-.button:active {
-   border-top-color: #f5d42e;
-   background: #E4E4F4;
-   }
-.button:disabled {
-   border-top-color: #EEEEEE;
-   background: #EEEEEE;
-   color: #DDDDDD;
-   box-shadow: none;   
-   }
    
 input[type="button"]{
 	display: block;
 	margin: 0 auto; 
 }
 
-form.setUpCard{ /*causing an issue with spacing and centering of text within cards I think*/
+form.setUpCard{ 
 	margin: 0 auto;
 }
 
@@ -178,7 +139,6 @@ table.setTeamCard{
 
 .mainView{
 	min-height: 72%;
-	/*margin: 30px 0px;*/ 
 }
 
 .setUpCard{
@@ -188,7 +148,6 @@ table.setTeamCard{
 	border-color: #FFFFFF;
 	padding: 12px 12px;
 	font-size: 15pt;
-
 }
 
 .teamCard{
@@ -199,31 +158,7 @@ table.setTeamCard{
 	padding: 12px 12px;
 	margin: 30px 30px;
 	font-size: 12pt;
-	
 }
-
-/*.teamCard input, textarea {
-	width:150px;
-	background: #FFFFFF;
-	border-color: #000000;
-	border-width: 1px;
-	width: 50%;
-}
-
-.teamCard label {
-	background: #000000;
-	color: #FFFFFF;
-	padding: 3px 3px 3px 3px;
-	width: 100px;
-} */
-
-.errorMessage{
-	color: red;
-	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-	padding: 15px 0px;
-	font-size: 10pt;
-}
-
 
 .statusMessage{
 	color: black;
