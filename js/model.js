@@ -1,4 +1,4 @@
-window.tournament = { name: "", totalTeams: 0, roundNumber: 1, rnd1Flip: "", isSideConstrained: true};
+window.tournament = { name: "", totalTeams: 0, roundNumber: 1, rnd1Flip: "", rnd3Flip: "Heads", isSideConstrained: true};
 window.pairings = [];
 window.swapList = [];
 

@@ -1,7 +1,7 @@
 <h1 align="center">{{name}} - Round {{round}} Pairings</h1>
 <p align="center">Swap list: {{swapList}}</p>
-<p align="center" ng-show = "round == 3">Coin flip results: Tab Director must flip the sides if the coin comes up tails.
-	<input type="button" class="btn btn-default" value="Flip Team Sides" ng-click ="flipSides()">
+<p align="center" ng-show = "round == 3">Round 3 coin flip results: Tab Director must switch Plaintiff/Defense if the coin comes up tails.
+	<input type="button" class="btn btn-default" value="Current result: {{flip}}" ng-click ="flipSides()">
 </p>
 	<div ng-init="pairTeams()">
 			<table cellspacing="0" cellpadding="0" class="setTeamCard">

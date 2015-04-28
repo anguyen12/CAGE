@@ -55,6 +55,8 @@ function Screen5Ctrl($scope, $state){
 	
 	$scope.swapList = swapList;
 	
+	$scope.flip = tournament.rnd3Flip;
+	
 	$scope.flipSides = function(){
 		for (var i = 0; i < pairings.length; i+=1){
 			var wasP = pairings[i].pTeam;
@@ -66,13 +68,19 @@ function Screen5Ctrl($scope, $state){
 			pairings[i].pTeam.status = "p";
 			pairings[i].dTeam.status = "d";
 		}
+		if (tournament.rnd3Flip == "Heads") { //change coin flip result on click
+			tournament.rnd3Flip = "Tails";
+		} else {
+				tournament.rnd3Flip = "Heads";
+		} 
+		this.flip = tournament.rnd3Flip;
 		updateRanks();
 		console.log("flipped");
 		checkImpermissibles(pairings, swapList);
 		this.newPairings = pairings;
 	}
 	
-	$scope.coinflip = ["Heads", "Tails"];
+	$scope.coinflip = ["Heads", "Tails"]; //unused??
 	
 	$scope.saveSwaps = function(){
 		swapList = [];
