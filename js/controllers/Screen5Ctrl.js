@@ -10,17 +10,29 @@ function Screen5Ctrl($scope, $state){
 	$scope.swapTeams = function(aPairing, thesePairings) {
 		var swapSide = aPairing.outTeam.status;
 		var swapDestination = aPairing.outTeam.rank;
+		var isSideConstrained = true;
 		
-		if (tournament.roundNumber == 3){swapDestination=Math.floor(swapDestination/2)};
+		if (tournament.roundNumber == 3){isSideConstrained = false;}; //explain this
+		
+		if (!isSideConstrained){swapDestination=Math.floor(swapDestination/2);}
+		
 		console.log(swapDestination);
 		console.log(swapSide);
 		if (swapSide == "p"){
 			thesePairings[swapDestination].pTeam = aPairing.inTeam;
-			aPairing.pTeam = aPairing.outTeam;
+			if (!isSideConstrained){
+				aPairing.dTeam = aPairing.outTeam;
+				console.log("executed correct logic with bad result")
+			} else {
+				aPairing.pTeam = aPairing.outTeam;
+				console.log("executed incorrect logic")
+			}
 
 		} else {
 			thesePairings[swapDestination].dTeam = aPairing.inTeam;
-			aPairing.dTeam = aPairing.outTeam;
+			if (!isSideConstrained){aPairing.pTeam = aPairing.outTeam;} else {
+				aPairing.dTeam = aPairing.outTeam;
+			}
 		}
 		aPairing.isImpermissible = false;
 		thesePairings[swapDestination].isImpermissible = false;
@@ -103,7 +115,9 @@ function Screen5Ctrl($scope, $state){
 				sortedTeams[i+1].tempRecord = 0;
 				sortedTeams[i].status = "p";
 				sortedTeams[i+1].status = "d";
+				console.log(sortedTeams[i], sortedTeams);
 				updateCS(sortedTeams[i], sortedTeams);
+				console.log(sortedTeams[i+1], sortedTeams);
 				updateCS(sortedTeams[i+1], sortedTeams);
 				var pair =  new Pairing(sortedTeams[i],sortedTeams[i+1]);
 				this.newPairings.push(pair);
