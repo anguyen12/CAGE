@@ -14,7 +14,11 @@ window.s = firstBy(function (v1, v2) { return v2.record - v1.record; })
 			
 window.s1 = firstBy(function (v1, v2) { return v2.record - v1.record; })
 			.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; })
-			.thenBy(function (v1, v2) { return v2.uniqueID - v1.uniqueID ; });;			
+			.thenBy(function (v1, v2) { return v2.uniqueID - v1.uniqueID ; });
+
+window.leastDiff = firstBy(function (v1, v2) { return v1.recordDiff - v2.recordDiff; })
+			.thenBy(function (v1, v2) { return v1.PDdiff - v2.PDdiff ; })
+			.thenBy(function (v1, v2) { return v2.rankSum - v1.rankSum ; });				
 
 window.updateCS = function(team, allTeams){	
 		team.combinedStr = 0;
@@ -85,7 +89,7 @@ window.proposeSwapNSC = function(impMatch, location, pairs, swapped){
 		}
 	}
 
-	swOptions.sort(s);
+	swOptions.sort(leastDiff);
 	console.log(swOptions);
 	pairs[location].inTeam = swOptions[0].inTeam;
 	pairs[location].outTeam = swOptions[0].outTeam;
@@ -97,6 +101,7 @@ window.proposeSwapSC = function(impMatch, location, pairs, swapped){
 	pSwaps = [];
 	dSwaps = [];
 	swOptions = [];
+	//turn location into radius?
 	
 	if (location > 0){
 		pSwaps.push(pairs[location-1].pTeam)
@@ -113,7 +118,9 @@ window.proposeSwapSC = function(impMatch, location, pairs, swapped){
 		swap2 = new ProposedSwap(d, dSwaps[a])
 		swOptions.push(swap2)
 	}
-	swOptions.sort(s);
+	swOptions.sort(leastDiff);
+	console.log(swOptions);
+	console.log(swOptions[0]);
 	pairs[location].inTeam = swOptions[0].inTeam;
 	pairs[location].outTeam = swOptions[0].outTeam;
 }	
@@ -150,4 +157,5 @@ function ProposedSwap(inTeam, outTeam) {
 	this.recordDiff = Math.abs(inTeam.record - outTeam.record);
 	this.CSdiff = Math.abs(inTeam.combinedStr - outTeam.combinedStr);
 	this.PDdiff = Math.abs(inTeam.pointDiff - outTeam.pointDiff);
+	this.rankSum = inTeam.rank + outTeam.rank;
 }

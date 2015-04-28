@@ -47,6 +47,7 @@ function Screen5Ctrl($scope, $state){
 		aPairing.isImpermissible = false;
 		thesePairings[swapDestination].isImpermissible = false;
 		swapList.push([aPairing.outTeam.uniqueID, aPairing.inTeam.uniqueID])
+		pairings = thesePairings;
 		checkImpermissibles(pairings, swapList);
 		this.newPairings = pairings;
 	}
