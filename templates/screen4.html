@@ -20,11 +20,9 @@
 									<b>Team Record:</b> {{pair.pTeam.record + pair.pTeam.tempRecord}} <br>
 									<b>Team CS:</b> {{pair.pTeam.combinedStr}} <br>
 									<b>Team PD:</b> {{pair.pTeam.pointDiff + pair.pTeam.temp1 + pair.pTeam.temp2}} <br>
-									<p ng-show = "pair.pTeam.button">
 									<b>Ballots Won:</b> <select ng-model = "pair.pTeam.tempRecord" ng-options="value for value in values" required></select> <br>
 									<b>Ballot 1 result: </b> <input type="number" ng-model="pair.pTeam.temp1" id="ballot1pd" min="-126" max="126" placeholder="-126 to +126" required></input> <br>
 									<b>Ballot 2 result: </b> <input type="number" ng-model="pair.pTeam.temp2" id="ballot2pd" min="-126" max="126" placeholder="-126 to +126" required></input> <br>
-									</p>	
 								</div>
 							<!--</form>-->
 						</td>
@@ -36,11 +34,9 @@
 									<b>Team Record:</b> {{pair.dTeam.record + pair.dTeam.tempRecord}} <br>
 									<b>Team CS:</b> {{pair.dTeam.combinedStr}} <br>
 									<b>Team PD:</b> {{pair.dTeam.pointDiff + pair.dTeam.temp1 + pair.dTeam.temp2}} <br>
-									<p ng-show = "pair.dTeam.button">
 									<b>Ballots Won:</b> <select ng-model = "pair.dTeam.tempRecord" ng-options="value for value in values" required></select> <br>
 									<b>Ballot 1 result: </b> <input type="number" ng-model="pair.dTeam.temp1" id="ballot1pd" min="-126" max="126" placeholder="-126 to +126" required></input> <br>
 									<b>Ballot 2 result: </b> <input type="number" ng-model="pair.dTeam.temp2" id="ballot2pd" min="-126" max="126" placeholder="-126 to +126" required></input> <br>
-									</p>
 								</div>
 							<!--</form>-->
 						</td>

@@ -61,6 +61,8 @@ function Screen5Ctrl($scope, $state){
 			pairings[i].dTeam = wasP;
 			pairings[i].pTeam.status = "p";
 			pairings[i].dTeam.status = "d";
+			pairings[i].pTeam.rank = wasD.rank;
+			pairings[i].dTeam.rank = wasP.rank;
 		}
 		console.log("flipped");
 		checkImpermissibles(pairings, swapList);
