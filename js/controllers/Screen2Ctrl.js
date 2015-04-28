@@ -11,8 +11,6 @@ function Screen2Ctrl($scope, $state){
 			if (tournament.totalTeams > 0){
 				tournament.name = "";
 				tournament.totalTeams = 0;
-				tournament.rnd1Flip = "";
-				tournmanet.rnd3Flip = "";
 				pairings = [];
 			}
 			
