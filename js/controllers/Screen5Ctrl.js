@@ -10,27 +10,37 @@ function Screen5Ctrl($scope, $state){
 	$scope.swapTeams = function(aPairing, thesePairings) {
 		var swapSide = aPairing.outTeam.status;
 		var swapDestination = aPairing.outTeam.rank;
-		var isSideConstrained = true;
 		
-		if (tournament.roundNumber == 3){isSideConstrained = false;}; //explain this
-		
-		if (!isSideConstrained){swapDestination=Math.floor(swapDestination/2);}
+		if (!tournament.isSideConstrained){swapDestination=Math.floor(swapDestination/2);}
 		
 		console.log(swapDestination);
 		console.log(swapSide);
 		if (swapSide == "p"){
 			thesePairings[swapDestination].pTeam = aPairing.inTeam;
-			if (!isSideConstrained){
+			console.log("sent", aPairing.inTeam," to ", swapDestination, " on the ", swapSide);
+			if (!tournament.isSideConstrained){
+				console.log("executed NSC swap logic");
+				console.log("sent", aPairing.outTeam," to the place of ", aPairing.dTeam.uniqueID, " on the ", aPairing.dTeam.status);
 				aPairing.dTeam = aPairing.outTeam;
-				console.log("executed correct logic with bad result")
+
 			} else {
+				console.log("executed SC swap logic");
+				console.log("sent", aPairing.outTeam," to the place of ", aPairing.pTeam.uniqueID, " on the ", aPairing.pTeam.status);
 				aPairing.pTeam = aPairing.outTeam;
-				console.log("executed incorrect logic")
 			}
 
 		} else {
 			thesePairings[swapDestination].dTeam = aPairing.inTeam;
-			if (!isSideConstrained){aPairing.pTeam = aPairing.outTeam;} else {
+			console.log("sent", aPairing.inTeam," to ", swapDestination, " on the ", swapSide);
+			if (!tournament.isSideConstrained){
+				console.log("executed NSC swap logic");
+				console.log("sent", aPairing.outTeam," to the place of ", aPairing.pTeam.uniqueID, " on the ", aPairing.pTeam.status);
+				aPairing.pTeam = aPairing.outTeam;
+				
+
+				} else {
+				console.log("executed SC swap logic");
+				console.log("sent", aPairing.outTeam," to the place of ", aPairing.dTeam.uniqueID, " on the ", aPairing.dTeam.status);
 				aPairing.dTeam = aPairing.outTeam;
 			}
 		}
@@ -55,7 +65,7 @@ function Screen5Ctrl($scope, $state){
 			pairings[i].dTeam.status = "d";
 		}
 		console.log("flipped");
-		if (tournament.roundNumber == 3){
+		if (!tournament.isSideConstrained){
 			checkImpermissiblesNSC(pairings, swapList);
 			} else {checkImpermissiblesSC(pairings, swapList);}
 		this.newPairings = pairings;
@@ -74,26 +84,28 @@ function Screen5Ctrl($scope, $state){
 		//var thisTournament = JSON.parse(localStorage.getItem('tournament'));
 		this.name = tournament.name;
 		this.round = tournament.roundNumber;
-		//var loadedTeams = JSON.parse(localStorage.getItem('listAllTeams'));
-		//var pairings = JSON.parse(localStorage.getItem('pairings'));
 		
 		var unsortedTeams = []; //unpair the teams
 		var leftColumn = []; 
 		var rightColumn = [];
-		
-		var leftColSide = ""; //garbage
-		var rightColSide = "";
+
+		if (tournament.roundNumber == 3) {
+			tournament.isSideConstrained = false;
+			} else {
+				tournament.isSideConstrained = true;
+			} //explain this
+		console.log("round is side constrained:", tournament.isSideConstrained);
 		
 		for (var i = 0; i < pairings.length; i+=1){
 			var thisPair = pairings[i];
 			var wasPTeam = thisPair.pTeam;
 			var wasDTeam = thisPair.dTeam;
 			
-			if (tournament.roundNumber == 3){
+			if (!tournament.isSideConstrained){
 				unsortedTeams.push(wasPTeam);
 				unsortedTeams.push(wasDTeam);
 			}
-			if (tournament.roundNumber == 4 || tournament.roundNumber == 2){
+			if (tournament.isSideConstrained){
 				rightColumn.push(wasPTeam);
 				leftColumn.push(wasDTeam);
 			}
@@ -103,7 +115,7 @@ function Screen5Ctrl($scope, $state){
 		this.newPairings = [];
 		
 		
-		if (tournament.roundNumber == 3){ //round not side constrained
+		if (!tournament.isSideConstrained){ //round not side constrained
 			var sortedTeams = unsortedTeams.sort(s); //sort teams by appropriate values
 			
 			for (var i = 0; i < sortedTeams.length; i+=2) { //pair teams
@@ -127,7 +139,7 @@ function Screen5Ctrl($scope, $state){
 		
 		}		
 		
-		if (tournament.roundNumber == 4 || tournament.roundNumber == 2){ //round is side constrained
+		if (tournament.isSideConstrained){ //round is side constrained
 			var sortedDTeams = rightColumn.sort(s1); //sort each stack of teams
 			var sortedPTeams = leftColumn.sort(s1);
 			
