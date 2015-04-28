@@ -22,7 +22,6 @@ window.leastDiff = firstBy(function (v1, v2) { return v1.recordDiff - v2.recordD
 
 window.updateCS = function(team, allTeams){	
 		team.combinedStr = 0;
-		
 		var opponents = team.opponents;
 		for (var i =0; i < opponents.length; i++){
 			var opponent = opponents[i];
@@ -38,6 +37,23 @@ window.updateCS = function(team, allTeams){
 			}
 			team.combinedStr+=oppRecord;
 		}
+}
+
+window.updateRanks = function(){
+	console.log("ranks updated");
+	if(!tournament.isSideConstrained){
+		for(var i = 0; i< pairings.length; i+=2){
+			pairings[i].pTeam.rank = i;
+			pairings[i].dTeam.rank = i+1;
+		}
+	}
+	if(tournament.isSideConstrained){
+		for(var i = 0; i< pairings.length; i+=1){
+			pairings[i].pTeam.rank = i;
+			pairings[i].dTeam.rank = i;
+		}
+	}
+	
 }
 
 window.checkImpermissibles = function(pairedTeams, swapList){
