@@ -22,6 +22,7 @@ function Screen3Ctrl($scope, $state){
 		//this.listAllTeams = JSON.parse(localStorage.getItem('listAllTeams'));
 		//this.pairings = JSON.parse(localStorage.getItem('pairings'));
 	}
+	
 	// NEEDS EDITED TO UPDATE PAIRINGS OBJECTS
 	$scope.startR1 = function($scope) { //clicking the button to start round 1
 		//var tournament = JSON.parse(localStorage.getItem('tournament'));//grab the number of totals teams from local storage
@@ -35,15 +36,22 @@ function Screen3Ctrl($scope, $state){
 			//---Update the properties of the plaintiff and defendant
 			var name_label = "#teamName"+counter; // build the name of the name input box in html
 			var id_label = "#teamID"+counter; //build the name of the id input box
+			var imp_label = "#teamImp"+counter;
 			plaintiff.name = $(name_label).val(); //update plaintiff to have value user feeds into input box
 			plaintiff.uniqueID = $(id_label).val(); //update plaintiff to have value user feeds into input box
+			var impList = $(imp_label).val();
+			impList = impList.replace(/ /g, "");
+			plaintiff.impermissibles = impList.split(",");
 			
 			counter +=1; //increment the counter/index of the pairing object, so we can grab the 2nd team of the pairing
 			name_label = "#teamName"+counter;// similar to above--build the name of the name input box
 			id_label = "#teamID"+counter; //build the name of the id input box
+			imp_label = "#teamImp"+counter;
 			defendant.name= $(name_label).val(); //update defendant's name and number properties
 			defendant.uniqueID = $(id_label).val();
-			
+			impList = $(imp_label).val();
+			impList = impList.replace(/ /g, "");
+			defendant.impermissibles = impList.split(",");
 			//---Insert into 
 			pairing.pTeam = plaintiff;
 			pairing.dTeam = defendant;
