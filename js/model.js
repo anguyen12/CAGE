@@ -83,7 +83,7 @@ window.pickSortAlg = function(round){
 	return result;
 }
 
-window.checkImpermissibles = function(pairedTeams, swapList){
+window.checkImpermissibles = function(pairedTeams, swapped){
 		for (i = 0; i < pairedTeams.length; i++){
 			var list = pairedTeams[i].pTeam.impermissibles;
 			var ID = pairedTeams[i].dTeam.uniqueID;
@@ -100,11 +100,11 @@ window.checkImpermissibles = function(pairedTeams, swapList){
 			if (pairedTeams[x].isImpermissible){ //need to merge the logic here
 				if (!tournament.isSideConstrained){
 					console.log("checking NSC imper");
-					proposeSwapNSC(pairedTeams[x], x, pairedTeams, swapList);
+					proposeSwapNSC(pairedTeams[x], x, pairedTeams, swapped);
 					} //NSC swaps
 				if (tournament.isSideConstrained){
 					console.log("checking SC imper");
-					proposeSwapSC(pairedTeams[x], x, pairedTeams, swapList);
+					proposeSwapSC(pairedTeams[x], x, pairedTeams, swapped);
 					} //SC swaps
 			}
 	}
@@ -117,17 +117,19 @@ window.proposeSwapNSC = function(impMatch, location, pairs, swapped){
 
 	if (location > 0){
 		swap = new ProposedSwap(p, pairs[location-1].dTeam);
-		var teamIDs = [swap.outTeam.uniqueID + "-" + swap.inTeam.uniqueID];
-		if (!_.contains(swapped, teamIDs)){
-			console.log("legal swap proposed")
+		var teamIDa = swap.outTeam.uniqueID + "-" + swap.inTeam.uniqueID;
+		var teamIDb = swap.inTeam.uniqueID + "-" + swap.outTeam.uniqueID;
+		if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
+			console.log("legal swap proposed");
 			swOptions.push(swap);
 		}
 	}
 	if (location < (pairs.length-1)){
 		swap2 = new ProposedSwap(d, pairs[location+1].pTeam);
-		var teamIDs = [swap2.outTeam.uniqueID + "-" + swap2.inTeam.uniqueID];
-		if (!_.contains(swapped, teamIDs)){
-			console.log("legal swap proposed")
+		var teamIDa = swap2.outTeam.uniqueID + "-" + swap2.inTeam.uniqueID;
+		var teamIDb = swap2.inTeam.uniqueID + "-" + swap2.outTeam.uniqueID;
+		if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
+			console.log("legal swap proposed");
 			swOptions.push(swap2);
 		}
 	}
@@ -157,15 +159,17 @@ window.proposeSwapSC = function(impMatch, location, pairs, swapped){
 	
 	for (var a = 0; a<pSwaps.length; a++){
 		swap = new ProposedSwap(p, pSwaps[a])
-		var teamIDs = [swap.outTeam.uniqueID + "-" + swap.inTeam.uniqueID];
-		if (!_.contains(swapped, teamIDs)){
+		var teamIDa = swap.outTeam.uniqueID + "-" + swap.inTeam.uniqueID;
+		var teamIDb = swap.inTeam.uniqueID + "-" + swap.outTeam.uniqueID;
+		if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
 			swOptions.push(swap);
 			console.log("legal swap proposed");
 		}
 		
 		swap2 = new ProposedSwap(d, dSwaps[a])
-		var teamIDs = [swap2.outTeam.uniqueID + "-" + swap2.inTeam.uniqueID];
-		if (!_.contains(swapped, teamIDs)){
+		var teamIDa = swap2.outTeam.uniqueID + "-" + swap2.inTeam.uniqueID;
+		var teamIDb = swap2.inTeam.uniqueID + "-" + swap2.outTeam.uniqueID;
+		if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
 			swOptions.push(swap2);
 			console.log("legal swap proposed");
 		}
