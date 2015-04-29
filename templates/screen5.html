@@ -1,9 +1,10 @@
-<h1 align="center">{{name}} - Round {{round}} Pairings</h1>
+<h1 align="center">{{name}} - Round {{round}} Pairings!!!</h1>
 <p align="center">Swap list: {{swapList}}</p>
 <p align="center" ng-show = "round == 3">Round 3 coin flip results: Tab Director must switch Plaintiff/Defense if the coin comes up tails.
 	<input type="button" class="btn btn-default" value="Current result: {{flip}}" ng-click ="flipSides()">
 </p>
 	<div ng-init="pairTeams()">
+			<form id="devTest">
 			<table cellspacing="0" cellpadding="0" class="setTeamCard">
 				<colgroup span="2"></colgroup>
 				<tbody>
@@ -37,13 +38,14 @@
 							<p ng-show = "pair.isImpermissible">
 							<b>Impermissible</b><br>
 							<b>Proposed Swap: {{pair.inTeam.uniqueID}} and {{pair.outTeam.uniqueID}}</b><br>
-							<input type="button" value="Swap" id="submit_button" class="btn btn-default" ng-click="swapTeams(pair, this.newPairings)">
+							<input type="button" value="Swap" id="swap_button" class="btn btn-default" ng-click="swapTeams(pair, this.newPairings)">
 							</p>
 						</td>
 					</tr>
+					
 				</tbody>
 			</table>
-		<input type="button" class="btn btn-default" ng-click = "saveSwaps()" value="Enter Round {{round}} Results" ui-sref="screen4" id="startR_button">	
+		<input type="button" class="btn btn-default" ng-disabled="devTest.$invalid" ng-click = "saveSwaps()" value="Enter Round {{round}} Results" ui-sref="screen4" id="startR_button"></form>	
 		<br></br>
 	</div>
 	

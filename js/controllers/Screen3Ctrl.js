@@ -6,6 +6,109 @@ module.controller('Screen3Ctrl', Screen3Ctrl);
 
 function Screen3Ctrl($scope, $state){
 
+	
+	//populate the team name and team ids
+	$scope.runAutoPop = function() {
+		alert("Running auto populate...");
+		//takes the numberOfTeams
+		//randomly generates names for the teams
+		
+		//Grab every field in the form of team cards
+		var teamCardsFormFields= document.getElementById("teamCards").elements;
+		
+		//For every form field...
+		var j;
+		for (j=0; j <= teamCardsFormFields.length; j++){
+			//grab the field
+			var field = teamCardsFormFields[j];
+			//0=name field, 1=teamID field
+			if (field.name == "teamName"){
+				var teamName = randomTeamName();
+				field.value = teamName;
+			}
+			else if (field.name == "teamNumber"){ 
+				var uniqueID = randomUniqueID();
+				field.value = uniqueID;
+			}
+			else{
+				field.value = "Can't hit this team";
+			}
+		}
+	}
+	
+	//'Randomizers'
+	function randomUniqueID(){
+		var number1 = Math.floor((Math.random() * 100) + 1);//randomly generate a number between 1 and 100
+		var number2 = Math.floor((Math.random() * 100) + 1);//randomly generate another number
+		var uniqueID = number1+""+number2; //Unique ID
+		return uniqueID;
+	}
+	
+	function randomTeamName(){
+		var colleges = ['Macalester', 
+						'Harvard', 
+						'St. Thomas',
+						'Hamline',
+						'Carleton',
+						'U of M',
+						'Princeton',
+						'Saint Paul Tech',
+						'Monsters University',
+						'Hogwarts',
+						'University of Florida',
+						'St. Cloud State',
+						'Mankato State',
+						'Winona State',
+						'John Hopkins',
+						'U W Madison',
+						'Michigan State',
+						'Chicago University',
+						];
+		var colors = ['Red', 'Blue', 'Yellow', 'Orange','Green', 'Silver', 'Gold', 'International'];
+		
+		var teams = ['Team', 
+					'Division', 
+					'Troop', 
+					'Squad', 
+					'Duo', 
+					'Contingent', 
+					'Trio', 
+					'Triple', 
+					'Faction', 
+					'Party'];
+		var etc = ['Baking Club',
+				'Breakfast Club',
+				'Kung Fu Fighters',
+				'Knitting Club', 
+				'Legal Geekery', 
+				'Drama Club', 
+				'Theatre Fanatics', 
+				'Glee Club', 
+				'Football Team', 
+				'Bar Association', 
+				'Republicans', 
+				'Democrats', 
+				'Marxists'];
+
+		
+		var wordLists1 = [colleges, colors];
+		var wordLists2 = [teams, etc];
+		
+		var randomList1 = (Math.floor(Math.random()*2));
+		var randomList2 = (Math.floor(Math.random()*2));
+		
+		var list1 = wordLists1[randomList1];
+		var list2 = wordLists2[randomList2];
+		
+		var word1 = Math.floor(Math.random()*list1.length);
+		var word2 = Math.floor(Math.random()*list2.length);
+		
+		var teamName = list1[word1]+" "+list2[word2];
+		
+		return teamName;
+	}
+
+
 
 		$scope.blah = function(){
 			alert("Test");
