@@ -1,4 +1,4 @@
-window.tournament = { name: "", totalTeams: 0, roundNumber: 1, rnd1Flip: "", rnd3Flip: "Heads", isSideConstrained: true};
+window.tournament = { name: "", totalTeams: 0, roundNumber: 1, rnd1Flip: "Heads", rnd3Flip: "Heads", isSideConstrained: true};
 window.pairings = [];
 window.swapList = [];
 
@@ -55,7 +55,7 @@ window.updateRanks = function(){
 window.pickSortAlg = function(round){
 	var result;
 	
-	if(round == 1){
+	if(round == 2){
 		if (tournament.rnd1Flip == "Heads"){
 			result = firstBy(function (v1, v2) { return v2.record - v1.record; })
 				.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; })
@@ -114,10 +114,10 @@ window.proposeSwapNSC = function(impMatch, location, pairs, swapped){
 	p = impMatch.pTeam;
 	d = impMatch.dTeam;
 	swOptions = [];
-	
+
 	if (location > 0){
 		swap = new ProposedSwap(p, pairs[location-1].dTeam);
-		var teamIDs = [swap.outTeam.uniqueID, swap.inTeam.uniqueID];
+		var teamIDs = [swap.outTeam.uniqueID + "-" + swap.inTeam.uniqueID];
 		if (!_.contains(swapped, teamIDs)){
 			console.log("legal swap proposed")
 			swOptions.push(swap);
@@ -125,7 +125,7 @@ window.proposeSwapNSC = function(impMatch, location, pairs, swapped){
 	}
 	if (location < (pairs.length-1)){
 		swap2 = new ProposedSwap(d, pairs[location+1].pTeam);
-		var teamIDs = [swap2.outTeam.uniqueID, swap2.inTeam.uniqueID];
+		var teamIDs = [swap2.outTeam.uniqueID + "-" + swap2.inTeam.uniqueID];
 		if (!_.contains(swapped, teamIDs)){
 			console.log("legal swap proposed")
 			swOptions.push(swap2);
@@ -157,9 +157,18 @@ window.proposeSwapSC = function(impMatch, location, pairs, swapped){
 	
 	for (var a = 0; a<pSwaps.length; a++){
 		swap = new ProposedSwap(p, pSwaps[a])
-		swOptions.push(swap)
+		var teamIDs = [swap.outTeam.uniqueID + "-" + swap.inTeam.uniqueID];
+		if (!_.contains(swapped, teamIDs)){
+			swOptions.push(swap);
+			console.log("legal swap proposed");
+		}
+		
 		swap2 = new ProposedSwap(d, dSwaps[a])
-		swOptions.push(swap2)
+		var teamIDs = [swap2.outTeam.uniqueID + "-" + swap2.inTeam.uniqueID];
+		if (!_.contains(swapped, teamIDs)){
+			swOptions.push(swap2);
+			console.log("legal swap proposed");
+		}
 	}
 	swOptions.sort(leastDiff);
 	console.log(swOptions);

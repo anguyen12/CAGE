@@ -1,6 +1,6 @@
 <h1 align="center">{{name}} - Enter Round {{round}} Results</h1>
 <p align="center" ng-show = "round == 1">Coin Flip Results: 
-	<select ng-model = "flip1" ng-options="side for side in coinflip" ></select>
+	<select ng-model = "flip1" ng-options="side for side in coinflip" required></select>
 </p>
 	<div id="teamChoicesSummary" ng-init="showTeams()">
 		<form name="teamCards">	

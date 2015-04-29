@@ -9,7 +9,7 @@ function Screen4Ctrl($scope, $state){
 	$scope.showTeams = function() {
 		this.name = tournament.name;
 		this.round = tournament.roundNumber;
-		this.flip1 = "";
+		this.flip1 = tournament.rnd1Flip;
 		this.pairings = window.pairings;
 	}
 	
