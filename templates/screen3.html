@@ -1,7 +1,8 @@
 <h1 align="center">{{name}}</h1>
 <h3 align="center">Enter Team Information for Round {{round}} Pairings:</h3>
+<input type="button" ng-click="runAutoPop()" value="Run Auto-Populate">
 	<div id="enterTeams" ng-init = "configTeams()" class="cardTableTop">
-		<form name="teamCards">
+		<form name="teamCards" id="teamCards">
 			<table cellspacing="0" cellpadding="0" id="teamSetUpTable" class="setTeamCard">
 				<colgroup span="2"></colgroup>
 				<tbody>
@@ -18,19 +19,19 @@
 							<div id="teamCard" class="form-group">
 								<label for="TeamName" class="col-sm-3 control-label"> Name: </label>
 								<div class="col-sm-5 col-xs-8">
-									<input type="text" id="teamName{{pair.pTeam.rank}}" ng-model = "pair.pTeam.name" placeholder="ex. Macalester Mock Trial Team" class="form-control" required></input>
+									<input type="text" id="teamName{{pair.pTeam.rank}}" name="teamName" ng-model = "pair.pTeam.name" placeholder="ex. Macalester Mock Trial Team" class="form-control" required></input>
 								</div>
 							</div>
 							<div  class="form-group">
 								<label for="TeamID" class="col-sm-3 control-label"> Number: </label>
 								<div class="col-sm-5 col-xs-8">
-									<input type="text" id="teamID{{pair.pTeam.rank}}" ng-model = "pair.pTeam.uniqueID" placeholder="ex. 9999" class="form-control" required></input>
+									<input type="text" id="teamID{{pair.pTeam.rank}}" name="teamNumber" ng-model = "pair.pTeam.uniqueID" placeholder="ex. 9999" class="form-control" required></input>
 								</div>
 							</div>
 							<div  class="form-group">
 								<label for="TeamImp" class="col-sm-3 control-label"> Impermissible: </label>
 								<div class="col-sm-5 col-xs-8">
-									<input type="text" id="teamImp{{pair.pTeam.rank}}" placeholder="ex. 1023, 1024" class="form-control"></input>
+									<input type="text" id="teamImp{{pair.pTeam.rank}}" name="impermissible" placeholder="ex. 1023, 1024" class="form-control"></input>
 								</div>
 							</div>
 						</div>
@@ -43,19 +44,19 @@
 							<div id="teamCard" class="form-group">
 								<label for="TeamName" class="col-sm-3 control-label"> Name: </label>
 								<div class="col-sm-5 col-xs-8">
-									<input type="text" id="teamName{{pair.dTeam.rank}}" ng-model = "pair.dTeam.name" placeholder="ex. Macalester Mock Trial Team" class="form-control" required></input>
+									<input type="text" id="teamName{{pair.dTeam.rank}}" name="teamName" ng-model = "pair.dTeam.name" placeholder="ex. Macalester Mock Trial Team" class="form-control" required></input>
 								</div>
 							</div>
 							<div  class="form-group">
 								<label for="TeamID" class="col-sm-3 control-label"> Number: </label>
 								<div class="col-sm-5 col-xs-8">
-									<input type="text" id="teamID{{pair.dTeam.rank}}" ng-model = "pair.dTeam.uniqueID" placeholder="ex. 9999" class="form-control" required></input>
+									<input type="text" id="teamID{{pair.dTeam.rank}}" name="teamNumber" ng-model = "pair.dTeam.uniqueID" placeholder="ex. 9999" class="form-control" required></input>
 								</div>
 							</div>
 							<div  class="form-group">
 								<label for="TeamImp" class="col-sm-3 control-label"> Impermissible: </label>
 								<div class="col-sm-5 col-xs-8">
-									<input type="text" id="teamImp{{pair.dTeam.rank}}" placeholder="ex. 1023, 1024" class="form-control"></input>
+									<input type="text" id="teamImp{{pair.dTeam.rank}}" name="impermissible" placeholder="ex. 1023, 1024" class="form-control"></input>
 								</div>
 							</div>
 						</div>

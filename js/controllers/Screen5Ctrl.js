@@ -8,6 +8,7 @@ function Screen5Ctrl($scope, $state){
 	
 		
 	$scope.swapTeams = function(aPairing, thesePairings) {
+		$('#startR_button').removeAttr('disabled');
 		var swapSide = aPairing.outTeam.status;
 		var swapDestination = aPairing.outTeam.rank;
 		
