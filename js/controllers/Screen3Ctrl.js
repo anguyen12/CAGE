@@ -6,14 +6,17 @@ module.controller('Screen3Ctrl', Screen3Ctrl);
 
 function Screen3Ctrl($scope, $state){
 
-	
 	//runAutoPop: triggered when you click the auto populate button on screen 3
 	//Automatically populates the team name and team ids
 	//Because of the way I built this algorithm, where each team's impermissible is the id of the team before it the first team card does not get an automatically generated impermissible
-	$scope.runAutoPop = function() {
+	$scope.runAutoPop = function(numOfTeams) {
 		var teamCardsFormFields= document.getElementById("teamCards").elements; //Grab every field in the form of team cards
+		var numOfEmptyCardFields= teamCardsFormFields.length; 
 		var j; 
-		for (j=0; j <= teamCardsFormFields.length; j++){ //For every form field...
+		if (!(numOfTeams%2 == 0)){ //if the pairing is not even/is odd... 3 *3= 9
+			numOfEmptyCardFields = teamCardsFormFields.length - 4; //the last team card is the bye team, so we don't need to loop through that and overwrite the bye team information...
+		}
+		for (j=0; j < numOfEmptyCardFields; j++){ //For every form field...
 			var field = teamCardsFormFields[j]; //grab the field
 			//4 branches of if and else statements. the logic here is BAD and probably redundant -Gozong
 			if (field.name == "teamName"){ //if the field is for team names...
