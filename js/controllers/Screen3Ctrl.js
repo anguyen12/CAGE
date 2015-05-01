@@ -15,6 +15,7 @@ function Screen3Ctrl($scope, $state){
 		var j; 
 		if (!(numOfTeams%2 == 0)){ //if the pairing is not even/is odd... 3 *3= 9
 			numOfEmptyCardFields = teamCardsFormFields.length - 4; //the last team card is the bye team, so we don't need to loop through that and overwrite the bye team information...
+			document.getElementById("startR_button").disabled = false;
 		}
 		for (j=0; j < numOfEmptyCardFields; j++){ //For every form field...
 			var field = teamCardsFormFields[j]; //grab the field

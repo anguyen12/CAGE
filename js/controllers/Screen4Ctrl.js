@@ -5,6 +5,28 @@ var module = angular.module('tabtracker');
 module.controller('Screen4Ctrl', Screen4Ctrl);
 
 function Screen4Ctrl($scope, $state){
+
+	//autoPopScores: function triggers when user clicks on auto populate button.
+	$scope.autoPopScores = function() {
+		var teamCardsFormFields= document.getElementById("teamCards").elements; //Grab every field in the form of team cards
+		var numOfEmptyCardFields= teamCardsFormFields.length; 
+		var j; 
+		for (j=0; j < numOfEmptyCardFields; j++){ //For every form field...
+			var field = teamCardsFormFields[j]; //grab the field
+			//4 branches of if and else statements. the logic here is BAD and probably redundant -Gozong
+			if (field.name == "dropDownRecord"){ //if the field is for team names...
+				var randomRecord = randomRecord(); //generate a random team name
+				field.value = randomRecord; //update the form field value
+			}
+			else if (field.id == "startR_button" || field.id == "startFinalButton"){
+				field.disabled = false; //in that case, reenable the button so its clickable.
+			}
+			else {  //if the field is for team number..
+				var randomScore = randomScore(); //generate a random id..
+				field.value = randomScore; //update the form field value
+			}
+		}
+	}
 	
 	$scope.showTeams = function() {
 		this.name = tournament.name;
@@ -16,6 +38,18 @@ function Screen4Ctrl($scope, $state){
 	$scope.values = [0, 0.5, 1, 1.5, 2];
 	
 	$scope.coinflip = ["Heads", "Tails"];
+	
+	//record randomizer
+	$scope.randomRecord = function(){
+		var randomIndex = Math.floor((Math.random() * 4) + 0);//randomly generate a number between 0 and 4
+		return values[randomIndex];
+	}
+	
+	//score randomizer
+	$scope.randomScore = function(){
+		var score = Math.floor((Math.random() * 5) + 0);//randomly generate a number between 0 and 4
+		return score;
+	}
 	
 	$scope.saveRound = function() {
 		if (tournament.roundNumber == 1){tournament.rnd1Flip = this.flip1;}
