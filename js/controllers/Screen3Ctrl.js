@@ -7,31 +7,34 @@ module.controller('Screen3Ctrl', Screen3Ctrl);
 function Screen3Ctrl($scope, $state){
 
 	
-	//populate the team name and team ids
+	//runAutoPop: triggered when you click the auto populate button on screen 3
+	//Automatically populates the team name and team ids
+	//Because of the way I built this algorithm, where each team's impermissible is the id of the team before it the first team card does not get an automatically generated impermissible
 	$scope.runAutoPop = function() {
-		alert("Running auto populate...");
-		//takes the numberOfTeams
-		//randomly generates names for the teams
-		
-		//Grab every field in the form of team cards
-		var teamCardsFormFields= document.getElementById("teamCards").elements;
-		
-		//For every form field...
-		var j;
-		for (j=0; j <= teamCardsFormFields.length; j++){
-			//grab the field
-			var field = teamCardsFormFields[j];
-			//0=name field, 1=teamID field
-			if (field.name == "teamName"){
-				var teamName = randomTeamName();
-				field.value = teamName;
+		var teamCardsFormFields= document.getElementById("teamCards").elements; //Grab every field in the form of team cards
+		var j; 
+		for (j=0; j <= teamCardsFormFields.length; j++){ //For every form field...
+			var field = teamCardsFormFields[j]; //grab the field
+			//4 branches of if and else statements. the logic here is BAD and probably redundant -Gozong
+			if (field.name == "teamName"){ //if the field is for team names...
+				var teamName = randomTeamName(); //generate a random team name
+				field.value = teamName; //update the form field value
 			}
-			else if (field.name == "teamNumber"){ 
-				var uniqueID = randomUniqueID();
-				field.value = uniqueID;
+			else if (field.name == "teamNumber"){  //if the field is for team number..
+				var uniqueID = randomUniqueID(); //generate a random id..
+				field.value = uniqueID; //update the form field value
 			}
-			else{
-				field.value = "Can't hit this team";
+			else if (field.name == "impermissible"){ //if the field name is impermissible..
+				if (j == 2){ //but you're still autopopulating the FIRST team card
+					field.value = ""; //set the impermissibles to nothing
+				}
+				else{ //if you've autopopulated more than 1 team card
+					var prevUniqueID = teamCardsFormFields[j-4].value; //grab the unique id of the previous team card
+					field.value = prevUniqueID; //update the impermissible field value
+				}
+			}
+			else{ //if the field name is NOT team number, team name, or impermissible... it HAS to be the button for next round..
+				field.disabled = false; //in that case, reenable the button so its clickable.
 			}
 		}
 	}
