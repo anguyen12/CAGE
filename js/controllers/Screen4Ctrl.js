@@ -39,6 +39,13 @@ function Screen4Ctrl($scope, $state){
 	
 	$scope.coinflip = ["Heads", "Tails"];
 	
+	$scope.undoRound = function(){
+		var loadPair = "pairings" + (tournament.roundNumber - 1);
+		var loadTour = "tournament" + (tournament.roundNumber - 1);
+		tournament = JSON.parse(localStorage.getItem(loadTour));
+		pairings = JSON.parse(localStorage.getItem(loadPair));
+	}
+	
 	//record randomizer
 	$scope.randomRecord = function(){
 		var randomIndex = Math.floor((Math.random() * 4) + 0);//randomly generate a number between 0 and 4
