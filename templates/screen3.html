@@ -8,10 +8,11 @@
 				<tbody>
 					<tr class="status">
 						<th scope="col" title="Plaintiff" style="text-align:center"><h3>Plaintiff</h3></th>
+						<th scope="col" title="Plaintiff" style="text-align:center"><h3>versus</h3></th>
 						<th scope="col" title="Defense" style="text-align:center"><h3>Defense</h3></th>
 					</tr>
 					<tr ng-repeat="pair in pairings"> <!--Don't have ID attributes in repeat-->
-					<td style="width: 900px;">
+					<td>
 						<div id="teamCardFormP" class="teamCard form-horizontal">
 							<div class="form-group">
 								<label for="TeamNumber" class="col-sm-2 control-label"> Team {{pair.pTeam.rank+1}} </label> 
@@ -35,9 +36,11 @@
 								</div>
 							</div>
 						</div>
-													<center><h2>V</h2></center>
 					</td>
-					<td >
+					
+					<td width="20px"><center><h2>v.</h2></center></td>
+					
+					<td>
 						<div id="teamCardFormD" class="teamCard form-horizontal">
 							<div class="form-group">
 								<label for="TeamNumber" class="col-sm-2 control-label"> Team {{pair.dTeam.rank+1}} </label> 
