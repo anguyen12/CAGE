@@ -85,9 +85,18 @@ function Screen5Ctrl($scope, $state){
 	
 	$scope.saveSwaps = function(){
 		swapList = [];
-		localStorage.setItem('pairings', JSON.stringify(pairings));
-		localStorage.setItem('tournament', JSON.stringify(tournament));
 		pairings = this.newPairings;
+		var savePair = "pairings" + tournament.roundNumber;
+		var saveTour = "tournament" + tournament.roundNumber;
+		localStorage.setItem(savePair, JSON.stringify(pairings));
+		localStorage.setItem(saveTour, JSON.stringify(tournament));
+	}
+	
+	$scope.undoRound = function(){
+		var loadPair = "pairings" + (tournament.roundNumber - 1);
+		var loadTour = "tournament" + (tournament.roundNumber - 1);
+		tournament = JSON.parse(localStorage.getItem(loadTour));
+		pairings = JSON.parse(localStorage.getItem(loadPair));
 	}
 	
 	$scope.pairTeams = function() {

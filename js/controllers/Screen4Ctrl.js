@@ -17,6 +17,13 @@ function Screen4Ctrl($scope, $state){
 	
 	$scope.coinflip = ["Heads", "Tails"];
 	
+	$scope.undoRound = function(){
+		var loadPair = "pairings" + (tournament.roundNumber - 1);
+		var loadTour = "tournament" + (tournament.roundNumber - 1);
+		tournament = JSON.parse(localStorage.getItem(loadTour));
+		pairings = JSON.parse(localStorage.getItem(loadPair));
+	}
+	
 	$scope.saveRound = function() {
 		if (tournament.roundNumber == 1){tournament.rnd1Flip = this.flip1;}
 		for (var i = 0; i < this.pairings.length; i++) {

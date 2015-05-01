@@ -22,13 +22,10 @@ function Screen2Ctrl($scope, $state){
 				if (j+1 >= tournament.totalTeams){
 					var newTeam = new TeamObject(j);
 					newTeam.status = "p";
-					var byeTeam = new TeamObject(j+1); //create a bye team when there is odd number of teams - EA
-					byeTeam.byeTeam = true;
-					byeTeam.name = "Bye Team";
-					byeTeam.uniqueID = "9999";
-					byeTeam.status = "d";
-					//listAllTeams.push([newTeam,byeTeam]); //I'm pretty sure this conditional is handling an odd number of teams - EA
-					var thisPair = new Pairing(newTeam, byeTeam);
+					var newTeam2 = new TeamObject(j+1); 
+					tournament.byeTeam = true; //require a bye team when there is odd number of teams
+					newTeam2.status = "d";
+					var thisPair = new Pairing(newTeam, newTeam2);
 					pairings.push(thisPair);
 				}	
 				else {			
@@ -36,12 +33,9 @@ function Screen2Ctrl($scope, $state){
 					var newTeam2 = new TeamObject(j+1);
 					newTeam.status = "p";
 					newTeam2.status = "d"; 
-					//listAllTeams.push([newTeam, newTeam2]);
 					var thisPair = new Pairing(newTeam, newTeam2);
 					pairings.push(thisPair);					
 				}
 			}
-			//localStorage.setItem('listAllTeams', JSON.stringify(listAllTeams));
-			//localStorage.setItem('pairings', JSON.stringify(pairings));
 		}
 }
