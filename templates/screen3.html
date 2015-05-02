@@ -1,4 +1,6 @@
-<h1 align="center">{{name}}</h1>
+<img class="backButton" src="resources/img/backbutton.png" ui-sref="screen2">
+<img class="forwardButton" src="resources/img/forwardbutton.png" align="right" ng-click = "startR1()" ui-sref="screen4" ng-disabled="teamCards.$invalid">
+<h1 align="center">{{name}}.....</h1>
 <h3 align="center">Enter Team Information for Round {{round}} Pairings:</h3>
 <input type="button" class="btn btn-default" ng-click="runAutoPop(pairing)" value="Run Auto-Populate">
 	<div id="enterTeams" ng-init = "configTeams()" class="cardTableTop">

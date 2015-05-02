@@ -170,3 +170,25 @@ table.setTeamCard{
 input.ng-dirty.ng-invalid{
 	background: #FFFF99;
 }
+
+img.backButton{
+	padding:25px; 
+	position:fixed;
+}
+
+img.forwardButton{
+	padding:25px; 
+	position:fixed;
+	right:0px; 
+}
+
+
+img.backButton:hover{
+   opacity: 1.0;
+   /*filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
+img.forwardButton:hover{
+   opacity: 1.0;
+   /*filter: alpha(opacity=100); /* For IE8 and earlier */
+}
