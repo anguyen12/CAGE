@@ -1,10 +1,14 @@
+<!--GL Reminder: The forward button here has a SPECIAL CASE--->
+<img class="backButton" src="resources/img/backbutton.png" ui-sref="screen3">
+<img class="forwardButton" src="resources/img/forwardbutton.png" align="right" ng-click = "saveRound()" ui-sref="screen5" ng-disabled="teamCards.$invalid">
 <h1 align="center">{{name}} - Enter Round {{round}} Results</h1>
 <p align="center" ng-show = "round == 1">Coin Flip Results: 
 	<select ng-model = "flip1" ng-options="side for side in coinflip" required></select>
 </p>
+<!--Auto populate is currently an option for this screen, but numerical values do not seem to persist to the next screen if they're automatically generated vs entered in by hand.-->
 <input type="button" class="btn btn-default" ng-click="autoPopScores()" value="Run Auto-Populate">
 	<div id="teamChoicesSummary" ng-init="showTeams()">
-		<form name="teamCards">	
+		<form id="teamCards">	
 			<table cellspacing="0" cellpadding="0" id="teamRanktable" class="setTeamCard">
 				<colgroup span="2"></colgroup>
 				<tbody>

@@ -174,12 +174,14 @@ input.ng-dirty.ng-invalid{
 img.backButton{
 	padding:25px; 
 	position:fixed;
+	top: 50px;
 }
 
 img.forwardButton{
 	padding:25px; 
 	position:fixed;
-	right:0px; 
+	right:0px;
+	top: 50px;
 }
 
 

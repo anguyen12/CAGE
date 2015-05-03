@@ -1,3 +1,5 @@
+<img class="backButton" src="resources/img/backbutton.png" ui-sref="screen4"><!--They're both taking you to screen 4, but one is back, and one is forward. the function will have to take in the current round number and check to see which button (forward or back) was pressed to determine which round data in the local storage to load-->
+<img class="forwardButton" src="resources/img/forwardbutton.png" align="right" ng-click = "saveRound()" ui-sref="screen4" ng-disabled="teamCards.$invalid">
 <h1 align="center">{{name}} - Round {{round}} Pairings</h1>
 <p align="center">Swap list: {{swapList}}</p>
 <p align="center" ng-show = "round == 3">Round 3 coin flip results: Tab Director must switch Plaintiff/Defense if the coin comes up tails.

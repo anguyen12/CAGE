@@ -8,6 +8,7 @@ function Screen4Ctrl($scope, $state){
 
 	//autoPopScores: function triggers when user clicks on auto populate button.
 	$scope.autoPopScores = function() {
+		//alert("Auto-populating scores..");
 		var teamCardsFormFields= document.getElementById("teamCards").elements; //Grab every field in the form of team cards
 		var numOfEmptyCardFields= teamCardsFormFields.length; 
 		var j; 
@@ -15,18 +16,28 @@ function Screen4Ctrl($scope, $state){
 			var field = teamCardsFormFields[j]; //grab the field
 			//4 branches of if and else statements. the logic here is BAD and probably redundant -Gozong
 			if (field.name == "dropDownRecord"){ //if the field is for team names...
-				var randomRecord = randomRecord(); //generate a random team name
+				//var randomRecord = randomRecord(); //generate a random team name
+				var randomIndex = Math.floor((Math.random() * 4) + 0);//randomly generate a number between 0 and 4
+				var values = [0, 0.5, 1, 1.5, 2];
+				var randomRecord = values[randomIndex];
+				//SelectElement(randomIndex);
+				//field.val(randomRecord);
+				//alert("asdhasda");
+				$("#dropDownRecord").val(randomRecord);
 				field.value = randomRecord; //update the form field value
+				//alert("Completed");
 			}
 			else if (field.id == "startR_button" || field.id == "startFinalButton"){
 				field.disabled = false; //in that case, reenable the button so its clickable.
 			}
 			else {  //if the field is for team number..
-				var randomScore = randomScore(); //generate a random id..
-				field.value = randomScore; //update the form field value
+				//var randomScore = randomScore(); //generate a random id..
+				var score = Math.floor((Math.random() * 5) + 0);//randomly generate a number between 0 and 4
+				field.value = score; //update the form field value
 			}
 		}
 	}
+	
 	
 	$scope.showTeams = function() {
 		this.name = tournament.name;

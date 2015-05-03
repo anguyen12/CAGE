@@ -13,10 +13,6 @@ function Screen3Ctrl($scope, $state){
 		var teamCardsFormFields= document.getElementById("teamCards").elements; //Grab every field in the form of team cards
 		var numOfEmptyCardFields= teamCardsFormFields.length; 
 		var j; 
-		if (!(numOfTeams%2 == 0)){ //if the pairing is not even/is odd... 3 *3= 9
-			numOfEmptyCardFields = teamCardsFormFields.length - 4; //the last team card is the bye team, so we don't need to loop through that and overwrite the bye team information...
-			document.getElementById("startR_button").disabled = false;
-		}
 		for (j=0; j < numOfEmptyCardFields; j++){ //For every form field...
 			var field = teamCardsFormFields[j]; //grab the field
 			//4 branches of if and else statements. the logic here is BAD and probably redundant -Gozong
@@ -135,6 +131,14 @@ function Screen3Ctrl($scope, $state){
 	
 	// NEEDS EDITED TO UPDATE PAIRINGS OBJECTS
 	$scope.startR1 = function($scope) { //clicking the button to start round 1
+		//double check this is the right tournament
+		//alert("testing: her eis the round number: "+tournament.roundNumber+" and here is the tournament total teams: "+tournament.totalTeams);
+	
+		//save the current tournament team information
+		localStorage.setItem('round'+tournament.roundNumber+'pairings', JSON.stringify(pairings)); //store pairings from the global model js file into local storage
+		localStorage.setItem('round'+tournament.roundNumber+'tournamentinfo', JSON.stringify(tournament)); //store pairings from the global model js file into local storage
+
+		//alert("Completed storing round "+tournament.roundNumber+" info.");
 		//var tournament = JSON.parse(localStorage.getItem('tournament'));//grab the number of totals teams from local storage
 		var counter = 0;
 		for (var i=0; i < (parseInt(tournament.totalTeams)/2); i++){
