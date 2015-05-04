@@ -127,11 +127,14 @@ function Screen3Ctrl($scope, $state){
 		this.name = tournament.name; //assign {{name}} to the name of the tournament
 		this.round = tournament.roundNumber;
 		this.pairings = pairings;
+		this.numTeams = Math.ceil(tournament.totalTeams/2) - 1;
 		//this is grabbing the empty placeholder of all team forms
 		//[[**pairing 1**{teamObject},{teamObject}],[**pairing 2**{teamObject1},{teamObject1}], etc...]
-		//this.listAllTeams = JSON.parse(localStorage.getItem('listAllTeams'));
 		//this.pairings = JSON.parse(localStorage.getItem('pairings'));
 	}
+	
+	$scope.byeTeamOptions = [true, false];
+	$scope.isByeTeam = tournament.byeTeam;
 	
 	// NEEDS EDITED TO UPDATE PAIRINGS OBJECTS
 	$scope.startR1 = function($scope) { //clicking the button to start round 1
@@ -185,10 +188,8 @@ function Screen3Ctrl($scope, $state){
 			pairing.pTeam = plaintiff;
 			pairing.dTeam = defendant;
 			counter +=1
-			//listAllTeams[i] = "";//clear out the empty placeholder
-			//listAllTeams[i] = [plaintiff, defendant]; //replace it with our new plaintiff and defendent pairing filled w/ data
+
 		}
-		//localStorage.setItem('listAllTeams', JSON.stringify(this.listAllTeams)); //store tournament teams into local storage
 		//localStorage.setItem('pairings', JSON.stringify(this.pairings)); //store tournament teams into local storage
 		//NEEDS EDITED UP UPDATE PAIRINGS
 	}
