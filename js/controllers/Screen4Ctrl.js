@@ -112,6 +112,11 @@ function Screen4Ctrl($scope, $state){
 			this.pairings[i].pTeam.opponents.push([pairings[i].dTeam.temp1, pairings[i].dTeam.temp2, pairings[i].dTeam.uniqueID]);
 			this.pairings[i].dTeam.opponents.push([pairings[i].pTeam.temp1, pairings[i].pTeam.temp2, pairings[i].pTeam.uniqueID]);
 		}
+		//Save the round for the back button
+		var savePair = "pairings" + tournament.roundNumber;
+		var saveTour = "tournament" + tournament.roundNumber;
+		localStorage.setItem(savePair, JSON.stringify(pairings));
+		localStorage.setItem(saveTour, JSON.stringify(tournament));
 		tournament.roundNumber += 1;
 	}
 	

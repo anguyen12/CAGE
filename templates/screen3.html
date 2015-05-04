@@ -33,14 +33,14 @@
 							<div  class="form-group">
 								<label for="TeamImp" class="col-sm-3 control-label"> Impermissible: </label>
 								<div class="col-sm-5 col-xs-8">
-									<input type="text" id="teamImp{{pair.pTeam.rank}}" name="impermissible" placeholder="ex. 1023, 1024" class="form-control" ng-model="pair.pTeam.fieldVal" required></input>
+									<input type="text" id="teamImp{{pair.pTeam.rank}}" name="impermissible" placeholder="ex. 1023, 1024" class="form-control" ng-model="pair.pTeam.fieldVal" ></input>
 									<!--added a fake ng-model to bind the impermissible field to something in order for required to work-->
 								</div>
 							</div>
 							<div class="form-group" ng-show = "$index == numTeams && isByeTeam">
-								<label for="TeamImp" class="col-sm-3 control-label"> Bye Team? </label>
+								<label class="col-sm-3 control-label"> Bye Team? </label>
 								<div class="col-sm-5 col-xs-8">
-									<select id="teamBye{{pair.pTeam.rank}}" ng-options="side for side in byeTeamOptions" ng-model = "pair.pTeam.byeTeam" required></select>
+									<select id="teamBye{{pair.pTeam.rank}}" ng-options="side for side in byeTeamOptions" ng-model = "pair.pTeam.byeTeam" ></select>
 								</div>
 							</div>
 						</div>
@@ -70,13 +70,13 @@
 							<div  class="form-group">
 								<label for="TeamImp" class="col-sm-3 control-label"> Impermissible: </label>
 								<div class="col-sm-5 col-xs-8">
-									<input type="text" id="teamImp{{pair.dTeam.rank}}" name="impermissible" placeholder="ex. 1023, 1024" class="form-control" ng-model="pair.dTeam.fieldVal" required></input>
+									<input type="text" id="teamImp{{pair.dTeam.rank}}" name="impermissible" placeholder="ex. 1023, 1024" class="form-control" ng-model="pair.dTeam.fieldVal" ></input>
 								</div>
 							</div>
 							<div class="form-group" ng-show = "$index == numTeams && isByeTeam">
-								<label for="TeamImp" class="col-sm-3 control-label"> Bye Team? </label>
+								<label class="col-sm-3 control-label"> Bye Team? </label>
 								<div class="col-sm-5 col-xs-8">
-									<select id="teamBye{{pair.pTeam.rank}}" ng-options="side for side in byeTeamOptions" ng-model = "pair.dTeam.byeTeam" required></select>
+									<select id="teamBye{{pair.pTeam.rank}}" ng-options="side for side in byeTeamOptions" ng-model = "pair.dTeam.byeTeam"></select>
 								</div>
 							</div>
 						</div>
@@ -84,16 +84,6 @@
 				</tr>
 			</tbody>
 		</table>
-		<!--below was commented out because of a todo on basecamp saying that back button should only appear after round 1--> <img class="backButton" src="resources/img/backbutton.png" ui-sref="screen2">
-<img class="forwardButton" src="resources/img/forwardbutton.png" align="right" ng-model="this.showError" ng-hide="showActiveNext" ng-click = "startR1()" ng-disabled="teamCards.$invalid">
-<button id="fbutton2" ng-click="startR1()"></button>
-<img class="forwardButton" src="resources/img/forwardbutton.png" align="right" ui-sref="screen4" ng-show="showActiveNext" ng-model="this.showError" ng-click = "startR1()" ng-disabled="teamCards.$invalid">
-<!--<div id="popover" class="slideLeft" ng-show="showError">Error! Please fill out stuff.</div>-->
-
-		<!--<input type="button" class="btn btn-default" ng-click = "startR1()" ui-sref="screen4" value="Start Round 1" id="startR_button" name="startR_button" ng-disabled="teamCards.$invalid"><br><br>-->
-		<!--GL: Why can't I ng-disable an image in angular js?"--->
-		<!--<input type="button" class="btn btn-default" ng-click = "startR1()" ui-sref="screen4" value="Start Round 1" id="startR_button" name="startR_button" ng-disabled="teamCards.$invalid" style="background-image:url('resources/img/forwardbutton.png');">-->
-		<br></br>
+		<input type="button" class="btn btn-default" ng-click = "startR1()" ui-sref="screen4" value="Start Round 1" id="startR_button" name="startR_button" ng-disabled="teamCards.$invalid">
 		</form>
 	</div>
-<br></br>
