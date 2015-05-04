@@ -1,5 +1,6 @@
-<h1 align="center">{{name}}</h1>
-<h3 align="center">Enter Team Information for Round {{round}} Pairings:</h3>
+<!--GL: Why ng disable without ng model does not work: http://stackoverflow.com/questions/16207202/required-attribute-not-working-with-file-input-in-angular-js-->
+<h1 align="center">Setting up Round {{round}} - {{name}}</h1>
+<center><div class="directions">Enter team information <b>randomly</b>, then click the next arrow when you're ready to enter in the scores for round 1.</div></center>
 <input type="button" class="btn btn-default" ng-click="runAutoPop(pairing)" value="Run Auto-Populate">
 	<div id="enterTeams" ng-init = "configTeams()" class="cardTableTop">
 		<form name="teamCards" id="teamCards">
@@ -32,7 +33,8 @@
 							<div  class="form-group">
 								<label for="TeamImp" class="col-sm-3 control-label"> Impermissible: </label>
 								<div class="col-sm-5 col-xs-8">
-									<input type="text" id="teamImp{{pair.pTeam.rank}}" name="impermissible" placeholder="ex. 1023, 1024" class="form-control"></input>
+									<input type="text" id="teamImp{{pair.pTeam.rank}}" name="impermissible" placeholder="ex. 1023, 1024" class="form-control" ng-model="pair.pTeam.fieldVal" required></input>
+									<!--added a fake ng-model to bind the impermissible field to something in order for required to work-->
 								</div>
 							</div>
 						</div>
@@ -55,12 +57,14 @@
 								<label for="TeamID" class="col-sm-3 control-label"> Number: </label>
 								<div class="col-sm-5 col-xs-8">
 									<input type="text" id="teamID{{pair.dTeam.rank}}" name="teamNumber" ng-model = "pair.dTeam.uniqueID" placeholder="ex. 9999" class="form-control" required></input>
+									<!--added a fake ng-model to bind the impermissible field to something in order for required to work-->
+
 								</div>
 							</div>
 							<div  class="form-group">
 								<label for="TeamImp" class="col-sm-3 control-label"> Impermissible: </label>
 								<div class="col-sm-5 col-xs-8">
-									<input type="text" id="teamImp{{pair.dTeam.rank}}" name="impermissible" placeholder="ex. 1023, 1024" class="form-control"></input>
+									<input type="text" id="teamImp{{pair.dTeam.rank}}" name="impermissible" placeholder="ex. 1023, 1024" class="form-control" ng-model="pair.dTeam.fieldVal" required></input>
 								</div>
 							</div>
 						</div>
@@ -68,8 +72,11 @@
 				</tr>
 			</tbody>
 		</table>
-		<img class="backButton" src="resources/img/backbutton.png" ui-sref="screen2">
-<img class="forwardButton" src="resources/img/forwardbutton.png" align="right" ng-click = "startR1()" ui-sref="screen4" ng-disabled="teamCards.$invalid">
+		<!--below was commented out because of a todo on basecamp saying that back button should only appear after round 1--> <img class="backButton" src="resources/img/backbutton.png" ui-sref="screen2">
+<img class="forwardButton" src="resources/img/forwardbutton.png" align="right" ng-model="this.showError" ng-hide="showActiveNext" ng-click = "startR1()" ng-disabled="teamCards.$invalid">
+<button id="fbutton2" ng-click="startR1()"></button>
+<img class="forwardButton" src="resources/img/forwardbutton.png" align="right" ui-sref="screen4" ng-show="showActiveNext" ng-model="this.showError" ng-click = "startR1()" ng-disabled="teamCards.$invalid">
+<!--<div id="popover" class="slideLeft" ng-show="showError">Error! Please fill out stuff.</div>-->
 
 		<!--<input type="button" class="btn btn-default" ng-click = "startR1()" ui-sref="screen4" value="Start Round 1" id="startR_button" name="startR_button" ng-disabled="teamCards.$invalid"><br><br>-->
 		<!--GL: Why can't I ng-disable an image in angular js?"--->

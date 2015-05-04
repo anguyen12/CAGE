@@ -6,6 +6,7 @@ module.controller('Screen4Ctrl', Screen4Ctrl);
 
 function Screen4Ctrl($scope, $state){
 
+	this.hideOverlayButton = false;
 	//autoPopScores: function triggers when user clicks on auto populate button.
 	$scope.autoPopScores = function() {
 		//alert("Auto-populating scores..");
@@ -24,8 +25,25 @@ function Screen4Ctrl($scope, $state){
 				//field.val(randomRecord);
 				//alert("asdhasda");
 				$("#dropDownRecord").val(randomRecord);
+				var fieldName= field.name;
+				
+				if (fieldName == "ballot1pd"){
+					$scope.pair.pTeam.temp1 = randomRecord;
+				}
+				else if (fieldName == "ballot1pd"){
+					$scope.pair.dTeam.temp1 = randomRecord;
+				}
+				else if (fieldName == "ballot2pd"){
+					$scope.pair.pTeam.temp2 = randomRecord;
+
+				}
+				else{
+					$scope.pair.dTeam.temp2 = randomRecord;
+
+				}
 				field.value = randomRecord; //update the form field value
 				//alert("Completed");
+				//GL: The reason why originally, after autopop was called and each field appeared to be properly set with a random value, there were NULL values in the next round: http://stackoverflow.com/questions/11873627/angularjs-ng-model-binding-not-updating-with-dynamic-values
 			}
 			else if (field.id == "startR_button" || field.id == "startFinalButton"){
 				field.disabled = false; //in that case, reenable the button so its clickable.
@@ -70,6 +88,16 @@ function Screen4Ctrl($scope, $state){
 	}
 	
 	$scope.saveRound = function() {
+	//check if the form is valid
+		var classes = document.getElementById("teamCards").className;
+		var classesList = classes.split(" ");
+		if (classesList.indexOf("ng-valid") == -1){
+			//Alert the user of their mistake
+			//alert("Please fill out every team card.");
+			//this.showActiveNext = true;
+			return;
+		}
+		this.hideOverlayButton = true;
 		if (tournament.roundNumber == 1){tournament.rnd1Flip = this.flip1;}
 		for (var i = 0; i < this.pairings.length; i++) {
 			this.pairings[i].pTeam.record = pairings[i].pTeam.tempRecord + pairings[i].pTeam.record;

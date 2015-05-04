@@ -160,24 +160,66 @@ table.setTeamCard{
 	font-size: 12pt;
 }
 
-.statusMessage{
+.directions{
 	color: black;
 	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-	padding: 15px 10px 10px 10px;
+	padding: 5px 5px 5px 5px;
 	font-size: 11pt;
+	border-width: top right bottom left;
+	border-style: double double double double;
+	border-color: #DDDDDD #DDDDDD #DDDDDD #DDDDDD;
+	width: 420px;
+	text-align: center;
+	margin: 15px;
 }
 
 input.ng-dirty.ng-invalid{
 	background: #FFFF99;
+
 }
 
-img.backButton{
+#fbutton2 { /*pink*/
+    background: transparent;
+    border: none !important;/*#FF3399*/
+    font-size:0;	
+	padding:25px; 
+	position:fixed;
+	right:0px;
+	top: 50px;
+	padding:25px; 
+	position:fixed;
+	margin:30px;
+	width: 65px;
+	height:55px;
+}
+
+#fbutton1 { /*orange*/
+
+	background: transparent;
+    border: none !important;/*#FFCC00*/
+    font-size:0;	
+	padding:25px; 
+	position:fixed;
+	top: 50px;
+	padding:25px; 
+	position:fixed;
+	margin: 35px;
+	width: 65px;
+	height:55px;
+	
+}
+
+#fbutton1:focus {outline:0;}
+#fbutton2:focus {outline:0;}
+
+
+.backButton{
 	padding:25px; 
 	position:fixed;
 	top: 50px;
 }
 
-img.forwardButton{
+.forwardButton{
 	padding:25px; 
 	position:fixed;
 	right:0px;

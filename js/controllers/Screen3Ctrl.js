@@ -6,6 +6,8 @@ module.controller('Screen3Ctrl', Screen3Ctrl);
 
 function Screen3Ctrl($scope, $state){
 
+	this.showActiveNext = false;
+
 	//runAutoPop: triggered when you click the auto populate button on screen 3
 	//Automatically populates the team name and team ids
 	//Because of the way I built this algorithm, where each team's impermissible is the id of the team before it the first team card does not get an automatically generated impermissible
@@ -37,6 +39,8 @@ function Screen3Ctrl($scope, $state){
 				field.disabled = false; //in that case, reenable the button so its clickable.
 			}
 		}
+		document.getElementById("teamCards").className = "ng-valid";
+		this.showActiveNext = true;
 	}
 	
 	//'Randomizers'
@@ -131,6 +135,17 @@ function Screen3Ctrl($scope, $state){
 	
 	// NEEDS EDITED TO UPDATE PAIRINGS OBJECTS
 	$scope.startR1 = function($scope) { //clicking the button to start round 1
+		//check and see if forms have been filled out yet (ng click is triggered regardless if ng disable is enabled or not on an image)
+		var classes = document.getElementById("teamCards").className;
+		var classesList = classes.split(" ");
+		if (classesList.indexOf("ng-valid") == -1){
+			//Alert the user of their mistake
+			//alert("Please fill out every team card.");
+			//this.showActiveNext = true;
+			return;
+		}
+	
+		this.showActiveNext = true;
 		//double check this is the right tournament
 		//alert("testing: her eis the round number: "+tournament.roundNumber+" and here is the tournament total teams: "+tournament.totalTeams);
 	
