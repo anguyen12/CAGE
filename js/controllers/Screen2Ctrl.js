@@ -12,6 +12,7 @@ function Screen2Ctrl($scope, $state){
 				tournament.name = "";
 				tournament.totalTeams = 0;
 				pairings = [];
+				tournament.byeTeam = false;
 			}
 			
 			tournament.name = $('#tourName').val();

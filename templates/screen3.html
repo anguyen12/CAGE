@@ -8,7 +8,7 @@
 				<tbody>
 					<tr class="status">
 						<th scope="col" title="Plaintiff" style="text-align:center"><h3>Plaintiff</h3></th>
-						<th scope="col" title="Plaintiff" style="text-align:center"><h3>versus</h3></th>
+						<th scope="col" title="versus" style="text-align:center"><h3>versus</h3></th>
 						<th scope="col" title="Defense" style="text-align:center"><h3>Defense</h3></th>
 					</tr>
 					<tr ng-repeat="pair in pairings"> <!--Don't have ID attributes in repeat-->
@@ -33,6 +33,12 @@
 								<label for="TeamImp" class="col-sm-3 control-label"> Impermissible: </label>
 								<div class="col-sm-5 col-xs-8">
 									<input type="text" id="teamImp{{pair.pTeam.rank}}" name="impermissible" placeholder="ex. 1023, 1024" class="form-control"></input>
+								</div>
+							</div>
+							<div class="form-group" ng-show = "$index == numTeams && isByeTeam">
+								<label for="TeamImp" class="col-sm-3 control-label"> Bye Team? </label>
+								<div class="col-sm-5 col-xs-8">
+									<select id="teamBye{{pair.pTeam.rank}}" ng-options="side for side in byeTeamOptions" ng-model = "pair.pTeam.byeTeam" required></select>
 								</div>
 							</div>
 						</div>
@@ -61,6 +67,12 @@
 								<label for="TeamImp" class="col-sm-3 control-label"> Impermissible: </label>
 								<div class="col-sm-5 col-xs-8">
 									<input type="text" id="teamImp{{pair.dTeam.rank}}" name="impermissible" placeholder="ex. 1023, 1024" class="form-control"></input>
+								</div>
+							</div>
+							<div class="form-group" ng-show = "$index == numTeams && isByeTeam">
+								<label for="TeamImp" class="col-sm-3 control-label"> Bye Team? </label>
+								<div class="col-sm-5 col-xs-8">
+									<select id="teamBye{{pair.pTeam.rank}}" ng-options="side for side in byeTeamOptions" ng-model = "pair.dTeam.byeTeam" required></select>
 								</div>
 							</div>
 						</div>
