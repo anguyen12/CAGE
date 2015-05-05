@@ -75,18 +75,6 @@ function Screen4Ctrl($scope, $state){
 		pairings = JSON.parse(localStorage.getItem(loadPair));
 	}
 	
-	//record randomizer
-	$scope.randomRecord = function(){
-		var randomIndex = Math.floor((Math.random() * 4) + 0);//randomly generate a number between 0 and 4
-		return values[randomIndex];
-	}
-	
-	//score randomizer
-	$scope.randomScore = function(){
-		var score = Math.floor((Math.random() * 5) + 0);//randomly generate a number between 0 and 4
-		return score;
-	}
-	
 	$scope.saveRound = function() {
 	//check if the form is valid
 		var classes = document.getElementById("teamCards").className;
