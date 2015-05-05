@@ -98,7 +98,7 @@ function Screen5Ctrl($scope, $state){
 		var loadTour = "tournament" + (tournament.roundNumber - 1);
 		tournament = JSON.parse(localStorage.getItem(loadTour));
 		pairings = JSON.parse(localStorage.getItem(loadPair));
-		swapList = [];
+		window.swapList = [];
 	}
 	
 	$scope.pairTeams = function() {
@@ -109,7 +109,8 @@ function Screen5Ctrl($scope, $state){
 		var unsortedTeams = []; //unpair the teams
 		var leftColumn = []; 
 		var rightColumn = [];
-		swapList = [];
+		window.swapList = [];
+		this.swapList = [];
 
 		if (tournament.roundNumber == 3) {
 			tournament.isSideConstrained = false;
@@ -153,15 +154,15 @@ function Screen5Ctrl($scope, $state){
 				unsortedTeams[i].status = "p";
 				unsortedTeams[i+1].status = "d";
 				
-				//find and remove the byeTeam
-				if (unsortedTeams[i].byeTeam = true) {
+				//find and remove the byeTeam 
+				/*if (unsortedTeams[i].byeTeam = true) {
 					ByeTeam = sortedTeams[i];
 					unsortedTeams.splice(i, 1);
 				}
 				if (unsortedTeams[i+1].byeTeam = true) {
 					ByeTeam = sunortedTeams[i+1];
 					unsortedTeams.splice(i+1, 1);
-				}
+				}*/
 				
 				//update CS
 				updateCS(unsortedTeams[i], unsortedTeams);
@@ -170,7 +171,7 @@ function Screen5Ctrl($scope, $state){
 			
 			var sortedTeams = unsortedTeams.sort(sortingAlgorithm); //sort teams by appropriate values
 			//drop bye team back in at the bottom of the pairings
-			sortedTeams.push(ByeTeam);
+			//sortedTeams.push(ByeTeam);
 			
 			for (var i = 0; i < sortedTeams.length; i+=2) { //pair teams
 				//set team ranks
@@ -202,6 +203,7 @@ function Screen5Ctrl($scope, $state){
 				updateCS(leftColumn[i], rightColumn.concat(leftColumn));
 				
 				//find Bye Team
+				/*
 				if (rightColumn[i].byeTeam = true) {
 					ByeTeam = rightColumn[i];
 					rightColumn.splice(i, 1);
@@ -209,18 +211,19 @@ function Screen5Ctrl($scope, $state){
 				if (leftColumn[i].byeTeam = true) {
 					ByeTeam = leftColumn[i];
 					leftColumn.splice(i, 1);
-				}
+				}*/
 			}
 			
 			var sortedDTeams = rightColumn.sort(sortingAlgorithm); //sort each stack of teams
 			var sortedPTeams = leftColumn.sort(sortingAlgorithm);
 			
 			//drop bye team in at the bottom of the pairings
+			/*
 			if (ByeTeam.status == "p"){
 				sortedPTeams.push(ByeTeam);
 			} else {
 				sortedDTeams.push(ByeTeam);
-			}
+			}*/
 			
 			for (var i = 0; i < sortedPTeams.length; i+=1) { //pair teams from P and D stack
 				sortedPTeams[i].rank = i;
