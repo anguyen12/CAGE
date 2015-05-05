@@ -6,6 +6,8 @@ module.controller('Screen3Ctrl', Screen3Ctrl);
 
 function Screen3Ctrl($scope, $state){
 
+	this.showActiveNext = false;
+
 	//runAutoPop: triggered when you click the auto populate button on screen 3
 	//Automatically populates the team name and team ids
 	//Because of the way I built this algorithm, where each team's impermissible is the id of the team before it the first team card does not get an automatically generated impermissible
@@ -37,6 +39,8 @@ function Screen3Ctrl($scope, $state){
 				field.disabled = false; //in that case, reenable the button so its clickable.
 			}
 		}
+		document.getElementById("teamCards").className = "ng-valid";
+		this.showActiveNext = true;
 	}
 	
 	//'Randomizers'
@@ -123,14 +127,28 @@ function Screen3Ctrl($scope, $state){
 		this.name = tournament.name; //assign {{name}} to the name of the tournament
 		this.round = tournament.roundNumber;
 		this.pairings = pairings;
+		this.numTeams = Math.ceil(tournament.totalTeams/2) - 1;
 		//this is grabbing the empty placeholder of all team forms
 		//[[**pairing 1**{teamObject},{teamObject}],[**pairing 2**{teamObject1},{teamObject1}], etc...]
-		//this.listAllTeams = JSON.parse(localStorage.getItem('listAllTeams'));
 		//this.pairings = JSON.parse(localStorage.getItem('pairings'));
 	}
 	
+	$scope.byeTeamOptions = [true, false];
+	$scope.isByeTeam = tournament.byeTeam;
+	
 	// NEEDS EDITED TO UPDATE PAIRINGS OBJECTS
 	$scope.startR1 = function($scope) { //clicking the button to start round 1
+		//check and see if forms have been filled out yet (ng click is triggered regardless if ng disable is enabled or not on an image)
+		var classes = document.getElementById("teamCards").className;
+		var classesList = classes.split(" ");
+		if (classesList.indexOf("ng-valid") == -1){
+			//Alert the user of their mistake
+			//alert("Please fill out every team card.");
+			//this.showActiveNext = true;
+			return;
+		}
+	
+		this.showActiveNext = true;
 		//double check this is the right tournament
 		//alert("testing: her eis the round number: "+tournament.roundNumber+" and here is the tournament total teams: "+tournament.totalTeams);
 	
@@ -170,10 +188,8 @@ function Screen3Ctrl($scope, $state){
 			pairing.pTeam = plaintiff;
 			pairing.dTeam = defendant;
 			counter +=1
-			//listAllTeams[i] = "";//clear out the empty placeholder
-			//listAllTeams[i] = [plaintiff, defendant]; //replace it with our new plaintiff and defendent pairing filled w/ data
+
 		}
-		//localStorage.setItem('listAllTeams', JSON.stringify(this.listAllTeams)); //store tournament teams into local storage
 		//localStorage.setItem('pairings', JSON.stringify(this.pairings)); //store tournament teams into local storage
 		//NEEDS EDITED UP UPDATE PAIRINGS
 	}

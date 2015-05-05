@@ -1,12 +1,10 @@
-<!--GL Reminder: The forward button here has a SPECIAL CASE--->
-<img class="backButton" src="resources/img/backbutton.png" ui-sref="screen3">
-<img class="forwardButton" src="resources/img/forwardbutton.png" align="right" ng-click = "saveRound()" ui-sref="screen5" ng-disabled="teamCards.$invalid">
-<h1 align="center">{{name}} - Enter Round {{round}} Results</h1>
+<h1 align="center">Round {{round}} - {{name}}</h1>
+<center><div class="directions">Enter scores from round {{round}} to calculate team pairings for the next round.</div></center>
 <p align="center" ng-show = "round == 1">Coin Flip Results: 
 	<select ng-model = "flip1" ng-options="side for side in coinflip" required></select>
 </p>
-<!--Auto populate is currently an option for this screen, but numerical values do not seem to persist to the next screen if they're automatically generated vs entered in by hand.-->
-<input type="button" class="btn btn-default" ng-click="autoPopScores()" value="Run Auto-Populate">
+<!--GL: Auto populate is currently an option for this screen, but numerical values do not seem to persist to the next screen if they're automatically generated vs entered in by hand.-->
+<!--<input type="button" class="btn btn-default" ng-click="autoPopScores()" value="Run Auto-Populate">-->
 	<div id="teamChoicesSummary" ng-init="showTeams()">
 		<form id="teamCards">	
 			<table cellspacing="0" cellpadding="0" id="teamRanktable" class="setTeamCard">
@@ -70,6 +68,9 @@
 											<div class="col-sm-5 col-xs-8">
 												<input type="number" ng-model="pair.dTeam.temp1" id="ballot1pd" min="-126" max="126" placeholder="-126 to +126" class="form-control" required></input> 
 											</div>
+											  <span ng-show="teamCards.dropDownRecord.$error.required">Select team record.</span>
+											  <!--GL: A helpful link to angular js+ddl validation. http://stackoverflow.com/questions/15360094/angularjs-dropdown-required-validation-->
+
 										</div>
 										<div class="form-group">
 											<label for="Ballot2" class="col-sm-3 control-label"> Ballot 2 Result: </label>
@@ -83,9 +84,14 @@
 					</tr>
 				</tbody>
 			</table>
-		<!--if the round is not round 4 yet..-->
-		<input type="button" ng-show = "round != 4" class="btn btn-default" value="Pair Round {{round + 1}}" ng-click="saveRound()" ui-sref="screen5" ng-disabled="teamCards.$invalid" id="startR_button">
-		<!--if its round 4--->
-		<input type="button" ng-show = "round == 4" class="btn btn-default" value="Show results" ng-click="saveRound()" ui-sref="screen6" ng-disabled="teamCards.$invalid" id="startFinalButton">
+	{{teamCards.$invalid}}
+	<input type="button" class="btn btn-default" ng-disabled="teamCards.$invalid" ng-click = "saveRound()" value="See Pairings" ui-sref="screen5" id="startP_button"></form>
+		<!--GL Reminder: The forward button here has a SPECIAL CASE--->
+<img class="backButton" src="resources/img/backbutton.png" ng-show = "round == 1" ui-sref="screen3">
+<img class="backButton" src="resources/img/backbutton.png" ng-show = "round != 1" ng-click = "underRound()" ui-sref="screen5">
+<img class="forwardButton" src="resources/img/forwardbutton.png" align="right" ng-click = "saveRound()" ui-sref="screen5" ng-show="round != 4 && !teamCards.$invalid">
+<img class="forwardButton" src="resources/img/forwardbutton.png" align="right" ng-click = "saveRound()" ui-sref="screen6" ng-show="round == 4 && !teamCards.$invalid">
+
+		
 		</form>
 	</div>
