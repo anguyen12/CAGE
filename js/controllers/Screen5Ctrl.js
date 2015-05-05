@@ -138,27 +138,42 @@ function Screen5Ctrl($scope, $state){
 		var sortingAlgorithm = pickSortAlg(tournament.roundNumber); //picks the appropriate sorting algorithm, which varies by round
 		
 		if (!tournament.isSideConstrained){ //round not side constrained
+			var ByeTeam;
+			
+			for (var i = 0; i < unsortedTeams.length; i+=2) {
+				//reset values to null for error checking
+				unsortedTeams[i].tempRecord = undefined;
+				unsortedTeams[i+1].tempRecord = undefined;
+				unsortedTeams[i].temp1 = undefined;
+				unsortedTeams[i+1].temp1 = undefined;
+				unsortedTeams[i].temp2 = undefined;
+				unsortedTeams[i+1].temp2 = undefined;
+				unsortedTeams[i].status = "p";
+				unsortedTeams[i+1].status = "d";
+				
+				//find and remove the byeTeam
+				if (unsortedTeams[i].byeTeam = true) {
+					ByeTeam = sortedTeams[i];
+					unsortedTeams.splice(i, 1);
+				}
+				if (unsortedTeams[i+1].byeTeam = true) {
+					ByeTeam = sunortedTeams[i+1];
+					unsortedTeams.splice(i+1, 1);
+				}
+				
+				//update CS
+				updateCS(unsortedTeams[i], unsortedTeams);
+				updateCS(unsortedTeams[i+1], unsortedTeams);
+			}
 			
 			var sortedTeams = unsortedTeams.sort(sortingAlgorithm); //sort teams by appropriate values
+			//drop bye team back in at the bottom of the pairings
+			sortedTeams.push(ByeTeam);
 			
 			for (var i = 0; i < sortedTeams.length; i+=2) { //pair teams
 				//set team ranks
 				sortedTeams[i].rank = i;
 				sortedTeams[i+1].rank = i+1;
-				
-				//reset temporary values to null for error checking
-				sortedTeams[i].tempRecord = undefined;
-				sortedTeams[i+1].tempRecord = undefined;
-				sortedTeams[i].temp1 = undefined;
-				sortedTeams[i+1].temp1 = undefined;
-				sortedTeams[i].temp2 = undefined;
-				sortedTeams[i+1].temp2 = undefined;
-				sortedTeams[i].status = "p";
-				sortedTeams[i+1].status = "d";
-				
-				//update CS
-				updateCS(sortedTeams[i], sortedTeams); // needs to be moved someplace more appropriate
-				updateCS(sortedTeams[i+1], sortedTeams);
 				
 				//make a pairing
 				var pair =  new Pairing(sortedTeams[i],sortedTeams[i+1]);
@@ -167,22 +182,48 @@ function Screen5Ctrl($scope, $state){
 		}		
 		
 		if (tournament.isSideConstrained){ //round is side constrained
+			var ByeTeam;
+			
+			for (var i = 0; i < sortedPTeams.length; i+=1) {
+				//undefine values for error checking
+				leftColumn[i].tempRecord = undefined;
+				rightColumn[i].tempRecord = undefined;
+				leftColumn[i].temp1 = undefined;
+				rightColumn[i].temp1 = undefined;
+				leftColumn[i].temp2 = undefined;
+				rightColumn[i].temp2 = undefined;
+				leftColumn[i].status = "p";
+				rightColumn[i].status = "d";
+				
+				//update CS
+				updateCS(rightColumn[i], rightColumn.concat(leftColumn));
+				updateCS(leftColumn[i], rightColumn.concat(leftColumn));
+				
+				//find Bye Team
+				if (rightColumn[i].byeTeam = true) {
+					ByeTeam = rightColumn[i];
+					rightColumn.splice(i, 1);
+				}
+				if (leftColumn[i].byeTeam = true) {
+					ByeTeam = leftColumn[i];
+					leftColumn.splice(i, 1);
+				}
+			}
+			
 			var sortedDTeams = rightColumn.sort(sortingAlgorithm); //sort each stack of teams
 			var sortedPTeams = leftColumn.sort(sortingAlgorithm);
+			
+			//drop bye team in at the bottom of the pairings
+			if (byeTeam.status == "p"){
+				sortedPTeams.push(byeTeam);
+			} else {
+				sortedDTeams.push(byeTeam);
+			}
 			
 			for (var i = 0; i < sortedPTeams.length; i+=1) { //pair teams from P and D stack
 				sortedPTeams[i].rank = i;
 				sortedDTeams[i].rank = i;
-				sortedPTeams[i].tempRecord = undefined;
-				sortedDTeams[i].tempRecord = undefined;
-				sortedPTeams[i].temp1 = undefined;
-				sortedDTeams[i].temp1 = undefined;
-				sortedPTeams[i].temp2 = undefined;
-				sortedDTeams[i].temp2 = undefined;
-				sortedPTeams[i].status = "p";
-				sortedDTeams[i].status = "d";
-				updateCS(sortedDTeams[i], sortedDTeams.concat(sortedPTeams));
-				updateCS(sortedPTeams[i], sortedDTeams.concat(sortedPTeams));
+
 				var pair =  new Pairing(sortedPTeams[i],sortedDTeams[i]);
 				this.newPairings.push(pair);
 			}
