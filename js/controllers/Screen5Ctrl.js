@@ -47,16 +47,20 @@ function Screen5Ctrl($scope, $state){
 		}
 		aPairing.isImpermissible = false;
 		thesePairings[swapDestination].isImpermissible = false;
+		tournament.impRemain = false;
 		swapList.push(aPairing.outTeam.uniqueID + "-" + aPairing.inTeam.uniqueID);
 		pairings = thesePairings;
 		updateRanks();
 		checkImpermissibles(pairings, swapList);
 		//update the screen
 		this.newPairings = pairings;
+		$scope.unresolved = tournament.impRemain;
 		$scope.swapList = swapList;
 	}
 	
 	$scope.flip = tournament.rnd3Flip;
+	
+	//$scope.unresolved = tournament.impRemain;
 	
 	$scope.flipSides = function(){
 		for (var i = 0; i < pairings.length; i+=1){
@@ -139,10 +143,11 @@ function Screen5Ctrl($scope, $state){
 		this.newPairings = [];
 		var sortingAlgorithm = pickSortAlg(tournament.roundNumber); //picks the appropriate sorting algorithm, which varies by round
 		
+		var ByeTeam;
+		var byeLocation;
+		
 		if (!tournament.isSideConstrained){ //round not side constrained
-			var ByeTeam;
-			var byeLocation;
-			
+	
 			for (var i = 0; i < numTeams; i+=2) {
 				//reset values to null for error checking
 				unsortedTeams[i].tempRecord = undefined;
@@ -190,8 +195,7 @@ function Screen5Ctrl($scope, $state){
 		}		
 		
 		if (tournament.isSideConstrained){ //round is side constrained
-			var ByeTeam;
-			var byeLocation;
+
 			for (var i = 0; i < numTeams/2; i+=1) {
 				//undefine values for error checking
 				leftColumn[i].tempRecord = undefined;
@@ -251,5 +255,6 @@ function Screen5Ctrl($scope, $state){
 		}
 		pairings = this.newPairings;
 		checkImpermissibles(this.newPairings, swapList); //check for impermissibles
+		this.unresolved = tournament.impRemain;
 	}
 }

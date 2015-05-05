@@ -1,4 +1,13 @@
-window.tournament = { name: "", totalTeams: 0, roundNumber: 1, rnd1Flip: "Heads", rnd3Flip: "Heads", isSideConstrained: true, byeTeam: false};
+window.tournament = { 
+	name: "", 
+	totalTeams: 0, 
+	roundNumber: 1, 
+	rnd1Flip: "Heads", 
+	rnd3Flip: "Heads", 
+	isSideConstrained: true, 
+	byeTeam: false, 
+	impRemain: false
+	};
 window.pairings = [];
 window.swapList = [];
 
@@ -105,9 +114,11 @@ window.checkImpermissibles = function(pairedTeams, swapped){
 			var list = pairedTeams[i].pTeam.impermissibles;
 			var ID = pairedTeams[i].dTeam.uniqueID;
 			
+			//can use _.contains here
 			for (var x = 0; x < list.length; x++){
 				if (list[x] == ID){
 					pairedTeams[i].isImpermissible = true;
+					tournament.impRemain = true;
 				}
 			}
 		}

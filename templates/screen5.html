@@ -1,5 +1,3 @@
-<img class="backButton" src="resources/img/backbutton.png" ng-click = "undoRound()" ui-sref="screen4">
-<img class="forwardButton" src="resources/img/forwardbutton.png" align="right" ng-click = "saveSwaps()" ui-sref="screen4">
 <h1 align="center">Round {{round}} - {{name}}</h1>
 <center><div class="directions">Below are the team pairings resulting from round {{round}}. Resolve impermissibles to continue to enter in scores for round {{round+1}}.</div></center>
 
@@ -48,7 +46,9 @@
 					</tr>
 				</tbody>
 			</table>
-		<input type="button" class="btn btn-default" ng-disabled="devTest.$invalid" ng-click = "saveSwaps()" value="Enter Round {{round}} Results" ui-sref="screen4" id="startR_button"></form>	
+		<input type="button" class="btn btn-default" ng-disabled="this.unresolved" ng-click = "saveSwaps()" value="Enter Round {{round}} Results" ui-sref="screen4" id="startR_button"></form>	
+		<img class="backButton" src="resources/img/backbutton.png" ng-click = "undoRound()" ui-sref="screen4">
+		<img class="forwardButton" src="resources/img/forwardbutton.png" align="right" ng-show = "!this.unresolved" ng-click = "saveSwaps()" ui-sref="screen4">
 		<br></br>
 	</div>
 	
