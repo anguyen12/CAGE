@@ -107,6 +107,7 @@ function Screen5Ctrl($scope, $state){
 		var unsortedTeams = []; //unpair the teams
 		var leftColumn = []; 
 		var rightColumn = [];
+		swapList = [];
 
 		if (tournament.roundNumber == 3) {
 			tournament.isSideConstrained = false;
