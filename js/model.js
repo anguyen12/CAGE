@@ -10,11 +10,7 @@ window.swapList = [];
 window.firstBy=(function(){function e(f){f.thenBy=t;return f}function t(y,x){x=this;return e(function(a,b){return x(a,b)||y(a,b)})}return e})();
 window.s = firstBy(function (v1, v2) { return v2.record - v1.record; })
 			.thenBy(function (v1, v2) { return v2.combinedStr - v1.combinedStr ; })
-			.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; });
-
-window.leastDiff = firstBy(function (v1, v2) { return v1.recordDiff - v2.recordDiff; })
-			.thenBy(function (v1, v2) { return v1.PDdiff - v2.PDdiff ; })
-			.thenBy(function (v1, v2) { return v2.rankSum - v1.rankSum ; });				
+			.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; });				
 
 window.updateCS = function(team, allTeams){	
 		team.combinedStr = 0;
@@ -36,20 +32,41 @@ window.updateCS = function(team, allTeams){
 }
 
 window.updateRanks = function(){
-	console.log("ranks updated");
 	if(!tournament.isSideConstrained){
-		for(var i = 0; i< pairings.length; i+=2){
-			pairings[i].pTeam.rank = i;
-			pairings[i].dTeam.rank = i+1;
+		var rank = 0
+		for(var i = 0; i< pairings.length; i+=1){
+			pairings[i].pTeam.rank = rank;
+			rank +=1;
+			pairings[i].dTeam.rank = rank;
+			rank +=1;
+			pairings[i].pTeam.status = "p";
+			pairings[i].dTeam.status = "d";
 		}
 	}
 	if(tournament.isSideConstrained){
 		for(var i = 0; i< pairings.length; i+=1){
 			pairings[i].pTeam.rank = i;
 			pairings[i].dTeam.rank = i;
+			pairings[i].pTeam.status = "p";
+			pairings[i].dTeam.status = "d";
 		}
 	}
-	
+	console.log("ranks updated:", pairings);
+}
+
+window.pickSwapAlg = function(round){
+	var result;
+	if (round >= 3){
+		result = window.leastDiff = firstBy(function (v1, v2) { return v1.recordDiff - v2.recordDiff; })
+			.thenBy(function (v1, v2) { return v1.CSdiff - v2.CSdiff ; })
+			.thenBy(function (v1, v2) { return v1.PDdiff - v2.PDdiff ; })
+			.thenBy(function (v1, v2) { return v2.rankSum - v1.rankSum ; });
+	} else {
+		result = window.leastDiff = firstBy(function (v1, v2) { return v1.recordDiff - v2.recordDiff; })
+			.thenBy(function (v1, v2) { return v1.PDdiff - v2.PDdiff ; })
+			.thenBy(function (v1, v2) { return v2.rankSum - v1.rankSum ; });
+	}
+	return result;
 }
 
 window.pickSortAlg = function(round){
@@ -133,7 +150,7 @@ window.proposeSwapNSC = function(impMatch, location, pairs, swapped){
 			swOptions.push(swap2);
 		}
 	}
-
+	var leastDiff = pickSwapAlg(tournament.roundNumber);
 	swOptions.sort(leastDiff);
 	console.log(swOptions);
 	pairs[location].inTeam = swOptions[0].inTeam;
@@ -174,6 +191,7 @@ window.proposeSwapSC = function(impMatch, location, pairs, swapped){
 			console.log("legal swap proposed");
 		}
 	}
+	var leastDiff = pickSwapAlg(tournament.round);
 	swOptions.sort(leastDiff);
 	console.log(swOptions);
 	console.log(swOptions[0]);

@@ -53,7 +53,6 @@ function Screen5Ctrl($scope, $state){
 		checkImpermissibles(pairings, swapList);
 		//update the screen
 		this.newPairings = pairings;
-		//this.swapList = swapList;
 		$scope.swapList = swapList;
 	}
 	
@@ -171,13 +170,13 @@ function Screen5Ctrl($scope, $state){
 			}
 			
 			//remove the bye team
-			unsortedTeams.splice(byeLocation, 1);
+			if (tournament.byeTeam){unsortedTeams.splice(byeLocation, 1);}
 			
 			//sort teams by appropriate values
 			var sortedTeams = unsortedTeams.sort(sortingAlgorithm); 
 			
 			//drop bye team back in at the bottom of the pairings
-			sortedTeams.push(ByeTeam);
+			if (tournament.byeTeam){sortedTeams.push(ByeTeam);}
 			
 			for (var i = 0; i < sortedTeams.length; i+=2) { //pair teams
 				//set team ranks
@@ -220,25 +219,27 @@ function Screen5Ctrl($scope, $state){
 			}
 			//take out Bye Team
 			console.log(ByeTeam);
-			if (ByeTeam.status == "p"){
-				leftColumn.splice(byeLocation,1);
-			} else {
-				rightColumn.splice(byeLocation,1);
+			if (tournament.byeTeam){
+				if (ByeTeam.status == "p"){
+					leftColumn.splice(byeLocation,1);
+				} else {
+					rightColumn.splice(byeLocation,1);
+				}
 			}
-			console.log(leftColumn);
-			console.log(rightColumn);
+
 			//sort Teams
 			var sortedDTeams = rightColumn.sort(sortingAlgorithm); //sort each stack of teams
 			var sortedPTeams = leftColumn.sort(sortingAlgorithm);
 			
 			//drop bye team in at the bottom of the pairings
-			if (ByeTeam.status == "p"){
-				sortedPTeams.push(ByeTeam);
-			} else {
-				sortedDTeams.push(ByeTeam);
+			if(tournament.byeTeam){
+				if (ByeTeam.status == "p"){
+					sortedPTeams.push(ByeTeam);
+				} else {
+					sortedDTeams.push(ByeTeam);
+				}
 			}
-			console.log(sortedDTeams);
-			console.log(sortedPTeams);
+
 			
 			for (var i = 0; i < sortedPTeams.length; i+=1) { //pair teams from P and D stack
 				sortedPTeams[i].rank = i;
