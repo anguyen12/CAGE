@@ -6,7 +6,7 @@
 <!--GL: Auto populate is currently an option for this screen, but numerical values do not seem to persist to the next screen if they're automatically generated vs entered in by hand.-->
 <!--<input type="button" class="btn btn-default" ng-click="autoPopScores()" value="Run Auto-Populate">-->
 	<div id="teamChoicesSummary" ng-init="showTeams()">
-		<form id="teamCards">	
+		<form name="teamCards">	
 			<table cellspacing="0" cellpadding="0" id="teamRanktable" class="setTeamCard">
 				<colgroup span="2"></colgroup>
 				<tbody>
@@ -84,7 +84,6 @@
 					</tr>
 				</tbody>
 			</table>
-	{{teamCards.$invalid}}
 	<input type="button" class="btn btn-default" ng-disabled="teamCards.$invalid" ng-click = "saveRound()" value="See Pairings" ui-sref="screen5" id="startP_button"></form>
 		<!--GL Reminder: The forward button here has a SPECIAL CASE--->
 <img class="backButton" src="resources/img/backbutton.png" ng-show = "round == 1" ui-sref="screen3">
