@@ -98,6 +98,14 @@ function Screen4Ctrl($scope, $state){
 			return;
 		}
 		this.hideOverlayButton = true;
+		
+		//save the round without latest entries
+		var savePair = "pairings" + tournament.roundNumber;
+		var saveTour = "tournament" + tournament.roundNumber;
+		localStorage.setItem(savePair, JSON.stringify(pairings));
+		localStorage.setItem(saveTour, JSON.stringify(tournament));
+		
+		//save the round
 		if (tournament.roundNumber == 1){tournament.rnd1Flip = this.flip1;}
 		for (var i = 0; i < this.pairings.length; i++) {
 			this.pairings[i].pTeam.record = pairings[i].pTeam.tempRecord + pairings[i].pTeam.record;
@@ -113,10 +121,6 @@ function Screen4Ctrl($scope, $state){
 			this.pairings[i].dTeam.opponents.push([pairings[i].pTeam.temp1, pairings[i].pTeam.temp2, pairings[i].pTeam.uniqueID]);
 		}
 		//Save the round for the back button
-		var savePair = "pairings" + tournament.roundNumber;
-		var saveTour = "tournament" + tournament.roundNumber;
-		localStorage.setItem(savePair, JSON.stringify(pairings));
-		localStorage.setItem(saveTour, JSON.stringify(tournament));
 		tournament.roundNumber += 1;
 	}
 	
