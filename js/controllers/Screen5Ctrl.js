@@ -51,10 +51,11 @@ function Screen5Ctrl($scope, $state){
 		pairings = thesePairings;
 		updateRanks();
 		checkImpermissibles(pairings, swapList);
+		//update the screen
 		this.newPairings = pairings;
+		//this.swapList = swapList;
+		$scope.swapList = swapList;
 	}
-	
-	$scope.swapList = swapList;
 	
 	$scope.flip = tournament.rnd3Flip;
 	
@@ -84,7 +85,7 @@ function Screen5Ctrl($scope, $state){
 	$scope.coinflip = ["Heads", "Tails"]; //unused??
 	
 	$scope.saveSwaps = function(){
-		swapList = [];
+		//swapList = [];
 		pairings = this.newPairings;
 		var savePair = "pairings" + tournament.roundNumber;
 		var saveTour = "tournament" + tournament.roundNumber;
@@ -97,6 +98,7 @@ function Screen5Ctrl($scope, $state){
 		var loadTour = "tournament" + (tournament.roundNumber - 1);
 		tournament = JSON.parse(localStorage.getItem(loadTour));
 		pairings = JSON.parse(localStorage.getItem(loadPair));
+		swapList = [];
 	}
 	
 	$scope.pairTeams = function() {
@@ -140,16 +142,25 @@ function Screen5Ctrl($scope, $state){
 			var sortedTeams = unsortedTeams.sort(sortingAlgorithm); //sort teams by appropriate values
 			
 			for (var i = 0; i < sortedTeams.length; i+=2) { //pair teams
+				//set team ranks
 				sortedTeams[i].rank = i;
 				sortedTeams[i+1].rank = i+1;
-				sortedTeams[i].tempRecord = 0;
-				sortedTeams[i+1].tempRecord = 0;
+				
+				//reset temporary values to null for error checking
+				sortedTeams[i].tempRecord = undefined;
+				sortedTeams[i+1].tempRecord = undefined;
+				sortedTeams[i].temp1 = undefined;
+				sortedTeams[i+1].temp1 = undefined;
+				sortedTeams[i].temp2 = undefined;
+				sortedTeams[i+1].temp2 = undefined;
 				sortedTeams[i].status = "p";
 				sortedTeams[i+1].status = "d";
-				//console.log(sortedTeams[i], sortedTeams);
+				
+				//update CS
 				updateCS(sortedTeams[i], sortedTeams); // needs to be moved someplace more appropriate
-				//console.log(sortedTeams[i+1], sortedTeams);
 				updateCS(sortedTeams[i+1], sortedTeams);
+				
+				//make a pairing
 				var pair =  new Pairing(sortedTeams[i],sortedTeams[i+1]);
 				this.newPairings.push(pair);
 			}
@@ -162,8 +173,12 @@ function Screen5Ctrl($scope, $state){
 			for (var i = 0; i < sortedPTeams.length; i+=1) { //pair teams from P and D stack
 				sortedPTeams[i].rank = i;
 				sortedDTeams[i].rank = i;
-				sortedPTeams[i].tempRecord = 0;
-				sortedDTeams[i].tempRecord = 0;
+				sortedPTeams[i].tempRecord = undefined;
+				sortedDTeams[i].tempRecord = undefined;
+				sortedPTeams[i].temp1 = undefined;
+				sortedDTeams[i].temp1 = undefined;
+				sortedPTeams[i].temp2 = undefined;
+				sortedDTeams[i].temp2 = undefined;
 				sortedPTeams[i].status = "p";
 				sortedDTeams[i].status = "d";
 				updateCS(sortedDTeams[i], sortedDTeams.concat(sortedPTeams));
