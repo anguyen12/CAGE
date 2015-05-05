@@ -142,6 +142,7 @@ function Screen5Ctrl($scope, $state){
 		
 		if (!tournament.isSideConstrained){ //round not side constrained
 			var ByeTeam;
+			var byeLocation;
 			
 			for (var i = 0; i < numTeams; i+=2) {
 				//reset values to null for error checking
@@ -154,24 +155,29 @@ function Screen5Ctrl($scope, $state){
 				unsortedTeams[i].status = "p";
 				unsortedTeams[i+1].status = "d";
 				
-				//find and remove the byeTeam 
-				/*if (unsortedTeams[i].byeTeam == true) {
-					ByeTeam = sortedTeams[i];
-					unsortedTeams.splice(i, 1);
+				//find the byeTeam 
+				if (unsortedTeams[i].byeTeam == true) {
+					ByeTeam = unsortedTeams[i];
+					byeLocation = i;
 				}
 				if (unsortedTeams[i+1].byeTeam == true) {
-					ByeTeam = sunortedTeams[i+1];
-					unsortedTeams.splice(i+1, 1);
-				}*/
+					ByeTeam = unsortedTeams[i+1];
+					byeLocation = i+1;
+				}
 				
 				//update CS
 				updateCS(unsortedTeams[i], unsortedTeams);
 				updateCS(unsortedTeams[i+1], unsortedTeams);
 			}
 			
-			var sortedTeams = unsortedTeams.sort(sortingAlgorithm); //sort teams by appropriate values
+			//remove the bye team
+			unsortedTeams.splice(byeLocation, 1);
+			
+			//sort teams by appropriate values
+			var sortedTeams = unsortedTeams.sort(sortingAlgorithm); 
+			
 			//drop bye team back in at the bottom of the pairings
-			//sortedTeams.push(ByeTeam);
+			sortedTeams.push(ByeTeam);
 			
 			for (var i = 0; i < sortedTeams.length; i+=2) { //pair teams
 				//set team ranks
