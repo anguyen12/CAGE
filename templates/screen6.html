@@ -6,12 +6,14 @@
 				<tr ng-repeat="winner in this.finalTeams">
 					<td >
 						<form class="teamCard">
-							<div id="teamCard" >
-								<b>Final Rank:</b> {{winner.rank}} <br>
-								<b>{{winner.name}} - {{winner.uniqueID}} </b> <br>
-								<b>Team Record:</b> {{winner.record}} <br>
-								<b>Team CS:</b> {{winner.combinedStr}} <br>
-								<b>Team PD:</b> {{winner.pointDiff}} <br>
+							<div id="teamCard">
+								<center>
+									<b>Final Rank:</b> {{winner.rank}} <br>
+									<b>{{winner.name}} - {{winner.uniqueID}} </b> <br>
+									<b>Team Record:</b> {{winner.record}} <br>
+									<b>Team CS:</b> {{winner.combinedStr}} <br>
+									<b>Team PD:</b> {{winner.pointDiff}} <br>
+								</center>
 							</div>
 						</form>
 					</td>
