@@ -7,6 +7,7 @@ Developed by Macalester College students: Elliott Averett, Gozong Lor, Cara Chen
 TrialTrackr is a convenient way to pair teams, adhering to the tabulation manual set by American Mock Trial Association.
 
 <b>Framework:</b> 
+
 Angular JS (back-end)
 
 CSS, HTML, Bootstrap (front-end)
