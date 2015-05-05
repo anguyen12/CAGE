@@ -117,7 +117,7 @@ function Screen5Ctrl($scope, $state){
 				tournament.isSideConstrained = true;
 			} //explain this
 		console.log("round is side constrained:", tournament.isSideConstrained);
-		
+		var numTeams = 0;
 		for (var i = 0; i < pairings.length; i+=1){
 			var thisPair = pairings[i];
 			var wasPTeam = thisPair.pTeam;
@@ -126,10 +126,12 @@ function Screen5Ctrl($scope, $state){
 			if (!tournament.isSideConstrained){
 				unsortedTeams.push(wasPTeam);
 				unsortedTeams.push(wasDTeam);
+				numTeams +=2;
 			}
 			if (tournament.isSideConstrained){
 				rightColumn.push(wasPTeam);
 				leftColumn.push(wasDTeam);
+				numTeams +=2;
 			}
 		}
 		
@@ -140,7 +142,7 @@ function Screen5Ctrl($scope, $state){
 		if (!tournament.isSideConstrained){ //round not side constrained
 			var ByeTeam;
 			
-			for (var i = 0; i < unsortedTeams.length; i+=2) {
+			for (var i = 0; i < numTeams; i+=2) {
 				//reset values to null for error checking
 				unsortedTeams[i].tempRecord = undefined;
 				unsortedTeams[i+1].tempRecord = undefined;
@@ -184,7 +186,7 @@ function Screen5Ctrl($scope, $state){
 		if (tournament.isSideConstrained){ //round is side constrained
 			var ByeTeam;
 			
-			for (var i = 0; i < sortedPTeams.length; i+=1) {
+			for (var i = 0; i < numTeams/2; i+=1) {
 				//undefine values for error checking
 				leftColumn[i].tempRecord = undefined;
 				rightColumn[i].tempRecord = undefined;
@@ -214,10 +216,10 @@ function Screen5Ctrl($scope, $state){
 			var sortedPTeams = leftColumn.sort(sortingAlgorithm);
 			
 			//drop bye team in at the bottom of the pairings
-			if (byeTeam.status == "p"){
-				sortedPTeams.push(byeTeam);
+			if (ByeTeam.status == "p"){
+				sortedPTeams.push(ByeTeam);
 			} else {
-				sortedDTeams.push(byeTeam);
+				sortedDTeams.push(ByeTeam);
 			}
 			
 			for (var i = 0; i < sortedPTeams.length; i+=1) { //pair teams from P and D stack
