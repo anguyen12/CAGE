@@ -155,11 +155,11 @@ function Screen5Ctrl($scope, $state){
 				unsortedTeams[i+1].status = "d";
 				
 				//find and remove the byeTeam 
-				/*if (unsortedTeams[i].byeTeam = true) {
+				/*if (unsortedTeams[i].byeTeam == true) {
 					ByeTeam = sortedTeams[i];
 					unsortedTeams.splice(i, 1);
 				}
-				if (unsortedTeams[i+1].byeTeam = true) {
+				if (unsortedTeams[i+1].byeTeam == true) {
 					ByeTeam = sunortedTeams[i+1];
 					unsortedTeams.splice(i+1, 1);
 				}*/
@@ -186,7 +186,7 @@ function Screen5Ctrl($scope, $state){
 		
 		if (tournament.isSideConstrained){ //round is side constrained
 			var ByeTeam;
-			
+			var byeLocation;
 			for (var i = 0; i < numTeams/2; i+=1) {
 				//undefine values for error checking
 				leftColumn[i].tempRecord = undefined;
@@ -203,27 +203,36 @@ function Screen5Ctrl($scope, $state){
 				updateCS(leftColumn[i], rightColumn.concat(leftColumn));
 				
 				//find Bye Team
-				/*
-				if (rightColumn[i].byeTeam = true) {
+				if (rightColumn[i].byeTeam == true) {
 					ByeTeam = rightColumn[i];
-					rightColumn.splice(i, 1);
+					byeLocation = i;
 				}
-				if (leftColumn[i].byeTeam = true) {
+				if (leftColumn[i].byeTeam == true) {
 					ByeTeam = leftColumn[i];
-					leftColumn.splice(i, 1);
-				}*/
+					byeLocation = i;
+				}
 			}
-			
+			//take out Bye Team
+			console.log(ByeTeam);
+			if (ByeTeam.status == "p"){
+				leftColumn.splice(byeLocation,1);
+			} else {
+				rightColumn.splice(byeLocation,1);
+			}
+			console.log(leftColumn);
+			console.log(rightColumn);
+			//sort Teams
 			var sortedDTeams = rightColumn.sort(sortingAlgorithm); //sort each stack of teams
 			var sortedPTeams = leftColumn.sort(sortingAlgorithm);
 			
 			//drop bye team in at the bottom of the pairings
-			/*
 			if (ByeTeam.status == "p"){
 				sortedPTeams.push(ByeTeam);
 			} else {
 				sortedDTeams.push(ByeTeam);
-			}*/
+			}
+			console.log(sortedDTeams);
+			console.log(sortedPTeams);
 			
 			for (var i = 0; i < sortedPTeams.length; i+=1) { //pair teams from P and D stack
 				sortedPTeams[i].rank = i;
