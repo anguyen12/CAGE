@@ -1,68 +1,210 @@
-//no nested views: (wait are views == contrllers?) http://jan.varwig.org/archive/how-to-do-nested-views-in-angularjs-hint-dont
-//-------------------------------------------------------------unrelated content exists above---------
-(function() {
-  var app = angular.module('tabRunner', []);
-  var firstBuild = { tournName: "" , totalTeams: 0, };
-	
-  function teamObject(inputnumber, name, record, pointDiff, combinedStr, teamNum) {
-	this.number = inputnumber, //lets make this the one that is assigned by tabber, and uniqueID as the school's special id
-	this.name= name,
-	this.record= record, //ballots won
-	this.pointDiff= pointDiff, //points won
-	this.combinedStr= combinedStr, //combined strength
-	this.rank= 0,
-	this.impermissibles= [], //a list of teams (teamObjects) a team cannot face
-	this.status= "", //plaintiff or defense
-	this.uniqueID = teamNum,
-	this.byeTeam = false
-	this.enterResults = false
+//File contains logical functions used in pairing each new round at the tournament
+
+//Microlibrary used to sort teams, pairings and swaps
+//ThenBy.JS microlibrary is Copyright 2013 Teun Duynstee
+//Licensed under the Apache License, Version 2.0 (the "License");
+//you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
+//http://www.apache.org/licenses/LICENSE-2.0
+window.firstBy=(function(){function e(f){f.thenBy=t;return f}function t(y,x){x=this;return e(function(a,b){return x(a,b)||y(a,b)})}return e})();
+
+//algorithm used for final results page - never changes
+window.s = firstBy(function (v1, v2) { return v2.record - v1.record; })
+			.thenBy(function (v1, v2) { return v2.combinedStr - v1.combinedStr ; })
+			.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; });				
+
+window.pickSwapAlg = function(round){ //picks the algorithm to sort swap options, which depends on the round
+	var result;
+	if (round >= 3){
+		result = firstBy(function (v1, v2) { return v1.distance - v2.distance; })
+			.thenBy(function (v1, v2) { return v1.recordDiff - v2.recordDiff ; })
+			.thenBy(function (v1, v2) { return v1.CSdiff - v2.CSdiff ; })
+			.thenBy(function (v1, v2) { return v1.PDdiff - v2.PDdiff ; })
+			.thenBy(function (v1, v2) { return v2.rankSum - v1.rankSum ; });
+	} else {
+		result = firstBy(function (v1, v2) { return v1.distance - v2.distance; })
+			.thenBy(function (v1, v2) { return v1.recordDiff - v2.recordDiff ; })
+			.thenBy(function (v1, v2) { return v1.PDdiff - v2.PDdiff ; })
+			.thenBy(function (v1, v2) { return v2.rankSum - v1.rankSum ; });
+	}
+	return result;
 }
 
-  var teams = [
-            { uniqueID: 1022, name: "Macalester A", record: 4, combinedStr: 10, pointDiff: 23, impermissibles: [1024, 2000], rank: 0 },
-            { uniqueID: 1023, name: "Macalester B", record: 3, combinedStr: 11, pointDiff: 20, impermissibles: [1000, 2000], rank: 0 },
-            { uniqueID: 1024, name: "Macalester C", record: 4, combinedStr: 10, pointDiff: 21, impermissibles: [1022, 2000], rank: 0 },
-			{ uniqueID: 1361, name: "Macalester D", record: 2, combinedStr: 12, pointDiff: -6, impermissibles: [1000, 2000], rank: 0 },
-			{ uniqueID: 1361, name: "U of M A", record: 2, combinedStr: 15, pointDiff: -6, impermissibles: [1000, 2000], rank: 0 },
-			{ uniqueID: 9999, name: "Bye Team", record: 1, combinedStr: 4, pointDiff: 50, impermissibles: [1000, 2000], rank: 0 } 
-        ];
-		
-  var pairs = [];
-  
-  app.controller('PairController', function(){
+window.pickSortAlg = function(round){ //picks the algorithm to sort teams, which depends on the round
+	var result;
 	
-	//sort teams by appropriate values
-	firstBy=(function(){function e(f){f.thenBy=t;return f}function t(y,x){x=this;return e(function(a,b){return x(a,b)||y(a,b)})}return e})();
-	//ThenBy.JS microlibrary is Copyright 2013 Teun Duynstee
-	//Licensed under the Apache License, Version 2.0 (the "License");
-	//you may not use this file except in compliance with the License.
-	//You may obtain a copy of the License at
-	//http://www.apache.org/licenses/LICENSE-2.0
-	
-	s = firstBy(function (v1, v2) { return v2.record - v1.record; })
-                    .thenBy(function (v1, v2) { return v2.cs - v1.cs ; })
-				    .thenBy(function (v1, v2) { return v2.pd - v1.pd ; });
-	//setup list of team for output				
-	sortedTeams = teams.sort(s);
+	if(round == 2){
+		if (tournament.rnd1Flip == "Heads"){
+			result = firstBy(function (v1, v2) { return v2.record - v1.record; })
+				.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; })
+				.thenBy(function (v1, v2) { return v2.uniqueID - v1.uniqueID ; });
+		}
+		if (tournament.rnd1Flip == "Tails"){
+			result = firstBy(function (v1, v2) { return v2.record - v1.record; })
+				.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; })
+				.thenBy(function (v1, v2) { return v1.uniqueID - v2.uniqueID ; });
+		}
+	} else {
+		if (tournament.rnd1Flip == "Heads"){
+			result = firstBy(function (v1, v2) { return v2.record - v1.record; })
+				.thenBy(function (v1, v2) { return v2.combinedStr - v1.combinedStr ; })
+				.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; })
+				.thenBy(function (v1, v2) { return v2.uniqueID - v1.uniqueID ; });
+		}
+		if (tournament.rnd1Flip == "Tails"){
+			result = firstBy(function (v1, v2) { return v2.record - v1.record; })
+				.thenBy(function (v1, v2) { return v2.combinedStr - v1.combinedStr ; })
+				.thenBy(function (v1, v2) { return v2.pointDiff - v1.pointDiff ; })
+				.thenBy(function (v1, v2) { return v1.uniqueID - v2.uniqueID ; });
+		}
+	}
+	return result;
+}
 		
-	for (var i = 0; i < sortedTeams.length; i+=2) {
-			sortedTeams[i].rank = i+1;
-			sortedTeams[i+1].rank = i+2;
-			pairs.push([sortedTeams[i], sortedTeams[i+1]]);
+window.updateCS = function(team, allTeams){	//updates the CS of a team
+	team.combinedStr = 0;
+	var newCS = 0;
+	var opponents = team.opponents;
+
+	for (var i =0; i < opponents.length; i++){ //go through opponents
+		var opponent = opponents[i]; //grab the opponent
+		var oppID = opponent[2]; //grab the opponent's team number
+		
+		for (var j=0; j<allTeams.length; j++){ //go through other teams
+			if (allTeams[j].uniqueID == oppID){ //if we hit that team
+				newCS += allTeams[j].record; //add their record to our CS
+			}
+		}
+	}
+	team.combinedStr = newCS;
+}
+
+window.updateRanks = function(){ //updates the rank and side of every team
+	if(!tournament.isSideConstrained){
+		var rank = 0
+		for(var i = 0; i< pairings.length; i+=1){
+			pairings[i].pTeam.rank = rank;
+			rank +=1;
+			pairings[i].dTeam.rank = rank;
+			rank +=1;
+			pairings[i].pTeam.status = "p";
+			pairings[i].dTeam.status = "d";
+		}
+	}
+	if(tournament.isSideConstrained){
+		for(var i = 0; i< pairings.length; i+=1){
+			pairings[i].pTeam.rank = i;
+			pairings[i].dTeam.rank = i;
+			pairings[i].pTeam.status = "p";
+			pairings[i].dTeam.status = "d";
+		}
+	}
+}
+
+window.checkImpermissibles = function(pairedTeams, swapped){ //check for impermissibles in the sorted pairings
+	for (i = 0; i < pairedTeams.length; i++){
+		var list = pairedTeams[i].pTeam.impermissibles;
+		var ID = pairedTeams[i].dTeam.uniqueID;
+		
+		if (_.contains(list, ID)){
+			pairedTeams[i].isImpermissible = true; //set pairing as impermissible
+			tournament.impRemain = true; //tell tournament that there are impermissibles
+		}
+
+	}
+	if (tournament.impRemain){	//if there are impermissibles, propose swaps to resolve them
+		for (var x = 0; x < pairedTeams.length; x+=1){
+			if (pairedTeams[x].isImpermissible){ //need to merge the logic here
+				if (!tournament.isSideConstrained){
+					proposeSwapNSC(pairedTeams[x], x, pairedTeams, swapped); //Non SC swaps
+					} 
+				if (tournament.isSideConstrained){
+					proposeSwapSC(pairedTeams[x], x, pairedTeams, swapped); //SC swaps
+					} 
+			}
+		}
+	}
+}
+
+window.proposeSwapNSC = function(impMatch, location, pairs, swapped){ //non side constrained swap search algorithm
+	p = impMatch.pTeam; //take the teams out of the impermissible match
+	d = impMatch.dTeam;
+	swOptions = [];
+	radius = 1;
+	while (radius < pairs.length){
+		if (location - radius >= 0){
+			swap = new ProposedSwap(p, pairs[location-radius].dTeam);
+			swap.distance = radius;
+			var teamIDa = swap.outTeam.uniqueID + "-" + swap.inTeam.uniqueID;
+			var teamIDb = swap.inTeam.uniqueID + "-" + swap.outTeam.uniqueID;
+			if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
+				console.log("legal swap proposed");
+				swOptions.push(swap);
+			}
+		}
+		if (location + radius <= (pairs.length-1)){
+			swap2 = new ProposedSwap(d, pairs[location+radius].pTeam);
+			swap2.distance = radius;
+			var teamIDa = swap2.outTeam.uniqueID + "-" + swap2.inTeam.uniqueID;
+			var teamIDb = swap2.inTeam.uniqueID + "-" + swap2.outTeam.uniqueID;
+			if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
+
+				swOptions.push(swap2);
+			}
+		}
+		radius+=1;
+	}
+
+	var leastDiff = pickSwapAlg(tournament.roundNumber); //pick sorting algorithm for swaps
+	swOptions.sort(leastDiff); //sort the proposed swaps by closest score
+	//console.log(swOptions);
+	pairs[location].inTeam = swOptions[0].inTeam;
+	pairs[location].outTeam = swOptions[0].outTeam;
+}	
+
+window.proposeSwapSC = function(impMatch, location, pairs, swapped){ //proposing side constrained swaps
+	p = impMatch.pTeam;
+	d = impMatch.dTeam;
+	pSwaps = [];
+	dSwaps = [];
+	swOptions = [];
+	radius = 1;
+	
+	while (radius < pairs.length){
+		if (location - radius >= 0){
+			pSwaps.push(pairs[location-radius].pTeam)
+			dSwaps.push(pairs[location-radius].dTeam)
+		}
+		if (location + radius <= (pairs.length-1)){
+			pSwaps.push(pairs[location+radius].pTeam)
+			dSwaps.push(pairs[location+radius].dTeam)
 		}
 	
-	this.pairings = pairs;
-	
-	this.isImpermissible = function(uniqueID, list) {
-			for (var x = 0; x < list.length; x++){
-				if (list[x] == uniqueID){
-						return true;
-					}
-				}
-			return false;
+		for (var a = 0; a<pSwaps.length; a++){
+			swap = new ProposedSwap(p, pSwaps[a]);
+			swap.distance = radius;
+			var teamIDa = swap.outTeam.uniqueID + "-" + swap.inTeam.uniqueID;
+			var teamIDb = swap.inTeam.uniqueID + "-" + swap.outTeam.uniqueID;
+			//if the proposed swap hasn't already taken place, add it to the proposed swap list
+			if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
+				swOptions.push(swap);
+			}
+		
+			swap2 = new ProposedSwap(d, dSwaps[a]);
+			swap2.distance = radius;
+			var teamIDa = swap2.outTeam.uniqueID + "-" + swap2.inTeam.uniqueID;
+			var teamIDb = swap2.inTeam.uniqueID + "-" + swap2.outTeam.uniqueID;
+			if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
+				swOptions.push(swap2);
+			}
 		}
-	
-  });
+		radius +=1;
+	}
 
-
-})();
+	var leastDiff = pickSwapAlg(tournament.round); //pick a sorting algorithm for proposed swaps
+	swOptions.sort(leastDiff); //sort the proposed swaps by least difference betweens scores
+	//console.log(swOptions);
+	//console.log(swOptions[0]);
+	pairs[location].inTeam = swOptions[0].inTeam; //put proposed teams to swap in place
+	pairs[location].outTeam = swOptions[0].outTeam;
+}	

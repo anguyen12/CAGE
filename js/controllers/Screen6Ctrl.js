@@ -1,11 +1,12 @@
 'use strict';
-//The controller that displays team results after round 4
+//The controller that displays final results after round 4
 
 var module = angular.module('tabtracker');
 module.controller('Screen6Ctrl', Screen6Ctrl);
 
 function Screen6Ctrl($scope, $state){
 	
+	//triggered when user clicks on "back" button
 	$scope.undoRound = function(){
 		var loadPair = "pairings" + (tournament.roundNumber - 1);
 		var loadTour = "tournament" + (tournament.roundNumber - 1);
@@ -15,15 +16,13 @@ function Screen6Ctrl($scope, $state){
 	}
 	
 	$scope.getWinners = function() {
-		//var thisTournament = JSON.parse(localStorage.getItem('tournament'));
+		//stuff to show on screen
 		this.name = tournament.name;
-		this.round = tournament.roundNumber;
-		//var loadedTeams = JSON.parse(localStorage.getItem('listAllTeams'));
-		//var pairings = JSON.parse(localStorage.getItem('pairings'));
 		
 		this.finalTeams = [];
-		var unsortedTeams = []; //unpair the teams
+		var unsortedTeams = [];
 		
+		//unpair the teams into a list of unsorted teams
 		for (var i = 0; i < pairings.length; i+=1){
 			var thisPair = pairings[i];
 			var team1 = thisPair.pTeam;
@@ -32,15 +31,20 @@ function Screen6Ctrl($scope, $state){
 			unsortedTeams.push(team2);
 		}
 		
-		var sortedTeams = unsortedTeams.sort(s); //sort teams by appropriate values
+		//update for the final time the CS of every team
+		for (var i = 0; i < unsortedTeams.length; i+=1){
+			updateCS(unsortedTeams[i], unsortedTeams);
+		}
+		
+		var sortedTeams = unsortedTeams.sort(s); //sort teams by appropriate values: record, CS, and PD
 			
+		//set final ranks
 		for (var i = 0; i < sortedTeams.length; i+=2) {
 			sortedTeams[i].rank = i+1;
 			sortedTeams[i+1].rank = i+2;
-			updateCS(sortedTeams[i], sortedTeams); // will cause bugs, needs to be done before sorting
-			updateCS(sortedTeams[i+1], sortedTeams);
 		}
 		
+		//display results
 		this.finalTeams = sortedTeams;
 	}
 }

@@ -1,5 +1,5 @@
 'use strict';
-//The controller that displays team names and matchup for round one.
+//The controller that displays team names and matchups, and resolves impermissible matches
 
 var module = angular.module('tabtracker');
 module.controller('Screen5Ctrl', Screen5Ctrl);
@@ -8,67 +8,61 @@ function Screen5Ctrl($scope, $state){
 	
 		
 	$scope.swapTeams = function(aPairing, thesePairings) {
-		$('#startR_button').removeAttr('disabled');
+		//$('#startR_button').removeAttr('disabled'); //I think this is causing a bug when there is more than one impermissible
 		var swapSide = aPairing.outTeam.status;
 		var swapDestination = aPairing.outTeam.rank;
 		
-		if (!tournament.isSideConstrained){swapDestination=Math.floor(swapDestination/2);}
+		if (!tournament.isSideConstrained){
+			swapDestination=Math.floor(swapDestination/2); //"target" destination for teams being swapped changes when round is side constrained
+		} 
 		
-		console.log(swapDestination);
-		console.log(swapSide);
-		if (swapSide == "p"){
+		if (swapSide == "p"){ //plaintiff side swap
 			thesePairings[swapDestination].pTeam = aPairing.inTeam;
-			console.log("sent", aPairing.inTeam," to ", swapDestination, " on the ", swapSide);
-			if (!tournament.isSideConstrained){
-				console.log("executed NSC swap logic");
-				console.log("sent", aPairing.outTeam," to the place of ", aPairing.dTeam.uniqueID, " on the ", aPairing.dTeam.status);
+			if (!tournament.isSideConstrained){ //non side constrained swap
 				aPairing.dTeam = aPairing.outTeam;
 
-			} else {
-				console.log("executed SC swap logic");
-				console.log("sent", aPairing.outTeam," to the place of ", aPairing.pTeam.uniqueID, " on the ", aPairing.pTeam.status);
+			} else { //side constrained swap
 				aPairing.pTeam = aPairing.outTeam;
 			}
 
-		} else {
+		} else { //defense side swap
 			thesePairings[swapDestination].dTeam = aPairing.inTeam;
-			console.log("sent", aPairing.inTeam," to ", swapDestination, " on the ", swapSide);
-			if (!tournament.isSideConstrained){
-				console.log("executed NSC swap logic");
-				console.log("sent", aPairing.outTeam," to the place of ", aPairing.pTeam.uniqueID, " on the ", aPairing.pTeam.status);
+			if (!tournament.isSideConstrained){  //non side constrained
 				aPairing.pTeam = aPairing.outTeam;
-				
-
-				} else {
-				console.log("executed SC swap logic");
-				console.log("sent", aPairing.outTeam," to the place of ", aPairing.dTeam.uniqueID, " on the ", aPairing.dTeam.status);
+			} else { //side constrained
 				aPairing.dTeam = aPairing.outTeam;
 			}
 		}
+		//reset impermissibles to false before checking them again
 		aPairing.isImpermissible = false;
 		thesePairings[swapDestination].isImpermissible = false;
 		tournament.impRemain = false;
+		
+		//add swap to swap list so it cannot happen again
 		swapList.push(aPairing.outTeam.uniqueID + "-" + aPairing.inTeam.uniqueID);
+		$scope.swapList = swapList;
+		
+		//update pairings object and ranks
 		pairings = thesePairings;
 		updateRanks();
+		
+		//check the impermissibles again
 		checkImpermissibles(pairings, swapList);
 		//update the screen
 		this.newPairings = pairings;
 		$scope.unresolved = tournament.impRemain;
-		$scope.swapList = swapList;
 	}
 	
 	$scope.flip = tournament.rnd3Flip;
 	
 	//$scope.unresolved = tournament.impRemain;
 	
-	$scope.flipSides = function(){
+	$scope.flipSides = function(){ //executes when tab director switches pairing sides in round 3 
 		for (var i = 0; i < pairings.length; i+=1){
 			var wasP = pairings[i].pTeam;
 			var wasD = pairings[i].dTeam;
-			console.log("switched sides:", pairings[i].pTeam, " plaintiff is now: ", wasD);
+
 			pairings[i].pTeam = wasD;
-			console.log("switched sides: ", pairings[i].dTeam, " defense is now: ", wasP);
 			pairings[i].dTeam = wasP;
 			pairings[i].pTeam.status = "p";
 			pairings[i].dTeam.status = "d";
@@ -80,15 +74,13 @@ function Screen5Ctrl($scope, $state){
 		} 
 		this.flip = tournament.rnd3Flip;
 		updateRanks();
-		console.log("flipped");
 		checkImpermissibles(pairings, swapList);
 		this.newPairings = pairings;
 	}
 	
-	$scope.coinflip = ["Heads", "Tails"]; //unused??
+	$scope.coinflip = ["Heads", "Tails"]; //options for coinflip results, heads by default
 	
-	$scope.saveSwaps = function(){
-		//swapList = [];
+	$scope.saveSwaps = function(){ //triggered when user finishes with impermissibles and saves their results
 		pairings = this.newPairings;
 		var savePair = "pairings" + tournament.roundNumber;
 		var saveTour = "tournament" + tournament.roundNumber;
@@ -96,7 +88,7 @@ function Screen5Ctrl($scope, $state){
 		localStorage.setItem(saveTour, JSON.stringify(tournament));
 	}
 	
-	$scope.undoRound = function(){
+	$scope.undoRound = function(){ //triggered when user clicks "back". loads last round's tournament and pairing data
 		var loadPair = "pairings" + (tournament.roundNumber - 1);
 		var loadTour = "tournament" + (tournament.roundNumber - 1);
 		tournament = JSON.parse(localStorage.getItem(loadTour));
@@ -105,23 +97,28 @@ function Screen5Ctrl($scope, $state){
 	}
 	
 	$scope.pairTeams = function() {
-		//var thisTournament = JSON.parse(localStorage.getItem('tournament'));
+		//display tournament name and round number
 		this.name = tournament.name;
 		this.round = tournament.roundNumber;
 		
 		var unsortedTeams = []; //unpair the teams
 		var leftColumn = []; 
 		var rightColumn = [];
+		
+		//swap list needs to be reset to empty after each round
 		window.swapList = [];
 		this.swapList = [];
-
+		
+		//determines whether or not this round is side constrained - only round 3 is side constrained
 		if (tournament.roundNumber == 3) {
 			tournament.isSideConstrained = false;
 			} else {
 				tournament.isSideConstrained = true;
-			} //explain this
-		console.log("round is side constrained:", tournament.isSideConstrained);
-		var numTeams = 0;
+			}
+			
+		var numTeams = 0; 
+		
+		//un-pair the teams, and push them into either two stacks of teams or one
 		for (var i = 0; i < pairings.length; i+=1){
 			var thisPair = pairings[i];
 			var wasPTeam = thisPair.pTeam;
@@ -149,7 +146,7 @@ function Screen5Ctrl($scope, $state){
 		if (!tournament.isSideConstrained){ //round not side constrained
 	
 			for (var i = 0; i < numTeams; i+=2) {
-				//reset values to null for error checking
+				//reset values to undefined for error checking
 				unsortedTeams[i].tempRecord = undefined;
 				unsortedTeams[i+1].tempRecord = undefined;
 				unsortedTeams[i].temp1 = undefined;
@@ -254,6 +251,6 @@ function Screen5Ctrl($scope, $state){
 		}
 		pairings = this.newPairings;
 		checkImpermissibles(this.newPairings, swapList); //check for impermissibles
-		this.unresolved = tournament.impRemain;
+		$scope.unresolved = tournament.impRemain;
 	}
 }
