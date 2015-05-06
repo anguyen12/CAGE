@@ -7,6 +7,18 @@ module.controller('Screen3Ctrl', Screen3Ctrl);
 function Screen3Ctrl($scope, $state){
 
 	this.showActiveNext = false;
+	
+		
+	$scope.swapTeams = function(){
+		var lastIndex = pairings.length;
+		var lastPairings = pairings[lastIndex-1];
+		var dTeam = lastPairings.dTeam;
+		var pTeam = lastPairings.pTeam;
+		var swappedPairings = new Pairing(pTeam, dTeam);
+		pairings[lastIndex-1] = swappedPairings;
+		alert("Completed swap");
+		$route.reload();
+	}
 
 	//runAutoPop: triggered when you click the auto populate button on screen 3
 	//Automatically populates the team name and team ids

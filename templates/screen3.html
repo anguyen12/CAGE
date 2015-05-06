@@ -37,18 +37,25 @@
 									<!--added a fake ng-model to bind the impermissible field to something in order for required to work-->
 								</div>
 							</div>
-							<div class="form-group" ng-show = "$index == numTeams && isByeTeam">
+							<!--<div class="form-group" ng-show = "$index == numTeams && isByeTeam">
 								<label class="col-sm-3 control-label"> Bye Team? </label>
 								<div class="col-sm-5 col-xs-8">
-									<select id="teamBye{{pair.pTeam.rank}}" ng-options="side for side in byeTeamOptions" ng-model = "pair.pTeam.byeTeam" ></select>
+									<select id="teamByeA" ng-options="side for side in byeTeamOptions" ng-model = "pair.pTeam.byeTeam" class="form-control"></select>
 								</div>
-							</div>
+							</div>-->
 						</div>
 					</td>
 					
-					<td width="20px"><center><h2>v.</h2></center></td>
+					<td width="20px"><div ng-hide="$index == numTeams && isByeTeam"><center><h2>v.</h2></center></div>
+					<div ng-show="$index == numTeams && isByeTeam"><center><img src="resources/img/swap.gif" width="50" id="swapButton" ng-click="swapTeams()"></center></div></td>
 					
 					<td>
+					<div class="form-group" ng-show = "$index == numTeams && isByeTeam">
+						<div class="teamCard form-horizontal">
+							<center><h1>BYE TEAM</h1></center>
+						</div>
+					</div>
+					<div class="form-group" ng-hide = "$index == numTeams && isByeTeam">
 						<div id="teamCardFormD" class="teamCard form-horizontal">
 							<div class="form-group">
 								<label for="TeamNumber" class="col-sm-2 control-label"> Team {{pair.dTeam.rank+1}} </label> 
@@ -73,13 +80,15 @@
 									<input type="text" id="teamImp{{pair.dTeam.rank}}" name="impermissible" placeholder="ex. 1023, 1024" class="form-control" ng-model="pair.dTeam.fieldVal" ></input>
 								</div>
 							</div>
-							<div class="form-group" ng-show = "$index == numTeams && isByeTeam">
-								<label class="col-sm-3 control-label"> Bye Team? </label>
+								<!--<label class="col-sm-3 control-label"> Bye Team? </label>
 								<div class="col-sm-5 col-xs-8">
-									<select id="teamBye{{pair.pTeam.rank}}" ng-options="side for side in byeTeamOptions" ng-model = "pair.dTeam.byeTeam"></select>
-								</div>
-							</div>
+									<select id="teamByeB" ng-options="side for side in byeTeamOptions" ng-model = "pair.dTeam.byeTeam" class="form-control"></select>
+									<!--use ng show or hide, have a swpa button with a condition checking if this is the last row, andif its an odd number of teams, and swap the bye teams-->
+								<!--</div>-->
 						</div>
+					</div>
+						
+						
 					</td>
 				</tr>
 			</tbody>
