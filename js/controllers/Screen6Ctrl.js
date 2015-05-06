@@ -6,6 +6,14 @@ module.controller('Screen6Ctrl', Screen6Ctrl);
 
 function Screen6Ctrl($scope, $state){
 	
+	$scope.undoRound = function(){
+		var loadPair = "pairings" + (tournament.roundNumber - 1);
+		var loadTour = "tournament" + (tournament.roundNumber - 1);
+		tournament = JSON.parse(localStorage.getItem(loadTour));
+		pairings = JSON.parse(localStorage.getItem(loadPair));
+		window.swapList = [];
+	}
+	
 	$scope.getWinners = function() {
 		//var thisTournament = JSON.parse(localStorage.getItem('tournament'));
 		this.name = tournament.name;

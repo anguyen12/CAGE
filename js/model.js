@@ -66,12 +66,14 @@ window.updateRanks = function(){
 window.pickSwapAlg = function(round){
 	var result;
 	if (round >= 3){
-		result = window.leastDiff = firstBy(function (v1, v2) { return v1.recordDiff - v2.recordDiff; })
+		result = firstBy(function (v1, v2) { return v1.distance - v2.distance; })
+			.thenBy(function (v1, v2) { return v1.recordDiff - v2.recordDiff ; })
 			.thenBy(function (v1, v2) { return v1.CSdiff - v2.CSdiff ; })
 			.thenBy(function (v1, v2) { return v1.PDdiff - v2.PDdiff ; })
 			.thenBy(function (v1, v2) { return v2.rankSum - v1.rankSum ; });
 	} else {
-		result = window.leastDiff = firstBy(function (v1, v2) { return v1.recordDiff - v2.recordDiff; })
+		result = firstBy(function (v1, v2) { return v1.distance - v2.distance; })
+			.thenBy(function (v1, v2) { return v1.recordDiff - v2.recordDiff ; })
 			.thenBy(function (v1, v2) { return v1.PDdiff - v2.PDdiff ; })
 			.thenBy(function (v1, v2) { return v2.rankSum - v1.rankSum ; });
 	}
@@ -142,25 +144,31 @@ window.proposeSwapNSC = function(impMatch, location, pairs, swapped){
 	p = impMatch.pTeam;
 	d = impMatch.dTeam;
 	swOptions = [];
+	radius = 1;
+	while (radius < pairs.length){
+		if (location - radius >= 0){
+			swap = new ProposedSwap(p, pairs[location-radius].dTeam);
+			swap.distance = radius;
+			var teamIDa = swap.outTeam.uniqueID + "-" + swap.inTeam.uniqueID;
+			var teamIDb = swap.inTeam.uniqueID + "-" + swap.outTeam.uniqueID;
+			if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
+				console.log("legal swap proposed");
+				swOptions.push(swap);
+			}
+		}
+		if (location + radius <= (pairs.length-1)){
+			swap2 = new ProposedSwap(d, pairs[location+radius].pTeam);
+			swap2.distance = radius;
+			var teamIDa = swap2.outTeam.uniqueID + "-" + swap2.inTeam.uniqueID;
+			var teamIDb = swap2.inTeam.uniqueID + "-" + swap2.outTeam.uniqueID;
+			if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
+				console.log("legal swap proposed");
+				swOptions.push(swap2);
+			}
+		}
+		radius+=1;
+	}
 
-	if (location > 0){
-		swap = new ProposedSwap(p, pairs[location-1].dTeam);
-		var teamIDa = swap.outTeam.uniqueID + "-" + swap.inTeam.uniqueID;
-		var teamIDb = swap.inTeam.uniqueID + "-" + swap.outTeam.uniqueID;
-		if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
-			console.log("legal swap proposed");
-			swOptions.push(swap);
-		}
-	}
-	if (location < (pairs.length-1)){
-		swap2 = new ProposedSwap(d, pairs[location+1].pTeam);
-		var teamIDa = swap2.outTeam.uniqueID + "-" + swap2.inTeam.uniqueID;
-		var teamIDb = swap2.inTeam.uniqueID + "-" + swap2.outTeam.uniqueID;
-		if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
-			console.log("legal swap proposed");
-			swOptions.push(swap2);
-		}
-	}
 	var leastDiff = pickSwapAlg(tournament.roundNumber);
 	swOptions.sort(leastDiff);
 	console.log(swOptions);
@@ -174,34 +182,41 @@ window.proposeSwapSC = function(impMatch, location, pairs, swapped){
 	pSwaps = [];
 	dSwaps = [];
 	swOptions = [];
+	radius = 1;
 	//turn location into radius?
 	
-	if (location > 0){
-		pSwaps.push(pairs[location-1].pTeam)
-		dSwaps.push(pairs[location-1].dTeam)
-	}
-	if (location < (pairs.length-1)){
-		pSwaps.push(pairs[location+1].pTeam)
-		dSwaps.push(pairs[location+1].dTeam)
-	}
+	while (radius < pairs.length){
+		if (location - radius >= 0){
+			pSwaps.push(pairs[location-radius].pTeam)
+			dSwaps.push(pairs[location-radius].dTeam)
+		}
+		if (location + radius <= (pairs.length-1)){
+			pSwaps.push(pairs[location+radius].pTeam)
+			dSwaps.push(pairs[location+radius].dTeam)
+		}
 	
-	for (var a = 0; a<pSwaps.length; a++){
-		swap = new ProposedSwap(p, pSwaps[a])
-		var teamIDa = swap.outTeam.uniqueID + "-" + swap.inTeam.uniqueID;
-		var teamIDb = swap.inTeam.uniqueID + "-" + swap.outTeam.uniqueID;
-		if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
-			swOptions.push(swap);
-			console.log("legal swap proposed");
-		}
+		for (var a = 0; a<pSwaps.length; a++){
+			swap = new ProposedSwap(p, pSwaps[a]);
+			swap.distance = radius;
+			var teamIDa = swap.outTeam.uniqueID + "-" + swap.inTeam.uniqueID;
+			var teamIDb = swap.inTeam.uniqueID + "-" + swap.outTeam.uniqueID;
+			if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
+				swOptions.push(swap);
+				console.log("legal swap proposed");
+			}
 		
-		swap2 = new ProposedSwap(d, dSwaps[a])
-		var teamIDa = swap2.outTeam.uniqueID + "-" + swap2.inTeam.uniqueID;
-		var teamIDb = swap2.inTeam.uniqueID + "-" + swap2.outTeam.uniqueID;
-		if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
-			swOptions.push(swap2);
-			console.log("legal swap proposed");
+			swap2 = new ProposedSwap(d, dSwaps[a]);
+			swap2.distance = radius;
+			var teamIDa = swap2.outTeam.uniqueID + "-" + swap2.inTeam.uniqueID;
+			var teamIDb = swap2.inTeam.uniqueID + "-" + swap2.outTeam.uniqueID;
+			if (!_.contains(swapped, teamIDa) && !_.contains(swapped, teamIDb)){
+				swOptions.push(swap2);
+				console.log("legal swap proposed");
+			}
 		}
+		radius +=1;
 	}
+
 	var leastDiff = pickSwapAlg(tournament.round);
 	swOptions.sort(leastDiff);
 	console.log(swOptions);
@@ -243,4 +258,5 @@ function ProposedSwap(inTeam, outTeam) {
 	this.CSdiff = Math.abs(inTeam.combinedStr - outTeam.combinedStr);
 	this.PDdiff = Math.abs(inTeam.pointDiff - outTeam.pointDiff);
 	this.rankSum = inTeam.rank + outTeam.rank;
+	this.distance;
 }

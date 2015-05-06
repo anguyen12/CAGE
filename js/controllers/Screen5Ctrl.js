@@ -222,7 +222,6 @@ function Screen5Ctrl($scope, $state){
 				}
 			}
 			//take out Bye Team
-			console.log(ByeTeam);
 			if (tournament.byeTeam){
 				if (ByeTeam.status == "p"){
 					leftColumn.splice(byeLocation,1);
