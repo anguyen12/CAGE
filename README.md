@@ -1,6 +1,6 @@
 5/05/2015
 
-<b>General Information</b>
+<b>General Information:</b>
 
 <b>TrialTrackr: A Tabulation App</b>
 
@@ -20,7 +20,7 @@ CSS, HTML, Bootstrap (front-end)
 Mongoose (server) *currently not in use, only used in development*
 
 <br>
-<b>Overview of the File Structure</b>
+<b>Overview of the File Structure:</b>
 
 <b>js/controllers</b> - has all of our screen controllers.
 
@@ -34,15 +34,16 @@ Mongoose (server) *currently not in use, only used in development*
 <b>Online Tools:</b>
 https://basecamp.com/2902245/projects/8844582 (Tasks/bug lists, other additional files)
 <br>
-<b>Getting Started</b>
+
+<b>Getting Started:</b>
 
 Clone and fork this github repository. It contains all the files needed to run this application. 
 
-<br><b>Testing</b>
+<br><b>Testing:</b>
 
 
 <br>
-<b>Staging and Production Environments</b>
+<b>Staging and Production Environments:</b>
 
 In our development environment, we used a Mongoose server to store our files. 
 
