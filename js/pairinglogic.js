@@ -201,7 +201,7 @@ window.proposeSwapSC = function(impMatch, location, pairs, swapped){ //proposing
 		radius +=1;
 	}
 
-	var leastDiff = pickSwapAlg(tournament.round); //pick a sorting algorithm for proposed swaps
+	var leastDiff = pickSwapAlg(tournament.roundNumber); //pick a sorting algorithm for proposed swaps
 	swOptions.sort(leastDiff); //sort the proposed swaps by least difference betweens scores
 	//console.log(swOptions);
 	//console.log(swOptions[0]);
