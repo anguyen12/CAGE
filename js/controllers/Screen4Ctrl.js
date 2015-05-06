@@ -28,18 +28,6 @@ function Screen4Ctrl($scope, $state){
 	}
 	
 	$scope.saveRound = function() {
-		//check if the form is valid 
-		/*
-		var classes = document.getElementById("teamCards").className;
-		var classesList = classes.split(" ");
-		if (classesList.indexOf("ng-valid") == -1){
-			//Alert the user of their mistake
-			//alert("Please fill out every team card.");
-			//this.showActiveNext = true;
-			return;
-		}
-		this.hideOverlayButton = true;
-		*/
 		
 		//save the round without latest entries
 		var savePair = "pairings" + tournament.roundNumber;

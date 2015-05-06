@@ -1,10 +1,9 @@
 <h1 align="center">Round {{round}} - {{name}}</h1>
-<center><div class="directions">Below are the team pairings resulting from round {{round}}. Resolve impermissibles from top to bottom to continue to enter in scores for round {{round+1}}.</div></center>
-
 <h3 align="center">Enter Team Information for Round {{round}} Pairings:</h3>
+<center><div class="directions">Below are the team pairings resulting from round {{round}}. Resolve impermissibles from top to bottom to continue to enter in scores for round {{round+1}}.</div></center>
 <p align="center">Swap list: {{swapList}}</p>
-<p align="center" ng-show = "round == 3">Round 3 coin flip results: Tab Director must switch Plaintiff/Defense if the coin comes up tails.
-	<input type="button" class="btn btn-default" value="Current result: {{flip}}" ng-click ="flipSides()">
+<p align="center" ng-show = "round == 3">Round 3 coin flip: Tab Director must switch Plaintiff and Defense teams if the coin comes up tails.
+	<input type="button" class="btn btn-default" value="Result: {{flip}}" ng-click ="flipSides()">
 </p>
 	<div ng-init="pairTeams()">
 		<table cellspacing="0" cellpadding="0" class="setTeamCard">

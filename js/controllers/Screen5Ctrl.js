@@ -8,7 +8,6 @@ function Screen5Ctrl($scope, $state){
 	
 		
 	$scope.swapTeams = function(aPairing, thesePairings) {
-		//$('#startR_button').removeAttr('disabled'); //I think this is causing a bug when there is more than one impermissible
 		var swapSide = aPairing.outTeam.status;
 		var swapDestination = aPairing.outTeam.rank;
 		
