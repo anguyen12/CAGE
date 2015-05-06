@@ -4,7 +4,7 @@ window.tournament = {
 	roundNumber: 1, 
 	rnd1Flip: "Heads", 
 	rnd3Flip: "Heads", 
-	isSideConstrained: true, 
+	isSideConstrained: false, 
 	byeTeam: false, 
 	impRemain: false
 	};

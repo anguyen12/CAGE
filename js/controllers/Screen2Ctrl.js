@@ -27,6 +27,9 @@ function Screen2Ctrl($scope, $state){
 					var newTeam2 = new TeamObject(j+1); 
 					tournament.byeTeam = true; //require a bye team when there is odd number of teams
 					newTeam2.status = "d";
+					newTeam2.byeTeam = true;
+					newTeam2.name = "Bye Team";
+					newTeam2.uniqueID = "9999";
 					var thisPair = new Pairing(newTeam, newTeam2);
 					pairings.push(thisPair);
 				}	

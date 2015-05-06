@@ -10,14 +10,14 @@ function Screen3Ctrl($scope, $state){
 	
 		
 	$scope.swapTeams = function(){
-		var lastIndex = pairings.length;
-		var lastPairings = pairings[lastIndex-1];
-		var dTeam = lastPairings.dTeam;
-		var pTeam = lastPairings.pTeam;
-		var swappedPairings = new Pairing(pTeam, dTeam);
-		pairings[lastIndex-1] = swappedPairings;
-		alert("Completed swap");
-		$route.reload();
+		var lastIndex = pairings.length-1;
+		var lastPairing = pairings[lastIndex];
+		var dTeam = lastPairing.pTeam;
+		var pTeam = lastPairing.dTeam;
+		var swappedPairing = new Pairing(pTeam, dTeam);
+		pairings[lastIndex] = swappedPairing;
+		updateRanks();
+		//alert(pTeam.rank);
 	}
 
 	//runAutoPop: triggered when you click the auto populate button on screen 3
@@ -126,12 +126,6 @@ function Screen3Ctrl($scope, $state){
 		
 		return teamName;
 	}
-
-
-
-		$scope.blah = function(){
-			alert("Test");
-		}
 		
 
 	$scope.configTeams = function() { //on load, build the empty team forms 
@@ -151,6 +145,7 @@ function Screen3Ctrl($scope, $state){
 	// NEEDS EDITED TO UPDATE PAIRINGS OBJECTS
 	$scope.startR1 = function($scope) { //clicking the button to start round 1
 		//check and see if forms have been filled out yet (ng click is triggered regardless if ng disable is enabled or not on an image)
+		// is any of this doing anything?
 		var classes = document.getElementById("teamCards").className;
 		var classesList = classes.split(" ");
 		if (classesList.indexOf("ng-valid") == -1){
@@ -160,13 +155,13 @@ function Screen3Ctrl($scope, $state){
 			return;
 		}
 	
-		this.showActiveNext = true;
+		//this.showActiveNext = true;
 		//double check this is the right tournament
 		//alert("testing: her eis the round number: "+tournament.roundNumber+" and here is the tournament total teams: "+tournament.totalTeams);
 	
 		//save the current tournament team information
-		localStorage.setItem('round'+tournament.roundNumber+'pairings', JSON.stringify(pairings)); //store pairings from the global model js file into local storage
-		localStorage.setItem('round'+tournament.roundNumber+'tournamentinfo', JSON.stringify(tournament)); //store pairings from the global model js file into local storage
+		//localStorage.setItem('round'+tournament.roundNumber+'pairings', JSON.stringify(pairings)); //store pairings from the global model js file into local storage
+		//localStorage.setItem('round'+tournament.roundNumber+'tournamentinfo', JSON.stringify(tournament)); //store pairings from the global model js file into local storage
 
 		//alert("Completed storing round "+tournament.roundNumber+" info.");
 		//var tournament = JSON.parse(localStorage.getItem('tournament'));//grab the number of totals teams from local storage
