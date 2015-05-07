@@ -33,14 +33,31 @@ Mongoose (server) *currently not in use, only used in development*
 <br>
 <b>Online Tools:</b>
 https://basecamp.com/2902245/projects/8844582 (Tasks/bug lists, other additional files)
+
 <br>
 
 <b>Getting Started:</b>
 
 Clone and fork this github repository. It contains all the files needed to run this application. 
 
+We used NotePad++ to code, but any text editor should work. 
+
+For our UI, we used a Bootstrap template:
+http://startbootstrap.com/template-overviews/landing-page/
+
+<b>Libraries Used: </b>
+
+thenBy.JS Microlibrary
+
+https://github.com/Teun/thenBy.js/tree/master
+
+Underscore.js
+
+http://underscorejs.org/
+
 <br><b>Testing:</b>
 
+For our testing purposes, we took previous tournament results and input that data into our application. We are currently in the process of writing unit tests. 
 
 <br>
 <b>Staging and Production Environments:</b>
